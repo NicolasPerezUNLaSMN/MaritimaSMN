@@ -51,6 +51,13 @@ class BoletinDetalle(DetailView):
     model = Boletin
     template_name = "AppMaritima/boletin/boletin_detalle.html"
     
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['avisos'] = Aviso.objects.filter(activo = True)
+        return context
+    
 
 class BoletinCreacion(FormView):
     
@@ -67,7 +74,16 @@ class BoletinCreacion(FormView):
                    
                     boletin.save()
                     
-                    lista = form.cleaned_data.get("area")
+                    #Ahora ademas le asigno todos los avisos activos, para que se puedan actualizar o cesar
+                    listaAvisosActivos = Aviso.objects.filter(activo = True)
+                    
+                    for aviso in listaAvisosActivos:
+                        
+                        
+                        aviso.boletin.add(boletin)
+                        aviso.save()
+                        
+                       
                     
                     
                     return redirect("boletin/list")    
@@ -90,6 +106,9 @@ class BoletinDelete(DeleteView):
     template_name = "AppMaritima/boletin/boletin_confirm_delete.html"
     success_url = "../boletin/list"
     
+
+    
+    
 #FIN - CRUD - Boletin
 
 
@@ -98,6 +117,9 @@ class AvisoList(ListView):
     
     model = Aviso
     template_name = "AppMaritima/aviso/avisos_list.html"
+    
+    
+   
     
     
 class AvisoDetalle(DetailView):
@@ -117,6 +139,15 @@ def ultimoAviso():
             ultimo = a.numero
     
     return ultimo   
+
+
+def ultimoID():
+    
+    ultimo = 0
+    avisoUltimo = Aviso.objects.all().order_by("id")[0]
+    
+    
+    return avisoUltimo.id
 
 class AvisoCreacion(FormView):
     
@@ -169,6 +200,8 @@ class AvisoCreacion(FormView):
                     aviso.save()
                     
                     return redirect("aviso/list")
+                    
+                
              
             
           
@@ -180,7 +213,7 @@ class AvisoCreacion(FormView):
 class AvisoUpdate(UpdateView):
     
     model = Aviso
-    success_url = "../aviso/list"
+    success_url = "../boletin/list"
     template_name = "AppMaritima/aviso/aviso_form.html"
     fields = ["tipo", "direccion", "desde", "hasta", "boletin","area", "activo"]
   
@@ -190,5 +223,8 @@ class AvisoDelete(DeleteView):
     model = Aviso
     template_name = "AppMaritima/aviso/aviso_confirm_delete.html"
     success_url = "../aviso/list"
+    
+    
+   
     
 #FIN - CRUD - Boletin

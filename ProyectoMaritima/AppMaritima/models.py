@@ -27,7 +27,7 @@ class Boletin(models.Model):
     hora = models.IntegerField(null=True)
     
     def __str__(self):
-        return f"{self.valido}"
+        return f"ID: {self.id} ------- {self.valido}"
     
     
 #Parte I Avisos
@@ -55,7 +55,7 @@ class Aviso(models.Model):
     area = models.ManyToManyField(Area)
     
     def __str__(self):
-        return f"{self.numero} --- {self.tipo} --- {self.direccion}"
+        return f"ID: {self.id} ----  {self.numero} --- {self.tipo} --- {self.direccion}"
     
    
 #Parte II SItuacion 

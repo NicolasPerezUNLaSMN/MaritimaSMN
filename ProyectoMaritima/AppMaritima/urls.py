@@ -26,4 +26,5 @@ urlpatterns = [
     path(r'^borrarAviso/(?P<pk>\d+)$', views.AvisoDelete.as_view(), name='DeleteAviso'),
     
     
+    
 ]
