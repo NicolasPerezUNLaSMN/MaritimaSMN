@@ -6,6 +6,7 @@ urlpatterns = [
     
     path('', views.inicio),
     path('cargarAreas', views.cargarAreas),
+    path('cargarPronosticos', views.cargarPronosticos),
     
     
     #PARA CLASES BASADAS EN VISTAS
@@ -24,6 +25,14 @@ urlpatterns = [
     path(r'^nuevoAviso$', views.AvisoCreacion.as_view(), name='NewAviso'),
     path(r'^editarAviso/(?P<pk>\d+)$', views.AvisoUpdate.as_view(), name='EditAviso'),
     path(r'^borrarAviso/(?P<pk>\d+)$', views.AvisoDelete.as_view(), name='DeleteAviso'),
+    
+    
+    #situación
+    path('situacion/list', views.SituacionList.as_view(), name='ListSituacion'),
+    path(r'situacion^(?P<pk>\d+)$', views.SituacionDetalle.as_view(), name='DetailSituacion'),
+    path(r'^nuevoSituacion$', views.SituacionCreacion.as_view(), name='NewSituacion'),
+    path(r'^editarSituacion/(?P<pk>\d+)$', views.SituacionUpdate.as_view(), name='EditSituacion'),
+    path(r'^borrarSituacion/(?P<pk>\d+)$', views.SituacionDelete.as_view(), name='DeleteSituacion'),
     
     
     

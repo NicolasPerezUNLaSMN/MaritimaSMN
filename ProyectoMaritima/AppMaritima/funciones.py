@@ -1,6 +1,7 @@
 from xml.etree.ElementTree import parse
 
-from AppMaritima.models import Area
+
+from AppMaritima.models import Pronostico, Boletin, Area
 
 archivoXML = 'prueba.xml'
 
@@ -84,13 +85,16 @@ class Forecast:
     return f"Pronostico del {self.year}/{self.month}/{self.day}   {self.hour}:{self.minute}"
 
 
-forecast = Forecast(0,0,0,0,0)
-forecastSur60 = Forecast(0,0,0,0,0)
-forecastOffShore = Forecast(0,0,0,0,0)
-forecastCostas = Forecast(0,0,0,0,0)
-forecastRio = Forecast(0,0,0,0,0)
+
 
 def leerXML():
+  
+  
+  forecast = Forecast(0,0,0,0,0)
+  forecastSur60 = Forecast(0,0,0,0,0)
+  forecastOffShore = Forecast(0,0,0,0,0)
+  forecastCostas = Forecast(0,0,0,0,0)
+  forecastRio = Forecast(0,0,0,0,0)
 
   for pronostico in root: 
     #Instancia vacia
@@ -734,6 +738,7 @@ def cargarAreasDesdeElXML():
           #instancio un area
           a = Area(area.attrib['id'],area.attrib['latitude'],area.attrib['longitude'],area.attrib['description'], area.attrib['domain'])
         
+          
           areaModels = Area(idPimet=float(area.attrib['id']), latitude=area.attrib['latitude'],
                             longitude=area.attrib['longitude'], description=area.attrib['description'],
                             domain= area.attrib['domain'])
@@ -741,4 +746,64 @@ def cargarAreasDesdeElXML():
           areaModels.save()
           
           
-         
+          
+def cargarPronosticosDesdeElXML():
+  
+    print("NO HACE NADA AÜN")
+    
+    for pronostico in root: 
+    #Instancia vacia
+    #Por ahora no se usaria
+
+    #Accedo a cada Area, elimino la posicion 0 porque es issue y esta vacio
+      for area in pronostico:
+
+      
+      
+          ###################ESTRUCTURA PRINCIPAL; CARGA AREAS CON PRONOSTICOS######
+          if (area.tag == 'area'):
+              #instancio un area
+              a = AreaXML(area.attrib['id'],area.attrib['latitude'],area.attrib['longitude'],area.attrib['description'], area.attrib['domain'])
+            
+              print(f"TRABAJO CON AREA: {a}")
+
+              #Accedo a cada parametro
+              for parameter in area: 
+                #filtro los tag que no sean utiles
+                if (parameter.tag == 'parameter'):
+                  #instancio el parametro
+                  p = Parameter(parameter.attrib['id'])
+
+                  ###################TIME RANGE#########################
+                  #accedo a las horas de mi parametro
+                  for timerange in parameter:
+                    #instancio el timerange
+                    t = Timerange(timerange.attrib['h'],timerange.attrib['datetime'])
+
+                    ###################VALUE#########################
+                    #accedo al value de ese horario
+                    for value in timerange:
+
+                      #instancio al valor
+                      v = Value(value.text,value.attrib['unit'])
+
+                      #Agrego el valor a la lista de timerange
+                      t.list_values.append(v)
+                    ###################FIN VALUE#########################
+
+
+                    #agrego el timerange a la lista de parameter
+                    p.list_timeranges.append(t)
+
+                  ###################FIN TIME RANGE#########################
+                      
+                  #agrego el parametro a la lista de area
+                  a.list_parameters.append(p)
+              
+              #antes de terminar el area la agrego a la lista de area del pronostico que corresponde
+             
+
+              pronos = Pronostico(texto = areaAtexto(a), area =  Area.objects.get(description__contains = a.description), boletin = Boletin.objects.order_by("id")[0])
+              
+              
+              pronos.save()

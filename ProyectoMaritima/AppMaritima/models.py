@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import BooleanField
 
+
 # Create your models here.
 
 class Area(models.Model): #son fijas, son las areas pimet
@@ -61,22 +62,32 @@ class Aviso(models.Model):
 #Parte II SItuacion 
 class Situacion(models.Model):
     
-    sistema = models.CharField(max_length=40)
+    sistema = models.CharField(max_length=60)
+    
     valorInicial = models.IntegerField(null=True, blank=True)
-    momentoInicial = models.DateField()
+
     
     movimiento = models.CharField(max_length=4,null=True, blank=True)
     evolucion = models.CharField(max_length=30,null=True, blank=True)
     
-    posicionInicial = models.TextField(null=True, blank=True)
-    posicionFinal = models.TextField(null=True, blank=True)
+    posicionInicial = models.CharField(max_length=60,null=True, blank=True)
+    momentoInicial = models.DateField(null=True, blank=True)
+    horaInicial = models.IntegerField(null=True, blank=True)
     
-    momentoFinal = models.DateField()
+    posicionFinal = models.CharField(max_length=60,null=True, blank=True) 
+    momentoFinal = models.DateField(null=True, blank=True)
+    horaFinal = models.IntegerField(null=True, blank=True)
     
     navtex = BooleanField(null=True, blank=True)
     
     #Cada situación pertenecea un boletin.. ese bolet´in tendrá muchas situaciones
     boletin = models.ForeignKey(Boletin,on_delete=models.CASCADE, null=True)
+    
+    def __str__(self):
+        return f"ID: {self.id} ----  SISTEMA:  {self.sistema} --- BOLETIN ID: {self.boletin.id} "
+    
+    
+    
 
 #Lo envia prefectura, solo guardo el texto
 class Hielo(models.Model):
@@ -100,6 +111,10 @@ class Pronostico (models.Model):
     area = models.ForeignKey(Area,on_delete=models.CASCADE, null=True)
     
     boletin = models.ForeignKey(Boletin,on_delete=models.CASCADE, null=True)
+    
+    
+    def __str__(self):
+        return f"ID: {self.id} ------ > "
 
 
     

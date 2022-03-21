@@ -2,11 +2,11 @@ from asyncio.constants import DEBUG_STACK_DEPTH
 from asyncio.windows_events import NULL
 from winreg import HKEY_PERFORMANCE_DATA
 from django.http.response import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 
-from AppMaritima.funciones import leerXML,cargarAreasDesdeElXML
+from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML
 
-from AppMaritima.form import AvisoForm, BoletinForm
+from AppMaritima.form import AvisoForm, BoletinForm,SituacionForm
 
 
 from AppMaritima.models import *
@@ -32,9 +32,21 @@ def inicio(request):
 #Ejectucarlo solo una vez, y con permisos de admin 
 def cargarAreas(request):
     
+    
     cargarAreasDesdeElXML()
     
     return HttpResponse("Areas cargadas")
+    
+    
+
+#Carga los pronosticos de cada area al ultimo bolerin
+def cargarPronosticos(request):
+    
+    
+    cargarPronosticosDesdeElXML()
+    
+    return HttpResponse("Pronosticos cargados")
+
 
 
 #CBV
@@ -227,4 +239,110 @@ class AvisoDelete(DeleteView):
     
    
     
-#FIN - CRUD - Boletin
+#FIN - CRUD - Aviso
+
+
+
+#CRUD - Situacion
+class SituacionList(ListView):
+    
+    model = Situacion
+    template_name = "AppMaritima/situacion/situaciones_list.html"
+    
+    
+   
+    
+    
+class SituacionDetalle(DetailView):
+    
+    model = Situacion
+    template_name = "AppMaritima/situacion/situacion_detalle.html"
+
+
+
+
+class SituacionCreacion(FormView):
+    
+                template_name="AppMaritima/situacion/situacion_form.html"
+                form_class = SituacionForm
+                success_url = "situacion/list" 
+                
+               
+                
+                
+                def form_valid(self, form):
+                    
+                    
+                     
+                    print(form.cleaned_data)
+                    #Si se cargo la hora la paso a entera, sino, -1
+                    valorI = -1
+                    horaI = -1
+                    horaH = -1
+                    
+                    
+                    
+                    if not (form.cleaned_data.get("valorInicial") is None):
+                        valorI = int (form.cleaned_data.get("valorInicial"))
+                    
+                    if form.cleaned_data.get("horaInicial") != ' ':
+                        
+                        horaI  = int(form.cleaned_data.get("horaInicial"))
+                        
+                    if form.cleaned_data.get("horaFinal") != ' ':
+                        
+                        horaH  =int(form.cleaned_data.get("horaFinal"))
+                        
+                        
+
+                    situacion = Situacion(
+                        
+                       sistema =  form.cleaned_data.get("sistema"),
+                       valorInicial =  valorI,
+                       movimiento =  form.cleaned_data.get("movimiento"),
+                       evolucion =  form.cleaned_data.get("evolucion"),
+                       posicionInicial =  form.cleaned_data.get("posicionInicial"),
+                       momentoInicial =  form.cleaned_data.get("momentoInicial"),
+                       horaInicial = horaI,
+                       posicionFinal =  form.cleaned_data.get("posicionFinal"),
+                       momentoFinal =  form.cleaned_data.get("momentoFinal"),
+                       horaFinal =  horaH,
+                       navtex =  form.cleaned_data.get("navtex"),
+                       boletin =  Boletin.objects.all().order_by("id")[0]
+                        
+                        
+                    )
+                    
+                  
+                  
+                    situacion.save()
+                    
+                    return redirect("situacion/list")
+                    
+                
+             
+            
+          
+
+    
+    
+    
+  
+class SituacionUpdate(UpdateView):
+    
+    model = Situacion
+    success_url = "../situacion/list"
+    template_name = "AppMaritima/situacion/situacion_form.html"
+    fields = ["sistema", "valorInicial", "movimiento", "evolucion", "posicionInicial","momentoInicial", "horaInicial","posicionFinal","momentoFinal", "horaFinal", "navtex" ]
+  
+
+class SituacionDelete(DeleteView):
+    
+    model = Situacion
+    template_name = "AppMaritima/situacion/situacion_confirm_delete.html"
+    success_url = "../situacion/list"
+    
+    
+   
+    
+#FIN - CRUD - Situacion
