@@ -749,7 +749,7 @@ def cargarAreasDesdeElXML():
           
 def cargarPronosticosDesdeElXML():
   
-    print("NO HACE NADA AÜN")
+    
     
     for pronostico in root: 
     #Instancia vacia
@@ -803,7 +803,7 @@ def cargarPronosticosDesdeElXML():
               #antes de terminar el area la agrego a la lista de area del pronostico que corresponde
              
 
-              pronos = Pronostico(texto = areaAtexto(a), area =  Area.objects.get(description__contains = a.description), boletin = Boletin.objects.order_by("id")[0])
+              pronos = Pronostico(texto = areaAtexto(a), area =  Area.objects.get(description__contains = a.description), boletin = Boletin.objects.order_by("-id")[0])
               
               
               pronos.save()

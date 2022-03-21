@@ -156,7 +156,7 @@ def ultimoAviso():
 def ultimoID():
     
     ultimo = 0
-    avisoUltimo = Aviso.objects.all().order_by("id")[0]
+    avisoUltimo = Aviso.objects.all().order_by("-id")[0]
     
     
     return avisoUltimo.id
@@ -207,7 +207,7 @@ class AvisoCreacion(FormView):
                         aviso.area.add(a)
                     
                     #Le asigno el ultimo boletin
-                    aviso.boletin.add(Boletin.objects.all().order_by("id")[0])
+                    aviso.boletin.add(Boletin.objects.all().order_by("-id")[0])
                   
                     aviso.save()
                     
@@ -308,7 +308,7 @@ class SituacionCreacion(FormView):
                        momentoFinal =  form.cleaned_data.get("momentoFinal"),
                        horaFinal =  horaH,
                        navtex =  form.cleaned_data.get("navtex"),
-                       boletin =  Boletin.objects.all().order_by("id")[0]
+                       boletin =  (Boletin.objects.all().order_by("-id"))[0]
                         
                         
                     )
