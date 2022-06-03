@@ -32,8 +32,8 @@ def inicio(request):
 #Ejectucarlo solo una vez, y con permisos de admin 
 def cargarAreas(request):
     
-    
-    cargarAreasDesdeElXML()
+    archivo = "prueba.xml"
+    cargarAreasDesdeElXML(archivo)
     
     return HttpResponse("Areas cargadas")
     
@@ -42,8 +42,8 @@ def cargarAreas(request):
 #Carga los pronosticos de cada area al ultimo bolerin
 def cargarPronosticos(request):
     
-    
-    cargarPronosticosDesdeElXML()
+    archivo = "prueba.xml"
+    cargarPronosticosDesdeElXML(archivo)
     
     return HttpResponse("Pronosticos cargados")
 

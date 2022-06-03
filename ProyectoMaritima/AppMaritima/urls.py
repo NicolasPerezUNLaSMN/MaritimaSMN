@@ -5,7 +5,7 @@ from AppMaritima import views
 urlpatterns = [
     
     path('', views.inicio),
-    path('cargarAreas', views.cargarAreas),
+    path('cargarAreas', views.cargarAreas), #Ejecutarlo la primera vez para cargas las areas PIMET
     path('cargarPronosticos', views.cargarPronosticos),
     
     
