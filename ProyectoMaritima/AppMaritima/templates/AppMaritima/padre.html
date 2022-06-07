@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Maritima SMN</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'AppMaritima/images/favicon.png' %}">
+    <!-- Pignose Calender -->
+    <link href="{% static 'AppMaritima/plugins/pg-calendar/css/pignose.calendar.min.css' %}" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="{% static 'AppMaritima/plugins/chartist/css/chartist.min.css' %}">
+    <link rel="stylesheet" href="{% static 'AppMaritima/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' %}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'AppMaritima/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+
+            https://wmail.smn.gov.ar/skins/outlook/skin/images/login.jpg
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#">
+                    <b class="logo-abbr"><img src="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}" alt=""> </b>
+                    <span class="logo-compact"><img src="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}" alt=""></span>
+                    <span class="brand-title">
+                        <img src="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+                    <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <div class="drop-down animated flipInX d-md-none">
+                            <form action="#">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span class="badge badge-pill gradient-1"></span>
+                            </a>
+                            
+                        </li>
+                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
+                                <i class="mdi mdi-bell-outline"></i>
+                                <span class="badge badge-pill gradient-2"></span>
+                            </a>
+                            
+                            
+                        </li>
+                       
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="{% static 'AppMaritima/images/user/1.png' %}" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                   
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ************
+        ***********************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Navegantes</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-note menu-icon"></i><span class="nav-text">Boletin</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Boletines</a></li>
+                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
+                        </ul>
+                    </li>
+                    <li class="mega-menu mega-menu-sm">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-menu menu-icon"></i><span class="nav-text">Avisos</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Activos</a></li>
+                            <li><a href="#">Nuevo</a></li>
+                               
+                        </ul>
+                    </li>
+                   
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-grid  menu-icon"></i> <span class="nav-text">Hielos</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="#">Activo</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-graph menu-icon"></i><span class="nav-text">Situación</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./app-profile.html">Activas</a></li>
+                            <li><a href="./app-calender.html">Nueva</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-label">Externos</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-list menu-icon"></i><span class="nav-text">ASCAT-C</span>
+                            
+                        </a>
+                       
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'Escaterometro' %}">Procductos</a></li>
+                            
+                        </ul>
+                    </li>
+                   
+                    
+                    
+                    
+                   
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+
+        
+        <!--**********************************
+            Contenido dinamico
+        ***********************************-->
+        <div class="content-body">
+
+            {% block contenido %}
+            {% endblock %}  
+            
+        </div>
+        <!--**********************************
+            cierra el contenido dinamico
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Desarrollado por y para el SMN - 2022. Plantilla de: <a href="https://themeforest.net/user/quixlab">quixlab</a> </p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="{% static 'AppMaritima/plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/custom.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/settings.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/gleek.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/styleSwitcher.js' %}"></script>
+
+    <!-- Chartjs -->
+    <script src="{% static 'AppMaritima/plugins/chart.js/Chart.bundle.min.js' %}"></script>
+    <!-- Circle progress -->
+    <script src="{% static 'AppMaritima/plugins/circle-progress/circle-progress.min.js' %}"></script>
+    <!-- Datamap -->
+    <script src="{% static 'AppMaritima/plugins/d3v3/index.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/topojson/topojson.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/datamaps/datamaps.world.min.js' %}"></script>
+    <!-- Morrisjs -->
+    <script src="{% static 'AppMaritima/plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/morris/morris.min.js' %}"></script>
+    <!-- Pignose Calender -->
+    <script src="{% static 'AppMaritima/plugins/moment/moment.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/pg-calendar/js/pignose.calendar.min.js' %}"></script>
+    <!-- ChartistJS -->
+    <script src="{% static 'AppMaritima/plugins/chartist/js/chartist.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js' %}"></script>
+
+
+
+    <script src="{% static 'AppMaritima/js/dashboard/dashboard-1.js' %}"></script>
+
+</body>
+
+</html>

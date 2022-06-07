@@ -2,7 +2,8 @@ from asyncio.constants import DEBUG_STACK_DEPTH
 from asyncio.windows_events import NULL
 from winreg import HKEY_PERFORMANCE_DATA
 from django.http.response import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+
 
 from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML
 
@@ -22,12 +23,19 @@ from django.views.generic.edit import  CreateView, UpdateView, DeleteView
 
 
 #VISTAS
-
 def inicio(request):
     
     
+    #return HttpResponse("Esto es una prueba del inicio")
+    return render(request, 'AppMaritima/inicio.html')
+
+
+def escaterometro(request):
     
-    return HttpResponse("Iniciandoo...")
+    
+    
+    return render(request, 'AppMaritima/escaterometro.html')
+
 
 #Ejectucarlo solo una vez, y con permisos de admin 
 def cargarAreas(request):

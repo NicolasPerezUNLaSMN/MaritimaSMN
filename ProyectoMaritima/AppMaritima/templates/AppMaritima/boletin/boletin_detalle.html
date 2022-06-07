@@ -1,54 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <p>EMITIDO: <i> {{ boletin.emitido}}</i></p>
-    <p>MODIFICADO: <i> {{ boletin.modificado}}</i></p>
-    <p>VÁLIDO: <i> {{ boletin.hora}}UTC ---- {{ boletin.valido}}</i></p>
-
-    <p>AVISOS:</p>
-    <br>
-
-    {% for aviso in avisos %}
-
-    <p>Numero: {{ aviso.numero}}</p>
-    <p>Actualización: {{ aviso.actualizacion}}</p>
-    <p>Tipo: {{ aviso.tipo}}</p>
-    <p>Direccion: {{ aviso.direccion}}</p>
-    <p>Desde: {{ aviso.desde}}</p>
-    <p>Hasta: {{ aviso.hasta}}</p>
-    <p>Activo: {{ aviso.activo}}</p>
-    <p>Boletines: HACEEEER???????</p>
+{% extends "AppMaritima/padre.html" %}
 
 
-    <a href="{% url 'EditAviso' aviso.id %}">Actualizar</a>
-    <a href="{% url 'DeleteAviso' aviso.id %}">Borrar</a>
+{% load static %}
+
+        {% block contenido %}
+
+                    <div class="row m-b-30">
+                       <div class="col-xl-12">
+                            <div class="card border-warning">
+                                <div class="card-header">Información del boletín</div>
+
+                                <a href="{% url 'ListBoletin' %}" class="btn btn-primary">-Atrás</a>
+                              
+
+                               <!--Info del boletín-->
+
+                               <div class="card-body">
+                                  <h5 class="card-title">VALIDO: {{ boletin.valido}}</h5>
+                                  <h5 class="card-title">Emitido: {{ boletin.emitido}}</h5>
+                                  <h5 class="card-title">Modificado: {{ boletin.modificado}}</h5>
+                                  <h5 class="card-title">HORA: {{ boletin.hora}} Z</h5>
+                                  <br>
+                                  <h5 class="card-title">Avisos:</h5>
+
+                                  <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a>
+
+                                  
+                              
+
+                              
+                                    {% for aviso in avisos %}
+
+                                   
+                                        <h6 class="card-header">Número: {{ aviso.numero}}</h6>
+                                        <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
+                                        <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
+                                        <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
+                                        <h6 class="card-header">Activo: {{ aviso.activo}}</h6>
+
+
+                                       
+                                        <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
+                                        <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
+
+
+                                    
+
+                              
+                                    {% endfor %}    
+                            
+                                </div>
+
+
+                            </div>
+                        </div>
+                      
+                    </div>
 
 
 
-    <br>
+                  
 
 
-
-
-    {% endfor %}
-
- 
-    
-     
-
-    <p>
-
-      <a href="{% url 'ListBoletin' %}">Regresar</a>
-
-    </p>
-
-
-</body>
-</html>
+                  
+         {% endblock %}

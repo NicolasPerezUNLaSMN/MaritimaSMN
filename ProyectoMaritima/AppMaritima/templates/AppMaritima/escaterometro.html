@@ -1,0 +1,85 @@
+{% extends "AppMaritima/padre.html" %}
+
+
+{% load static %}
+
+        {% block contenido %}
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <a target="_blank" href="https://manati.star.nesdis.noaa.gov/datasets/ASCATCData.php"><h4 class="card-title">Datos ASCAT-C</h4></a>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered zero-configuration">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto/HR</th>
+                                            <th>00Z</th>
+                                            <th>06Z</th>
+                                            <th>12Z</th>
+                                            <th>18Z</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Data Coverage</td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalcoverage_00.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalcoverage_06.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalcoverage_12.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalcoverage_18.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>Map O-B Speed Bias</td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_speeddiff_00.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_speeddiff_06.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_speeddiff_12.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_speeddiff_18.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td>Map O-B Vector Difference</td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_vecdiff_00.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_vecdiff_06.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_vecdiff_12.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_vecdiff_18.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                        
+                                        </tr>
+                                        <tr>
+                                            <td>Map Observed Speed</td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_obspeed_00.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_obspeed_06.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_obspeed_12.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_obspeed_18.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                                                                    
+                                        </tr>
+                                        <tr>
+                                            <td>Map Background Speed</td>
+                                            <td ><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_bgspeed_00.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td ><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_bgspeed_06.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td ><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_bgspeed_12.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                            <td ><img alt="ASCAT-C" width="150" class="theimage" src="https://nwp-saf.eumetsat.int/monitoring/scatter/ukplots/ASCATC_globalmap_bgspeed_18.gif?number=" onclick="window.open(this.src)" style = "cursor:pointer"/></td>
+                                                                                    
+                                        </tr>
+                                    
+                                        
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+      
+            
+           
+
+        {% endblock %}
