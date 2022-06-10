@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 
 from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML
 
-from AppMaritima.form import AvisoForm, BoletinForm,SituacionForm
+from AppMaritima.form import AvisoForm, BoletinForm,SituacionForm,AvisoFormUpdate
 
 
 from AppMaritima.models import *
@@ -63,7 +63,18 @@ def cargarPronosticos(request):
 class BoletinList(ListView):
     
     model = Boletin
+    paginate_by = 4 #que solo muestre los ultimos 4
     template_name = "AppMaritima/boletin/boletines_list.html"
+    
+    ordering = ['-id'] #los ordeno por id
+    
+class BoletinListTodos(ListView):
+    
+    model = Boletin
+    
+    template_name = "AppMaritima/boletin/boletines_list.html"
+    
+    ordering = ['-id'] #los ordeno por id
     
     
 class BoletinDetalle(DetailView):
@@ -116,8 +127,8 @@ class BoletinUpdate(UpdateView):
     
     model = Boletin
     success_url = "../boletin/list"
-    template_name = "AppMaritima/boletin/boletin_form.html"
-    fields = ["valido"]
+    template_name = "AppMaritima/boletin/boletin_form_update.html"
+    fields = ["valido","hora"]
   
 
 class BoletinDelete(DeleteView):
@@ -137,6 +148,13 @@ class AvisoList(ListView):
     
     model = Aviso
     template_name = "AppMaritima/aviso/avisos_list.html"
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['avisos'] = Aviso.objects.filter(activo = True)
+        return context
     
     
    
@@ -163,7 +181,7 @@ def ultimoAviso():
 
 def ultimoID():
     
-    ultimo = 0
+    
     avisoUltimo = Aviso.objects.all().order_by("-id")[0]
     
     
@@ -179,7 +197,6 @@ class AvisoCreacion(FormView):
                 
                 
                 def form_valid(self, form):
-                    
                     
                     
                     #Si se cargo la hora la paso a entera, sino, -1
@@ -216,26 +233,107 @@ class AvisoCreacion(FormView):
                     
                     #Le asigno el ultimo boletin
                     aviso.boletin.add(Boletin.objects.all().order_by("-id")[0])
-                  
+                         
                     aviso.save()
                     
-                    return redirect("aviso/list")
+                    idBoletin = (Boletin.objects.all().order_by("-id")[0])
+                    
+                    return redirect(f"boletin/{idBoletin.id}")
                     
                 
-             
+class AvisoUpdate(FormView):
+    
+                template_name="AppMaritima/aviso/aviso_form_update.html"
+                form_class = AvisoFormUpdate
+                success_url = "boletin/list" 
+                
+                
+                
+                
+                def form_valid(self, form):
+                    
+                    #id del aviso a actualizar
+                    pk = int(self.kwargs['pk'])
+                    
+                    avisoViejo =Aviso.objects.get(id=pk)
+                   
+                    
+                    
+                    #Si se cargo la hora la paso a entera, sino, -1
+                    horaD = -1
+                    horaH = -1
+                    if form.cleaned_data.get("horaDesde") != ' ':
+                        horaD  =int(form.cleaned_data.get("horaDesde"))
+               
+                        
+                    if form.cleaned_data.get("horaHasta") != ' ':
+                        
+                        horaH  =int(form.cleaned_data.get("horaHasta"))
+
+                  
+                    
+                    aviso = Aviso(id=ultimoID()+1,numero = avisoViejo.numero,
+                    actualizacion =avisoViejo.actualizacion +1,
+                    tipo = form.cleaned_data.get("tipo"),
+                    direccion = form.cleaned_data.get("direccion"),
+                    desde = form.cleaned_data.get("desde"),
+                    horaDesde = horaD,
+                    hasta = form.cleaned_data.get("hasta"),
+                    horaHasta = horaH,
+                    activo = True)
+                    #boletin = Boletin.objects.all().order_by("-id")[0] 
+                    
+                    
+                    #Guardo la actualización
+                    aviso.save()
+                    
+                    #Pongo inactivo el aviso desactualizado
+                    avisoViejo.activo = False
+                    avisoViejo.save()
+                    
+                    lista = form.cleaned_data.get("area")
+                    
+                    
+                    
+                    for a in lista:
+                        aviso.area.add(a)
+                    
+                    #Le asigno el ultimo boletin
+                    aviso.boletin.add(Boletin.objects.all().order_by("-id")[0])
+                  
+                    #Modifico el boletín con las areas asociadas
+                    aviso.save()
+                    
+                    idBoletin = (Boletin.objects.all().order_by("-id")[0])
+                    
+                    return redirect(f"../boletin/{idBoletin.id}")       
             
           
-
+def  cesarAviso(request,pk):
+    
+                   
+                    
+                    avisoViejo =Aviso.objects.get(id=pk)
+                   
+                    avisoViejo.activo = False
+                    #GUardo el aviso cesado
+                    avisoViejo.save()
+                    
+                   
+                    idBoletin = (Boletin.objects.all().order_by("-id")[0])
+                    
+                    return redirect(f"../boletin/{idBoletin.id}")    
     
     
     
   
-class AvisoUpdate(UpdateView):
+class AvisoUpdateGenerico(UpdateView):
     
     model = Aviso
+   
     success_url = "../boletin/list"
-    template_name = "AppMaritima/aviso/aviso_form.html"
-    fields = ["tipo", "direccion", "desde", "hasta", "boletin","area", "activo"]
+    template_name = "AppMaritima/aviso/aviso_form_update.html"
+    fields = ["tipo", "direccion", "desde", "hasta", "boletin","area"]
   
 
 class AvisoDelete(DeleteView):

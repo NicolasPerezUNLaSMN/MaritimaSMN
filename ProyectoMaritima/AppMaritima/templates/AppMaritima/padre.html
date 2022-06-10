@@ -10,6 +10,19 @@
     <title>Maritima SMN</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'AppMaritima/images/favicon.png' %}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'AppMaritima/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+
+    <!-- Page plugins css -->
+    <link href="{% static 'AppMaritima/plugins/clockpicker/dist/jquery-clockpicker.min.css' %}" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="{% static 'AppMaritima/plugins/jquery-asColorPicker-master/css/asColorPicker.css' %}" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="{% static 'AppMaritima/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="{% static 'AppMaritima/plugins/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'AppMaritima/plugins/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+    
     <!-- Pignose Calender -->
     <link href="{% static 'AppMaritima/plugins/pg-calendar/css/pignose.calendar.min.css' %}" rel="stylesheet">
     <!-- Chartist -->
@@ -75,10 +88,11 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
+                        <!-- 
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                       <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard"> -->
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
@@ -105,7 +119,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="{% static 'AppMaritima/images/user/1.png' %}" height="40" width="40" alt="">
+                               
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -134,7 +148,9 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">Boletin</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Boletines</a></li>
+                            <li><a href="{% url 'NewBoletin' %}">+Nuevo boletín</a></li>
+                            <li><a href="{% url 'ListBoletin' %}">Boletines(ultimos)</a></li>
+                            <li><a href="{% url 'ListBoletinTodos' %}">Boletines(todos)</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -143,8 +159,8 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Avisos</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Activos</a></li>
-                            <li><a href="#">Nuevo</a></li>
+                            <li><a href="{% url 'ListAviso' %}">Activos</a></li>
+                            <li><a href="{% url 'NewAviso' %}">+Nuevo</a></li>
                                
                         </ul>
                     </li>
@@ -255,6 +271,24 @@
 
 
     <script src="{% static 'AppMaritima/js/dashboard/dashboard-1.js' %}"></script>
+
+
+
+    <script src="{% static 'AppMaritima/plugins/moment/moment.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+    <!-- Clock Plugin JavaScript -->
+    <script src="{% static 'AppMaritima//plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
+    <!-- Color Picker Plugin JavaScript -->
+    <script src="{% static 'AppMaritima/plugins/jquery-asColorPicker-master/libs/jquery-asColor.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js' %}"></script>
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="{% static 'AppMaritima/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="{% static 'AppMaritima/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+
+    <script src="{% static 'AppMaritima/js/plugins-init/form-pickers-init.js' %}"></script>
 
 </body>
 

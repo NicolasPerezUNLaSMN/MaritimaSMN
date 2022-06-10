@@ -21,33 +21,14 @@
                                   <h5 class="card-title">Modificado: {{ boletin.modificado}}</h5>
                                   <h5 class="card-title">HORA: {{ boletin.hora}} Z</h5>
                                   <br>
-                                  <h5 class="card-title">Avisos:</h5>
+                                
 
                                   <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a>
 
                                   
                               
 
-                              
-                                    {% for aviso in avisos %}
-
-                                   
-                                        <h6 class="card-header">Número: {{ aviso.numero}}</h6>
-                                        <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
-                                        <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
-                                        <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
-                                        <h6 class="card-header">Activo: {{ aviso.activo}}</h6>
-
-
-                                       
-                                        <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
-                                        <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
-
-
-                                    
-
-                              
-                                    {% endfor %}    
+                                
                             
                                 </div>
 

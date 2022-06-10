@@ -1,42 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "AppMaritima/padre.html" %}
 
 
-    <p>Acá tenemos todos los avisos:</p> <br>
-    <ul>
-      {% for aviso in object_list %}
-      <li>
+{% load static %}
 
-        <p>Numero: {{ aviso.numero}}</p>
-        <p>Actualización: {{ aviso.actualizacion}}</p>
-        <p>Tipo: {{ aviso.tipo}}</p>
-        <p>Direccion: {{ aviso.direccion}}</p>
+        {% block contenido %}
 
-        <p>
-        <a href="{% url 'DetailAviso' aviso.id %}">Ver más</a>
-        <a href="{% url 'EditAviso' aviso.id %}">Editar</a>
-        <a href="{% url 'DeleteAviso' aviso.id %}">Borrar</a>
+                    <div class="row m-b-30">
+                       <div class="col-xl-12">
+                            <div class="card border-warning">
+                                <div class="card-header">Información de avisos activos:</div>
 
-      </p>
+                                <a href="{% url 'ListBoletin' %}" class="btn btn-primary">-Atrás</a>
+                              
 
-      </li>
+                               <!--Info del boletín-->
 
-      
+                               <div class="card-body">
+                                 
+                                  <h5 class="card-title">Avisos activos:</h5>
 
-      {% endfor %}
+                                  <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a>
+
+                                  
+                              
+
+                              
+                                    {% for aviso in avisos %}
+
+                                   
+                                        <h6 class="card-header">Número: {{ aviso.numero}}</h6>
+                                        <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
+                                        <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
+                                        <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
+                                        <h6 class="card-header">Activo: {{ aviso.activo}}</h6>
+
+
+                                       
+                                        <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
+                                        <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark">Cesar</a>
+                                        <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
+
+
+                                    
+
+                              
+                                    {% endfor %}    
+                            
+                                </div>
+
+
+                            </div>
+                        </div>
+                      
+                    </div>
 
 
 
-    </ul>
+                  
 
-    <a href="{% url 'NewAviso' %}">Agregar Aviso</a>
-    
-</body>
-</html>
+
+                  
+         {% endblock %}

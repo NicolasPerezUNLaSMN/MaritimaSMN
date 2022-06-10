@@ -14,7 +14,7 @@ class Area(models.Model): #son fijas, son las areas pimet
     domain = models.CharField(max_length=30)
     
     def __str__(self):
-        return f"{self.id} --  {self.description} ({self.domain})"
+        return f"{self.description} ({self.domain})"
     
 
 class Boletin(models.Model):
