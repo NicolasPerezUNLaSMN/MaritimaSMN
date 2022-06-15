@@ -5,13 +5,15 @@
 
         {% block contenido %}
 
+
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                          <div class="card">
-                            <a href="{% url 'ListSituacion' %}" class="btn btn-primary">-Atrás</a>
+                            <a href="{% url 'ListHielo' %}" class="btn btn-primary">-Atrás</a>
                             <div class="card-body">
-                                <h4 class="card-title">Crear un nueva situación</h4>
+                                <h4 class="card-title">Actualizar el hielo (Si estaba mal)</h4>
                                
                                 <form method="POST">
                                     {% csrf_token %}
@@ -37,6 +39,12 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
 
 
         {% endblock %}

@@ -17,9 +17,9 @@
 
                                <div class="card-body">
                                  
-                                <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a> <BR></BR>
+                                <a href="{% url 'NewHielo' %}" class="btn btn-primary">+Nuevo hielo</a> <BR></BR>
                                 
-                                  <h5 class="card-title">Avisos activos:</h5>
+                                  <h5 class="card-title">Hielos activos:</h5>
 
                                  
 
@@ -27,20 +27,17 @@
                               
 
                               
-                                    {% for aviso in avisos %}
+                                    {% for hielo in hielos %}
 
                                    
-                                        <h6 class="card-header">Número: {{ aviso.numero}}</h6>
-                                        <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
-                                        <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
-                                        <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
-                                        <h6 class="card-header">Activo: {{ aviso.activo}}</h6>
+                                        <h6 class="card-header">Texto: {{ hielo.texto}}</h6>
+                                        
 
 
                                        
-                                        <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
-                                        <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark">Cesar</a>
-                                        <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
+                                        <a href="{% url 'EditHielo' hielo.id %}" class="btn btn-warning">Actualizar</a>
+                                        <a href="{% url 'CesarHielo' hielo.id %}" class="btn btn-dark">Cesar</a>
+                                        <a href="{% url 'DeleteHielo' hielo.id %}"  class="btn btn-danger">Borrar</a>
 
 
                                     

@@ -16,6 +16,9 @@
                                <!--Info del boletín-->
 
                                <div class="card-body">
+
+                                <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a><BR></BR>
+                                
                                   <h5 class="card-title">VALIDO: {{ boletin.valido}}</h5>
                                   <h5 class="card-title">Emitido: {{ boletin.emitido}}</h5>
                                   <h5 class="card-title">Modificado: {{ boletin.modificado}}</h5>
@@ -23,7 +26,7 @@
                                   <br>
                                 
 
-                                  <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a>
+                                 
 
                                   
                               

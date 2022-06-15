@@ -90,7 +90,7 @@ class AvisoFormUpdate(forms.Form):
     
 class SituacionForm(forms.Form):
     
-    
+    CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
       
     CHOICESTIPO = (('HIGH','ANTICICLON'),
                    ('LOW','DEPRESION'),('CFNT','FRENTE FRIO'),('WFNT','FRENTE CALIENTE'),('OCCLUDED','FRENTE OCLUIDO'),('CYCLOGENESIS','CICLOGENESIS'),('STRONG GRADIENT','FUERTE GRADIENTE BARICO'),('RIDGE','EJE DE CUÑA'),('TROUGH','EJE DE VAGUADA'))
@@ -106,23 +106,40 @@ class SituacionForm(forms.Form):
    
     
     
-    sistema = forms.ChoiceField(required=True, widget=forms.Select, choices=CHOICESTIPO)
-    valorInicial = forms.IntegerField(required=False)
+    sistema = forms.ChoiceField(label="Sistema",required=True, widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESTIPO)
+    valorInicial = forms.IntegerField(label="Valor",required=False, widget=forms.NumberInput(attrs={"class":"form-control"}))
   
    
-    movimiento  = forms.ChoiceField(label="Movimiento", required=False,widget=forms.Select, choices=CHOICESMOV)
-    evolucion  = forms.ChoiceField(label="Evolución", required=False,widget=forms.Select, choices=CHOICESEVO)
+    movimiento  = forms.ChoiceField(label="Movimiento", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESMOV)
+    evolucion  = forms.ChoiceField(label="Evolución", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESEVO)
     
-    posicionInicial= forms.CharField(max_length=60, required=False)
-    momentoInicial= forms.DateTimeField(label="Dia inicial",required=False, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    horaInicial = forms.ChoiceField(label="Hora inicial", required=False,widget=forms.Select, choices=CHOICESHORAS)
+    posicionInicial= forms.CharField(label="Posición inicial",max_length=60, required=False,widget=forms.TextInput(attrs={"class":"form-control",'placeholder': 'SS-WW,SS-WW,.....,SS-WW'}))
+    momentoInicial= forms.DateTimeField(label="Dia inicial",required=False, widget=forms.widgets.DateInput(attrs={'type': 'date',"class":"form-control"}))
+    horaInicial = forms.ChoiceField(label="Hora inicial", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
     
-    posicionFinal = forms.CharField(max_length=60, required=False)
-    momentoFinal= forms.DateTimeField(label="Dia final",required=False, widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    horaFinal = forms.ChoiceField(label="Hora final", required=False,widget=forms.Select, choices=CHOICESHORAS)
+    posicionFinal = forms.CharField(label="Posición inicial",max_length=60, required=False,widget=forms.TextInput(attrs={"class":"form-control",'placeholder': 'SS-WW,SS-WW,......,SS-WW'}))
+    momentoFinal= forms.DateTimeField(label="Dia final",required=False, widget=forms.widgets.DateInput(attrs={'type': 'date',"class":"form-control"}))
+    horaFinal = forms.ChoiceField(label="Hora final", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
     
-    navtex = forms.BooleanField(required=False)
-    
-    
+    navtex = forms.ChoiceField(label="Incluir en navtex", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESNAVTEX)
     
     
+    
+
+class HieloForm(forms.Form):
+    
+  
+    
+    texto = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control"}))
+    
+    
+    
+class HieloFormUpdate(forms.Form):
+    
+            texto = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control"}))
+          
+            
+            
+            
+            
+            

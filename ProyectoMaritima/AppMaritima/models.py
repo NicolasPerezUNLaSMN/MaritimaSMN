@@ -80,11 +80,14 @@ class Situacion(models.Model):
     
     navtex = BooleanField(null=True, blank=True)
     
-    #Cada situación pertenecea un boletin.. ese bolet´in tendrá muchas situaciones
-    boletin = models.ForeignKey(Boletin,on_delete=models.CASCADE, null=True)
+    #Si la situacion está vigente lo mantenemos activo
+    activo = models.BooleanField(null=True, blank=True)
+    
+    #Cada situacion puede estar en varios boletines, y cada boletin tiene muchas situaciones
+    boletin = models.ManyToManyField(Boletin)
     
     def __str__(self):
-        return f"ID: {self.id} ----  SISTEMA:  {self.sistema} --- BOLETIN ID: {self.boletin.id} "
+        return f"ID: {self.id} ----  SISTEMA:  {self.sistema} --- "
     
     
     
@@ -94,8 +97,10 @@ class Hielo(models.Model):
     
     creado = models.DateField(auto_now_add=True)
     texto = models.TextField(null=True, blank=True)
+    activo = models.BooleanField(null=True, blank=True)
     
-    boletin = models.ForeignKey(Boletin,on_delete=models.CASCADE, null=True)
+    #Planteo un muchos a muchos porque los hielos no siempre llegan a horario, por ahí el mismo hielo pertenece a varios boletines
+    boletin = models.ManyToManyField(Boletin)
     
 #Parte III - Pronostico
 #Esto esta persistido en el xml,no se si tiene sentido guardarlo en la bd, por eso
