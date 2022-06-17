@@ -1,3 +1,4 @@
+from cgi import print_form
 from django.db import models
 from django.db.models.fields import BooleanField
 
@@ -58,6 +59,41 @@ class Aviso(models.Model):
     def __str__(self):
         return f"ID: {self.id} ----  {self.numero} --- {self.tipo} --- {self.direccion}"
     
+    
+    def paraTXTEnIngles(self):
+        
+        #Hay dos casos, aviso activo y aviso cesado
+        texto = f"WARNING {self.numero}: "
+        
+        #Si está activo
+        if (self.activo):
+            
+            texto = texto + f"{self.tipo} " + f" FROM {self.direccion} WITH GUST IN"
+            
+            #En qué areas?
+            
+            for a in self.area.all():
+                texto = texto + f" {(a.description.upper())}"
+            
+            
+            #si tiene hora de inicio
+            if (not self.horaDesde == -1):
+                
+                texto = texto + f" FROM {self.desde} / {self.horaDesde}"
+                
+            #si tiene hora de fin
+            if (not self.horaHasta == -1):
+                
+                texto = texto + f" UNTIL {self.hasta} / {self.horaHasta}"
+            
+        #Si fue cesado   
+        else:
+            texto = texto + "CEASED"  
+        
+        texto = texto +"\n"
+        
+        return texto
+    
    
 #Parte II SItuacion 
 class Situacion(models.Model):
@@ -89,8 +125,30 @@ class Situacion(models.Model):
     def __str__(self):
         return f"ID: {self.id} ----  SISTEMA:  {self.sistema} --- "
     
-    
-    
+    def paraTXTEnIngles(self):
+        
+        #Solo me interesan los activos, cesados no aparecen en el boletin
+        if ( self.activo):
+            
+            #mejorar esto, porque en la base de datos en vez de vacio se guarda con -1
+            valorInicial = ""
+            if ( self.valorInicial != -1):
+                valorInicial = self.valorInicial
+            
+            texto = f"{self.sistema} {valorInicial} MOV {self.movimiento} {self.evolucion}"
+            
+            
+            #Si tiene posición inicial
+            if (not self.horaInicial == -1):
+                
+                texto = texto +f"AT {self.posicionInicial} BY {self.momentoInicial}/{self.horaInicial}"
+                
+            #Si tiene posición final
+            if (not self.horaFinal == -1):
+                
+                texto = texto +f" EXP {self.posicionFinal} BY {self.momentoFinal}/{self.horaFinal}"
+            texto = texto +"\n"
+            return texto
 
 #Lo envia prefectura, solo guardo el texto
 class Hielo(models.Model):
@@ -102,6 +160,13 @@ class Hielo(models.Model):
     #Planteo un muchos a muchos porque los hielos no siempre llegan a horario, por ahí el mismo hielo pertenece a varios boletines
     boletin = models.ManyToManyField(Boletin)
     
+    
+    def paraTXTEnIngles(self):
+        
+        if ( self.activo):
+            
+            return self.texto
+    
 #Parte III - Pronostico
 #Esto esta persistido en el xml,no se si tiene sentido guardarlo en la bd, por eso
 #solo guardo el texto. 
@@ -109,19 +174,24 @@ class Hielo(models.Model):
 class Pronostico (models.Model):
     
     
+    tipo = models.TextField(null=True, blank=True)
+    
     texto = models.TextField(null=True, blank=True)
     
     #Cada pronostico es de un area pimet - y cada area tiene muchos 
     # #pronsoticos, según boletin 
     area = models.ForeignKey(Area,on_delete=models.CASCADE, null=True)
     
-    boletin = models.ForeignKey(Boletin,on_delete=models.CASCADE, null=True)
+    #boletin = models.ForeignKey(Boletin,on_delete=models.CASCADE, null=True)
+    boletin = models.ManyToManyField(Boletin)
     
     
     def __str__(self):
-        return f"ID: {self.id} ------ > "
+        return f"ID: {self.id} ------ > ({self.tipo}) "
 
-
+    def paraTXTEnIngles(self):
+        
+        return self.texto.upper() +"\n"
     
     
     

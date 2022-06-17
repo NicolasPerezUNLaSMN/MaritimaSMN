@@ -4,13 +4,13 @@ from AppMaritima import views
 
 urlpatterns = [
     
-    path('inicio', views.inicio, name="Inicio"),
+    path('', views.BoletinCreacion.as_view(), name='NewBoletin'),
     path('cargarAreas', views.cargarAreas), #Ejecutarlo la primera vez para cargas las areas PIMET
     path('cargarPronosticos', views.cargarPronosticos),
     path('escaterometro', views.escaterometro, name="Escaterometro"),
     
     
-    #Vistas para crud de las clases
+    #url a Vistas para crud de las tablas
     
     #BOLETIN
     path('boletin/list', views.BoletinList.as_view(), name='ListBoletin'),
@@ -46,6 +46,8 @@ urlpatterns = [
     path('cesarHielo/<pk>', views.cesarHielo, name='CesarHielo'),
     path('borrarHielo/<pk>', views.HieloDelete.as_view(), name='DeleteHielo'),
     
+    #Otros url
+    path('crearTXT/<pk>', views.CrearTXT, name='CrearTXT'),
     
     
 ]

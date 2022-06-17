@@ -651,7 +651,7 @@ def areaAtexto(area):
   texto = texto.replace(" .", ".")
   texto = texto.replace(". ", ".")
   
-  texto = texto +"\n\r"
+  
 
   return texto
 
@@ -688,7 +688,7 @@ def cargarAreasDesdeElXML(nombreArchivo):
           
           
           
-def cargarPronosticosDesdeElXML(nombreArchivo):
+def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
   
     root = definirRoot(nombreArchivo)
     
@@ -743,8 +743,49 @@ def cargarPronosticosDesdeElXML(nombreArchivo):
               
               #antes de terminar el area la agrego a la lista de area del pronostico que corresponde
              
-
-              pronos = Pronostico(texto = areaAtexto(a), area =  Area.objects.get(description__contains = a.description), boletin = Boletin.objects.order_by("-id")[0])
+              queAreaEs = Area.objects.get(description__contains = a.description)
               
+              #SEGUN QUE AREA ES DEBO DEFINIR EL TIPO- METAREA VI - OFF SHORE - COSTA
+              tipo = definirTipoDePronostico(queAreaEs)
+              
+
+              pronos = Pronostico(texto = areaAtexto(a), area =  queAreaEs, tipo = tipo)
+              
+              #Guardo el pronostico pero aun no le asigne el boletín
+              pronos.save()
+              
+              #Ahora le asigno el boletín y vuelvo a guardarlo para que se genere el vinculo, en un solo paso no se puede hacer porque
+              #es una relación muchos a muchos. 
+              b = Boletin.objects.get(id = idBoletin)
+              
+              pronos.boletin.add(b)
               
               pronos.save()
+              
+              
+
+#Esto es para no estar consultando el area ya que las divisiones de PIMET no se adaptan al boletin en cuanto 
+#al subdomino.... Importante separar Norte y sur de 60 para no agregar areas antartida          
+def definirTipoDePronostico(area):
+  
+  tipo = "Costa"
+              
+  if ("OFFSHORE" in area.description):
+                tipo = "Offshore"
+                
+  else:
+                if (area.domain == "Metarea VI"):
+                  tipo= "Metarea VI - N"
+                  
+                if ("Weddell" in area.description):
+                  tipo= "Metarea VI - S"
+                if ("MarDeLaFlota" in area.description):
+                  tipo= "Metarea VI - S"
+                if ("Drake South" in area.description):
+                  tipo= "Metarea VI - S"
+                if ("Erebus" in area.description):
+                  tipo= "Metarea VI - S"
+                if ("Gerlache" in area.description):
+                  tipo= "Metarea VI - S"
+                  
+  return tipo

@@ -1,5 +1,7 @@
 from asyncio.constants import DEBUG_STACK_DEPTH
 from asyncio.windows_events import NULL
+from cgitb import text
+from ctypes.wintypes import PINT
 from winreg import HKEY_PERFORMANCE_DATA
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
@@ -40,7 +42,7 @@ def escaterometro(request):
 #Ejectucarlo solo una vez, y con permisos de admin 
 def cargarAreas(request):
     
-    archivo = "prueba.xml"
+    archivo = "xmlPIMET/prueba.xml"
     cargarAreasDesdeElXML(archivo)
     
     return HttpResponse("Areas cargadas")
@@ -48,10 +50,16 @@ def cargarAreas(request):
     
 
 #Carga los pronosticos de cada area al ultimo bolerin
-def cargarPronosticos(request):
+def cargarPronosticos(idBoletin):
     
-    archivo = "prueba.xml"
-    cargarPronosticosDesdeElXML(archivo)
+    #Los pronosticos los lee del xml de pimet. 
+    #habria que hacer que el xml tenga el nombre segun el día del pronostico
+    #y validar que se está cargando el pronostico del día. 
+    archivo = "xmlPIMET/prueba.xml"
+    
+    #Función que genera los textos en ingles para cada area y asigna los pronos al boletín que se creo. 
+    print("qUIERO CARGAR LOS PRONOSTICOS EN EL BOLETIN: ID:" ,idBoletin)
+    cargarPronosticosDesdeElXML(archivo, idBoletin)
     
     return HttpResponse("Pronosticos cargados")
 
@@ -77,6 +85,8 @@ class BoletinListTodos(ListView):
     
     ordering = ['-id'] #los ordeno por id
     
+
+
     
 class BoletinDetalle(DetailView):
     
@@ -84,10 +94,24 @@ class BoletinDetalle(DetailView):
     template_name = "AppMaritima/boletin/boletin_detalle.html"
     
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
+        
+        #id del Boletin
+        pk = int(self.kwargs['pk'])
+        print("------>, el boletin : ", pk)
+        # Obtengo el contexto
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['avisos'] = Aviso.objects.filter(activo = True)
+        
+        # Envio al contexto, el detalle del boletin los avisos, situaciones y hielos del mismo
+        # Ya sean activos o no. Así no se pierden los ceses
+        context['avisosDelBoletin'] = Aviso.objects.filter(boletin = pk)
+        
+        #Los sistemas no me interesan una vez cesados, así que solo muestro el activo
+        context['situacionesDelBoletin'] = Situacion.objects.filter(boletin = pk, activo = True)
+        
+        #Los hielos no me interesan una vez cesados, así que solo muestro el activo
+        context['hielosDelBoletin'] = Hielo.objects.filter(boletin = pk, activo = True)
+        
+ 
         return context
     
 
@@ -130,9 +154,10 @@ class BoletinCreacion(FormView):
                         
                         situacion.boletin.add(boletin)
                         situacion.save()
-                        
-                       
                     
+                    print("Nuevo bOletin con ID: ", boletin.id) 
+                    cargarPronosticos( boletin.id)   
+
                     
                     return redirect("boletin/list")    
                 
@@ -251,13 +276,14 @@ class AvisoCreacion(FormView):
                         aviso.area.add(a)
                     
                     #Le asigno el ultimo boletin
-                    aviso.boletin.add(Boletin.objects.all().order_by("-id")[0])
+                    boletin = (Boletin.objects.all().order_by("-id")[0])
+                    aviso.boletin.add(boletin)
                          
                     aviso.save()
                     
-                    idBoletin = (Boletin.objects.all().order_by("-id")[0])
                     
-                    return redirect(f"boletin/{idBoletin.id}")
+                    
+                    return redirect(f"boletin/{boletin.id}")
                     
                 
 class AvisoUpdate(FormView):
@@ -459,14 +485,19 @@ class SituacionCreacion(FormView):
                        momentoFinal =  form.cleaned_data.get("momentoFinal"),
                        horaFinal =  horaH,
                        navtex =  form.cleaned_data.get("navtex")=="Incluir",
-                       activo = True,
-                       boletin =  (Boletin.objects.all().order_by("-id"))[0]
+                       activo = True
                         
                         
                     )
                     
                   
                   
+                    situacion.save()
+                    
+                    boletin =  (Boletin.objects.all().order_by("-id"))[0]
+                    
+                    situacion.boletin.add(boletin)
+                    
                     situacion.save()
                     
                     return redirect("situacion/list")
@@ -658,4 +689,78 @@ class HieloDelete(DeleteView):
     template_name = "AppMaritima/hielo/hielo_confirm_delete.html"
     success_url = "../hielo/list"
     
+
+#FIN - CRUD - Hielo
+
+##################################################################
+##################### ESCRITURA DE tXT #############################
+##################################################################
     
+def CrearTXT(request, pk):
+    
+    #Uso get porque es uno solo
+    boletin = Boletin.objects.get(id = pk)
+    
+    avisos =  Aviso.objects.filter(boletin = pk)
+  
+    situaciones = Situacion.objects.filter(boletin = pk, activo = True)
+        
+    hielos = Hielo.objects.filter(boletin = pk, activo = True)
+    
+    pronosticosOffshore = Pronostico.objects.filter(boletin = pk, tipo = "Offshore")
+    
+    pronosticosMetarea = Pronostico.objects.filter(boletin = pk,tipo = "Metarea VI - N")
+    
+    #Encabezado "casi" fijo
+    textoEnIngles = f"""FQST02 SABM {boletin.valido}{boletin.hora}
+1:31:06:01:00 
+SECURITE 
+WEATHER BULLETIN ON METAREA VI
+SMN ARGENTINA, {boletin.valido} AT {boletin.hora}UTC WIND SPEED IN BEAUFORT SCALE WAVES IN METERS
+Please be aware wind gust can be a further 40 percent stronger than the averages 
+and maximum waves may be up to twice the significant height, sea ice and icebergs issued by SHN
+                    
+PART 1 GALE WARNING\n"""
+                    
+    #Escritura de los avisos
+    for a in avisos: 
+        
+        #Defino en un metodo del modelo la escritura de txt
+        textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+        
+    #Escritura de las situaciones
+    textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
+    
+    
+    #Escribo los hielos, aún es uno solo
+    
+    for h in hielos:
+        
+        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
+    textoEnIngles = textoEnIngles +"\n"
+    
+       
+    for s in situaciones: 
+        
+        textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
+    textoEnIngles = textoEnIngles +"\n"
+    
+    
+    #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
+    textoEnIngles = textoEnIngles +"\nPART 3 FORECAST\n"
+    for p in pronosticosOffshore:
+        
+        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+        
+    for p in pronosticosMetarea:
+        
+        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+    #Cierre pedido por comunicaciones
+    textoEnIngles = textoEnIngles + "-----------------------------------------------------------------\nNNNN="
+    
+    #Abro el archivo, escribo y lo cierro
+    f = open (f"txtGuardados/{boletin.valido}_{boletin.hora}.txt",'w')
+    f.write(textoEnIngles)
+    f.close()
+    
+    return redirect(f"../boletin/list")  

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Maritima SMN</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'AppMaritima/images/favicon.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}">
     <!-- Custom Stylesheet -->
     <link href="{% static 'AppMaritima/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
 
@@ -159,8 +159,9 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Avisos</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{% url 'ListAviso' %}">Activos</a></li>
                             <li><a href="{% url 'NewAviso' %}">+Nuevo</a></li>
+                            <li><a href="{% url 'ListAviso' %}">Activos</a></li>
+                            
                                
                         </ul>
                     </li>
@@ -170,7 +171,8 @@
                             <i class="icon-grid  menu-icon"></i> <span class="nav-text">Hielos</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Activo</a></li>
+                            <li><a href="{% url 'NewHielo' %}">+Nuevo</a></li>
+                            <li><a href="{% url 'ListHielo' %}">Activo</a></li>
                             
                         </ul>
                     </li>
@@ -179,8 +181,9 @@
                             <i class="icon-graph menu-icon"></i><span class="nav-text">Situación</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Activas</a></li>
-                            <li><a href="./app-calender.html">Nueva</a></li>
+                            <li><a href="{% url 'NewSituacion' %}">+Nuevo</a></li>
+                            <li><a href="{% url 'ListSituacion' %}">Activos</a></li>
+                           
                         </ul>
                     </li>
 

@@ -17,13 +17,102 @@
 
                                <div class="card-body">
 
-                                <a href="{% url 'NewAviso' %}" class="btn btn-primary">+Nuevo aviso</a><BR></BR>
+                                
                                 
                                   <h5 class="card-title">VALIDO: {{ boletin.valido}}</h5>
                                   <h5 class="card-title">Emitido: {{ boletin.emitido}}</h5>
                                   <h5 class="card-title">Modificado: {{ boletin.modificado}}</h5>
                                   <h5 class="card-title">HORA: {{ boletin.hora}} Z</h5>
                                   <br>
+
+                                 
+                                  <!-- BLOQUE PARA LOS AVISOS-->
+                                    <a href="{% url 'NewAviso' %}" class="btn btn-info">+Nuevo aviso</a> 
+                                    <a href="{% url 'NewSituacion' %}" class="btn btn-info">+Nueva situación</a>
+                                    <a href="{% url 'NewHielo' %}" class="btn btn-info">+Nuevo hielo</a>
+
+                                    <br><br>
+                                      <h5 class="card-title">Avisos del boletín:</h5>
+    
+                                     
+                                  
+                                        {% for aviso in avisosDelBoletin %}
+    
+                                       
+                                            <h6 class="card-header">Número: {{ aviso.numero}}</h6>
+                                            <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
+                                            <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
+                                            <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
+                                            <h6 class="card-header">Activo: {{ aviso.activo}}</h6>
+    
+    
+                                           
+                                            <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
+                                            <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark">Cesar</a>
+                                            <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
+    
+    
+                                        
+    
+                                  
+                                        {% endfor %}    
+                                
+
+                                 <!-- BLOQUE PARA LAS SITUACIONES-->
+                                 <br><br>
+                                  <h5 class="card-title">Situaciones del boletín:</h5>
+
+                                  
+
+                                  
+                              
+
+                              
+                                    {% for situacion in situacionesDelBoletin %}
+
+                                   
+                                        <h6 class="card-header">Sistema {{situacion.sistema}}</h6>
+                                        <h6 class="card-header">Movimioento: {{ situacion.movimiento}}</h6>
+                                        <h6 class="card-header">Evolucion: {{ situacion.evolucion}}</h6>
+                                        <h6 class="card-header">Navtex: {{ situacion.navtex}}</h6>
+                                      
+
+
+                                       
+                                        <a href="{% url 'EditSituacion' situacion.id %}" class="btn btn-warning">Actualizar</a>
+                                        <a href="{% url 'CesarSituacion' situacion.id %}" class="btn btn-dark">Cesar</a>
+                                        <a href="{% url 'DeleteSituacion' situacion.id %}"  class="btn btn-danger">Borrar</a>
+
+
+                                    
+
+                              
+                                    {% endfor %}    
+                                    
+
+                                    <!-- BLOQUE PARA Los hielos-->
+                                  <br><br>
+                                  <h5 class="card-title">Hielos del boletín:</h5>
+
+                                    {% for hielo in hielosDelBoletin %}
+
+                                   
+                                    <h6 class="card-header">Hielo: {{hielo.texto}}</h6>
+                                    <h6 class="card-header">Creado: {{hielo.creado}}</h6>
+                                    
+                                  
+
+
+                                   
+                                    <a href="{% url 'EditHielo' hielo.id %}" class="btn btn-warning">Actualizar</a>
+                                    <a href="{% url 'CesarHielo' hielo.id %}" class="btn btn-dark">Cesar</a>
+                                    <a href="{% url 'DeleteHielo' hielo.id %}"  class="btn btn-danger">Borrar</a>
+
+
+                                
+
+                          
+                                {% endfor %}    
                                 
 
                                  
@@ -35,6 +124,7 @@
                             
                                 </div>
 
+                              <a href="{% url 'CrearTXT' boletin.id%}" class="btn btn-dark">¡¡¡Crear txt final!!!</a>
 
                             </div>
                         </div>
