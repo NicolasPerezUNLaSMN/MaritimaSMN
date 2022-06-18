@@ -1,8 +1,4 @@
-from asyncio.constants import DEBUG_STACK_DEPTH
-from asyncio.windows_events import NULL
-from cgitb import text
-from ctypes.wintypes import PINT
-from winreg import HKEY_PERFORMANCE_DATA
+
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 
