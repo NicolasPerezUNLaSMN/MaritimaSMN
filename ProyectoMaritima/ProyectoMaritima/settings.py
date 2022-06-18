@@ -75,13 +75,25 @@ WSGI_APPLICATION = 'ProyectoMaritima.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+#CONFIGURACIón por defecto para sqlite3
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+#CONFIGURACIón para postgres... OJO CAMBIAR de USER PARA ABAJO
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'maritima',
+        'USER': 'postgres',
+        'PASSWORD':'root',
+        'HOST':'127.0.0.1',
+        'DATABASE_PORT':'5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

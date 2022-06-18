@@ -683,7 +683,7 @@ def cargarAreasDesdeElXML(nombreArchivo):
           areaModels = Area(idPimet=float(area.attrib['id']), latitude=area.attrib['latitude'],
                             longitude=area.attrib['longitude'], description=area.attrib['description'],
                             domain= area.attrib['domain'])
-          
+          print("--->", areaModels)
           areaModels.save()
           
           

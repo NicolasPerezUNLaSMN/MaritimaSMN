@@ -1,4 +1,5 @@
 
+from cgi import print_arguments
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -38,10 +39,19 @@ def escaterometro(request):
 #Ejectucarlo solo una vez, y con permisos de admin 
 def cargarAreas(request):
     
-    archivo = "xmlPIMET/prueba.xml"
-    cargarAreasDesdeElXML(archivo)
+    cantidadAreas =  Area.objects.all().count()
+    print("------->", cantidadAreas)
     
-    return HttpResponse("Areas cargadas")
+    #Solo permite cargar areas cuando no hay nada en la base de datos
+    #Esto lo podemos mejorar, actualizando. 
+    if ( cantidadAreas == 0):
+        
+        archivo = "xmlPIMET/prueba.xml"
+        cargarAreasDesdeElXML(archivo)
+        return HttpResponse("Areas cargadas")
+    
+   
+    return HttpResponse("No se cargaron las areas, ya estaban en la base")
     
     
 
