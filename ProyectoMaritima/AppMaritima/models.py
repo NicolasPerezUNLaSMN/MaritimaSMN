@@ -29,8 +29,74 @@ class Boletin(models.Model):
     hora = models.IntegerField(null=True)
     
     def __str__(self):
-        return f"ID: {self.id} ------- {self.valido}"
+        return f"Boletín para -------> {self.valido}:{self.hora}  --> Generado/id: {self.emitido}{self.id}"
     
+#Parte II SItuacion 
+class Situacion(models.Model):
+    
+    sistema = models.CharField(max_length=60)
+    
+    valorInicial = models.IntegerField(null=True, blank=True)
+
+    
+    movimiento = models.CharField(max_length=4,null=True, blank=True)
+    evolucion = models.CharField(max_length=30,null=True, blank=True)
+    
+    posicionInicial = models.CharField(max_length=60,null=True, blank=True)
+    momentoInicial = models.DateField(null=True, blank=True)
+    horaInicial = models.IntegerField(null=True, blank=True)
+    
+    posicionFinal = models.CharField(max_length=60,null=True, blank=True) 
+    momentoFinal = models.DateField(null=True, blank=True)
+    horaFinal = models.IntegerField(null=True, blank=True)
+    
+    navtex = BooleanField(null=True, blank=True)
+    
+    #Si la situacion está vigente lo mantenemos activo
+    activo = models.BooleanField(null=True, blank=True)
+    
+    #Cada situacion puede estar en varios boletines, y cada boletin tiene muchas situaciones
+    boletin = models.ManyToManyField(Boletin)
+    
+    def __str__(self):
+        return f"  {self.sistema}// {self.evolucion}// {self.movimiento} "
+    
+    def paraTXTEnIngles(self): #Texto en ingles que aparece en el boletín
+        
+        #Solo me interesan los activos, cesados no aparecen en el boletin
+        if ( self.activo):
+            
+            #mejorar esto, porque en la base de datos en vez de vacio se guarda con -1
+            valorInicial = ""
+            if ( self.valorInicial != -1):
+                valorInicial = self.valorInicial
+            
+            texto = f"{self.sistema} {valorInicial} MOV {self.movimiento} {self.evolucion}"
+            
+            
+            #Si tiene posición inicial
+            if (not self.horaInicial == -1):
+                
+                texto = texto +f"AT {self.posicionInicial} BY {self.momentoInicial}/{self.horaInicial}"
+                
+            #Si tiene posición final
+            if (not self.horaFinal == -1):
+                
+                texto = texto +f" EXP {self.posicionFinal} BY {self.momentoFinal}/{self.horaFinal}"
+            texto = texto +"\n"
+            return texto
+        
+    def paraTXTEnInglesResumen(self): #Este texto es el que aparece en el aviso de temporal asociado
+        
+        #Solo me interesan los activos, cesados no aparecen en el boletin
+        if ( self.activo):
+            
+           
+            
+            texto = f"{self.sistema} "
+            
+            return texto
+
     
 #Parte I Avisos
 class Aviso(models.Model):
@@ -56,14 +122,25 @@ class Aviso(models.Model):
     
     area = models.ManyToManyField(Area)
     
+    situacion = models.ManyToManyField(Situacion)
+    
+    provoca = models.CharField(default="PROVOKE", max_length=30)
+    
     def __str__(self):
-        return f"ID: {self.id} ----  {self.numero} --- {self.tipo} --- {self.direccion}"
+        return f"NUMERO: ---->  {self.numero} TIPO: ---> {self.tipo} ---> DIRECCIÓN ---> {self.direccion}"
     
     
     def paraTXTEnIngles(self):
         
         #Hay dos casos, aviso activo y aviso cesado
-        texto = f"WARNING {self.numero}: "
+        
+        #traigo la situación, a futuro se podria tener varias, por ahora solo UNA
+        listaDeSituacionesAsignadas= []
+        for s in self.situacion.all():
+            listaDeSituacionesAsignadas.append(s)
+        
+        
+        texto = f"WARNING {self.numero}: {listaDeSituacionesAsignadas[0].paraTXTEnInglesResumen()} {self.provoca} "
         
         #Si está activo
         if (self.activo):
@@ -94,62 +171,7 @@ class Aviso(models.Model):
         
         return texto
     
-   
-#Parte II SItuacion 
-class Situacion(models.Model):
     
-    sistema = models.CharField(max_length=60)
-    
-    valorInicial = models.IntegerField(null=True, blank=True)
-
-    
-    movimiento = models.CharField(max_length=4,null=True, blank=True)
-    evolucion = models.CharField(max_length=30,null=True, blank=True)
-    
-    posicionInicial = models.CharField(max_length=60,null=True, blank=True)
-    momentoInicial = models.DateField(null=True, blank=True)
-    horaInicial = models.IntegerField(null=True, blank=True)
-    
-    posicionFinal = models.CharField(max_length=60,null=True, blank=True) 
-    momentoFinal = models.DateField(null=True, blank=True)
-    horaFinal = models.IntegerField(null=True, blank=True)
-    
-    navtex = BooleanField(null=True, blank=True)
-    
-    #Si la situacion está vigente lo mantenemos activo
-    activo = models.BooleanField(null=True, blank=True)
-    
-    #Cada situacion puede estar en varios boletines, y cada boletin tiene muchas situaciones
-    boletin = models.ManyToManyField(Boletin)
-    
-    def __str__(self):
-        return f"ID: {self.id} ----  SISTEMA:  {self.sistema} --- "
-    
-    def paraTXTEnIngles(self):
-        
-        #Solo me interesan los activos, cesados no aparecen en el boletin
-        if ( self.activo):
-            
-            #mejorar esto, porque en la base de datos en vez de vacio se guarda con -1
-            valorInicial = ""
-            if ( self.valorInicial != -1):
-                valorInicial = self.valorInicial
-            
-            texto = f"{self.sistema} {valorInicial} MOV {self.movimiento} {self.evolucion}"
-            
-            
-            #Si tiene posición inicial
-            if (not self.horaInicial == -1):
-                
-                texto = texto +f"AT {self.posicionInicial} BY {self.momentoInicial}/{self.horaInicial}"
-                
-            #Si tiene posición final
-            if (not self.horaFinal == -1):
-                
-                texto = texto +f" EXP {self.posicionFinal} BY {self.momentoFinal}/{self.horaFinal}"
-            texto = texto +"\n"
-            return texto
-
 #Lo envia prefectura, solo guardo el texto
 class Hielo(models.Model):
     
@@ -160,6 +182,8 @@ class Hielo(models.Model):
     #Planteo un muchos a muchos porque los hielos no siempre llegan a horario, por ahí el mismo hielo pertenece a varios boletines
     boletin = models.ManyToManyField(Boletin)
     
+    def __str__(self):
+        return f"Ultima modificación: {self.creado}"
     
     def paraTXTEnIngles(self):
         

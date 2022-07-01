@@ -22,6 +22,14 @@ from django.views.generic.edit import  CreateView, UpdateView, DeleteView
 
 
 #VISTAS genericas
+
+def editor(request):
+    
+    
+
+    return render(request, 'AppMaritima/editor.html')
+
+
 def inicio(request):
     
     
@@ -64,7 +72,7 @@ def cargarPronosticos(idBoletin):
     archivo = "xmlPIMET/prueba.xml"
     
     #Función que genera los textos en ingles para cada area y asigna los pronos al boletín que se creo. 
-    print("qUIERO CARGAR LOS PRONOSTICOS EN EL BOLETIN: ID:" ,idBoletin)
+    print("QUIERO CARGAR LOS PRONOSTICOS EN EL BOLETIN: ID:" ,idBoletin)
     cargarPronosticosDesdeElXML(archivo, idBoletin)
     
     return HttpResponse("Pronosticos cargados")
@@ -91,7 +99,16 @@ class BoletinListTodos(ListView):
     
     ordering = ['-id'] #los ordeno por id
     
+def ultimoBoletin(request):
+    
+        
+        #id del Boletin 
+        pk = ((Boletin.objects.all().order_by("-id"))[0]).id
+        print("------>, el boletin : ", pk)
 
+        return redirect(f"../boletin/{pk}")  
+ 
+       
 
     
 class BoletinDetalle(DetailView):
@@ -232,7 +249,7 @@ def ultimoAviso():
 def ultimoID():
     
     
-    avisoUltimo = Aviso.objects.all().order_by("-id")[0]
+    avisoUltimo = Aviso.objects.all().order_by("-id")
     
     
     return avisoUltimo.id
@@ -269,14 +286,18 @@ class AvisoCreacion(FormView):
                     horaDesde = horaD,
                     hasta = form.cleaned_data.get("hasta"),
                     horaHasta = horaH,
-                    activo = True)
+                    activo = True,
+                    provoca = form.cleaned_data.get("provoca"))
                     #boletin = Boletin.objects.all().order_by("-id")[0] 
                     
                     aviso.save()
                     
                     lista = form.cleaned_data.get("area")
                     
+                    situacionQueLogenera = form.cleaned_data.get("situacion")
                     
+                    for s in situacionQueLogenera:
+                        aviso.situacion.add(s)
                     
                     for a in lista:
                         aviso.area.add(a)
@@ -331,7 +352,8 @@ class AvisoUpdate(FormView):
                     horaDesde = horaD,
                     hasta = form.cleaned_data.get("hasta"),
                     horaHasta = horaH,
-                    activo = True)
+                    activo = True, 
+                    provoca = form.cleaned_data.get("provoca"))
                     #boletin = Boletin.objects.all().order_by("-id")[0] 
                     
                     
@@ -344,6 +366,10 @@ class AvisoUpdate(FormView):
                     
                     lista = form.cleaned_data.get("area")
                     
+                    situacionQueLogenera = form.cleaned_data.get("situacion")
+                    
+                    for s in situacionQueLogenera:
+                        aviso.situacion.add(s)
                     
                     
                     for a in lista:
@@ -702,7 +728,7 @@ class HieloDelete(DeleteView):
 ##################### ESCRITURA DE tXT #############################
 ##################################################################
     
-def CrearTXT(request, pk):
+def crearTXT(request, pk):
     
     #Uso get porque es uno solo
     boletin = Boletin.objects.get(id = pk)
@@ -764,9 +790,18 @@ PART 1 GALE WARNING\n"""
     #Cierre pedido por comunicaciones
     textoEnIngles = textoEnIngles + "-----------------------------------------------------------------\nNNNN="
     
+    #Por si algo quedó mal lo paso todo a mayusculas
+    textoEnIngles = textoEnIngles.upper()
+    
     #Abro el archivo, escribo y lo cierro
-    f = open (f"txtGuardados/{boletin.valido}_{boletin.hora}.txt",'w')
+    nombreArchivo = f"{boletin.valido}_{boletin.hora}.txt"
+    f = open (f"txtGuardados/{nombreArchivo}",'w')
     f.write(textoEnIngles)
     f.close()
     
-    return redirect(f"../boletin/list")  
+    texto = textoEnIngles
+    
+    diccionario = {"texto": texto, "nombreArchivo":nombreArchivo}
+
+ 
+    return render(request, 'AppMaritima/editor.html', diccionario)

@@ -13,6 +13,9 @@ urlpatterns = [
     #url a Vistas para crud de las tablas
     
     #BOLETIN
+    path('boletin/ultimo', views.ultimoBoletin, name='UltimoBoletin'),
+    
+    
     path('boletin/list', views.BoletinList.as_view(), name='ListBoletin'),
     path('boletin/listTodos', views.BoletinListTodos.as_view(), name='ListBoletinTodos'),
     path('boletin/<pk>', views.BoletinDetalle.as_view(), name='DetailBoletin'),
@@ -47,7 +50,8 @@ urlpatterns = [
     path('borrarHielo/<pk>', views.HieloDelete.as_view(), name='DeleteHielo'),
     
     #Otros url
-    path('crearTXT/<pk>', views.CrearTXT, name='CrearTXT'),
+    path('crearTXT/<pk>', views.crearTXT, name='CrearTXT'),
+    path('editor', views.editor, name='Editor'),
     
     
 ]

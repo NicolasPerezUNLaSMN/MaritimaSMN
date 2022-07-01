@@ -31,6 +31,8 @@
     <!-- Custom Stylesheet -->
     <link href="{% static 'AppMaritima/css/style.css' %}" rel="stylesheet">
 
+    <link href="{% static 'AppMaritima/plugins/summernote/dist/summernote.css' %}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -143,6 +145,10 @@
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Navegantes</li>
+                    
+                        <li><a href="{% url 'UltimoBoletin' %}">Ir a último Boletín</a></li>
+                        
+                    
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Boletin</span>
@@ -292,6 +298,17 @@
     <script src="{% static 'AppMaritima/plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
 
     <script src="{% static 'AppMaritima/js/plugins-init/form-pickers-init.js' %}"></script>
+
+        <!-- Editor texto-->
+    <script src="{% static 'AppMaritima/plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/custom.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/settings.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/gleek.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/styleSwitcher.js' %}"></script>
+
+    <script src="{% static 'AppMaritima/plugins/summernote/dist/summernote.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/summernote/dist/summernote-init.js' %}"></script>
+    
 
 </body>
 

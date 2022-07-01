@@ -17,6 +17,9 @@ class BoletinForm(forms.Form):
 
 
 class AvisoForm(forms.Form):
+
+    CHOICESPROVOCA = (('PROVOKE','PROVOCA'),
+                        ('PROVOKES','PROVOCARÁ'),)
     
     CHOICESTIPO = (('GALE','TEMPORAL'),
                    ('SEVERE GALE','TEMPORAL FUERTE'),('VIOLENT STORM','TEMPORAL MUY FUERTE'),)
@@ -28,7 +31,12 @@ class AvisoForm(forms.Form):
     CHOICESHORAS = ((' ',' '),('0','0'),
                    ('3','3'),('6','6'),('9','9'), ('12','12'),('15','15'),('18','18'),('21','21'))
    
+    situacion = forms.ModelMultipleChoiceField(
+        queryset=Situacion.objects.filter(activo=True), #solo situaciones activas
+        widget=forms.CheckboxSelectMultiple
+    )
     
+    provoca = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESPROVOCA)
     
     tipo = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESTIPO)
     direccion = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESDIR)
@@ -51,6 +59,9 @@ class AvisoForm(forms.Form):
     
 class AvisoFormUpdate(forms.Form):
     
+            CHOICESPROVOCA = (('PROVOKE','PROVOCA'),
+                        ('PROVOKES','PROVOCARÁ'),)
+    
             CHOICESTIPO = (('GALE','TEMPORAL'),
                         ('SEVERE GALE','TEMPORAL FUERTE'),('VIOLENT STORM','TEMPORAL MUY FUERTE'),)
             
@@ -62,10 +73,19 @@ class AvisoFormUpdate(forms.Form):
                         ('3','3'),('6','6'),('9','9'), ('12','12'),('15','15'),('18','18'),('21','21'))
 
             #CHOICESACTIVO= (('Activo','Activo'),("Cesar","Cesar"))
+            situacion = forms.ModelMultipleChoiceField(
+                queryset=Situacion.objects.filter(activo=True), #solo situaciones activas
+                widget=forms.CheckboxSelectMultiple
+                 )
+            
+            provoca = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESPROVOCA)
             
             
             tipo = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESTIPO)
             direccion = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESDIR)
+            
+            
+            
             
             desde = forms.DateTimeField(required=False,widget=forms.widgets.DateInput(attrs={'type': 'date',"class":"form-control"}))
             horaDesde = forms.ChoiceField(label="Hora (desde)", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
