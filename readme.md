@@ -67,7 +67,9 @@ Repetir los pasos 6 y 7.
 - [x] Versión estable para crear boletín en ingles
 - [x] Persistencia de todos los datos en tablas 
 - [x] Escaterometro y borde de hielos visibles desde la web. 
+- [ ] Definir qué hacer con las divisiones Rio De la Plata.
 
 
+Manual usuario y técnico del SW: [MANUALES](https://drive.google.com/drive/folders/1EdElg3e95aywZnOQJLetQNT4LN--bmhZ?usp=sharing)
 
 Crear un README mejor que este: [GitHub Docs](https://docs.github.com/es/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).

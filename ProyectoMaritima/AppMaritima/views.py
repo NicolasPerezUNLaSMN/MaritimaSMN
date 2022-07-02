@@ -1,10 +1,10 @@
 
-from cgi import print_arguments
+
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 
 
-from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML
+from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML, enviarMail
 
 from AppMaritima.form import AvisoForm, BoletinForm,SituacionForm,AvisoFormUpdate, HieloForm, HieloFormUpdate
 
@@ -15,7 +15,13 @@ from django.views.generic.edit import FormView
 #Para hacer CBV
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import  CreateView, UpdateView, DeleteView
+from django.views.generic.edit import  UpdateView, DeleteView
+
+#Esto es para el envio de mails
+from django.conf import settings
+from django.core.mail import send_mail
+
+
 
 
 # Create your views here.
@@ -739,9 +745,9 @@ def crearTXT(request, pk):
         
     hielos = Hielo.objects.filter(boletin = pk, activo = True)
     
-    pronosticosOffshore = Pronostico.objects.filter(boletin = pk, tipo = "Offshore")
+    pronosticosOffshore = Pronostico.objects.filter(boletin = pk, tipo = "Offshore").order_by("area__orden")
     
-    pronosticosMetarea = Pronostico.objects.filter(boletin = pk,tipo = "Metarea VI - N")
+    pronosticosMetarea = Pronostico.objects.filter(boletin = pk,tipo = "Metarea VI - N").order_by("area__orden")
     
     #Encabezado "casi" fijo
     textoEnIngles = f"""FQST02 SABM {boletin.valido}{boletin.hora}
@@ -779,11 +785,16 @@ PART 1 GALE WARNING\n"""
     
     
     #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
-    textoEnIngles = textoEnIngles +"\nPART 3 FORECAST\n"
+    textoEnIngles = textoEnIngles +"PART 3 FORECAST\n"
+    
+    textoEnIngles = textoEnIngles +"COASTAL AREAS:\n"
+   
+    
     for p in pronosticosOffshore:
         
         textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
         
+    textoEnIngles = textoEnIngles +"OCEANIC AREAS:\n"
     for p in pronosticosMetarea:
         
         textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
@@ -803,5 +814,12 @@ PART 1 GALE WARNING\n"""
     
     diccionario = {"texto": texto, "nombreArchivo":nombreArchivo}
 
+    
+    #Ademas podria enviar el archivo por mail:
+    #Por ahora lo envio de acá:
+    #pronossm@gmail.com
+    #pronos_smn
+    #Ya no se acepta iniciar con smtplib :( )
+    #enviarMail('nico_perez_velez@hotmail.com',texto)
  
     return render(request, 'AppMaritima/editor.html', diccionario)

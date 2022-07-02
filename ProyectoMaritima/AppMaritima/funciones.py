@@ -1,9 +1,46 @@
+from cgi import print_form
 from xml.etree.ElementTree import parse
 
 
 from AppMaritima.models import Pronostico, Boletin, Area
 
 from AppMaritima.clasesLecturaDelXML import *
+
+#Envio de mails
+import smtplib, ssl
+
+#Para saber a la hora que se ejecuta el algoritmo
+import time
+
+def queHoraEs():
+  
+  return int(time.strftime('%H', time.localtime()))
+
+
+
+#!!!!!Ya no se acepta iniciar sección con smtplib
+def enviarMail(enviarA,texto):
+    # on rentre les renseignements pris sur le site du fournisseur
+    smtp_address = 'smtp.gmail.com'
+    smtp_port = 465
+
+    # on rentre les informations sur notre adresse e-mail
+    email_address = 'metareavi@gmail.com'
+    email_password = 'pronos_smn'
+
+    # on rentre les informations sur le destinataire
+    email_receiver = enviarA
+
+    # on crée la connexion
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
+      # connexion au compte
+      server.login(email_address, email_password)
+      # envoi du mail
+      server.sendmail(email_address, email_receiver, texto)
+
+
+
 
 def definirRoot(nombreArchivo):#en este caso el argumento a recibir debe ser 'prueba.xml'
   
@@ -171,11 +208,19 @@ def agregarONoRafagas(velBeaufort):
 def ktABeaufort(velo):
 
       vel = 0
-
-      if (velo != '0.1'):
-        vel = int (velo)
+      print("VELOOOO", velo , type(velo))
+      
+      #Si llega un digito lo paso a float
+      if (velo.isdigit()):
+        
+        velo = float(velo)
+        
+        if (velo <= 0.1):
+          vel = 0
+      #Si no llega un digito lo pongo en 0    
       else:
-        vel = 0
+        velo = float (0)    
+        
 
       retorno = ""
 
@@ -226,18 +271,54 @@ def transformarASectores(vientoD):
   return retorno
 
 
+def tomarHorasIndicadasSegunTurno(elemento):
+        horaActual = queHoraEs()
+
+        hora1 = 0
+        hora2 = 0
+        hora3 = 0
+       
+        if (horaActual < 18): #Si se crea el boletin en el turno diurno
+          
+          for i,horasDelXML in enumerate(elemento.list_timeranges):
+            
+            if horasDelXML.h == 12:
+              
+              hora1 = i
+              
+            if horasDelXML.h == 24:
+              
+              hora2 = i
+              
+            if horasDelXML.h == 36:
+              
+              hora3 = i
+        else:  #Si se ejecuta para el turno noche
+          
+            for i,horasDelXML in enumerate(elemento.list_timeranges):
+            
+              if horasDelXML.h == 24:
+                
+                hora1 = i
+                
+              if horasDelXML.h == 36:
+                
+                hora2 = i
+                
+              if horasDelXML.h == 48:
+                
+                hora3 = i
+
+
+        return hora1,hora2,hora3 #Retorno las tres horaas que uso para el pronos
 
 def escribirTextoOlas(direccion, altura):
 
 
         
-       
-
 
         #####Checkear y validar esto entre diuno y nocturno y distintos modelos
-        hora1 = 1
-        hora2 = 3
-        hora3 = 5
+        hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(altura)
         ########
 
 
@@ -247,6 +328,8 @@ def escribirTextoOlas(direccion, altura):
         alturaInicial = altura.list_timeranges[hora1].list_values[0].text
         alturaMedia = altura.list_timeranges[hora2].list_values[0].text
         alturaFinal = altura.list_timeranges[hora3].list_values[0].text
+        
+        print(f"\nPRUEBA DE HORARIOS DE OLAS: {altura.list_timeranges[hora1]}{altura.list_timeranges[hora2]}{altura.list_timeranges[hora3]}")
         
 
         #Value[1] direccion en 16 cuadrantes
@@ -327,17 +410,17 @@ def escribirTextoViento(direccion, velocidad):
 
           t.list_values[1].text = transformarASectores(t.list_values[1].text)
 
-        """OBS: list_ parametros : #1-WD viento direccion  6- WS vel viento
-                list_timeranges:   #0 - 6z  #1- 12Z    2-18  3-24/00   4-30/06   5-36/12
-                list_values: 1 para la direccion así transforma grados en puntos cardinales list_values[1]
-                list_values: 0 para velocidad así lo da en kT list_values[0]"""
+        #"""OBS: list_ parametros : #1-WD viento direccion  6- WS vel viento
+        #        list_timeranges:   #0 - 6z  #1- 12Z    2-18  3-24/00   4-30/06   5-36/12
+        #        list_values: 1 para la direccion así transforma grados en puntos cardinales list_values[1]
+        #        list_values: 0 para velocidad así lo da en kT list_values[0]"""
 
         #####Checkear y validar esto entre diuno y nocturno y distintos modelos
-        hora1 = 1
-        hora2 = 3
-        hora3 = 5
+        hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(velocidad)
         ########
-
+         
+        print(f"\nPRUEBA DE HORARIOS DE VEINTO: {velocidad.list_timeranges[hora1]}{velocidad.list_timeranges[hora2]}{velocidad.list_timeranges[hora3]}")
+        
 
         velInicial = int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )
       
@@ -454,21 +537,28 @@ def escribirVisibilidad(visibilidad):
         retorno = " "
 
         #Si 1 y 5 son distintas agrego el TO
+ 
+        hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(visibilidad)
+ 
+        print(f"\nPRUEBA DE HORARIOS DE VEINTO: {visibilidad.list_timeranges[hora1]}{visibilidad.list_timeranges[hora2]}{visibilidad.list_timeranges[hora3]}")
+        
 
-        if (visibilidad.list_timeranges[1].list_values[0].text != visibilidad.list_timeranges[5].list_values[0].text ):
+        
+        
+        if (visibilidad.list_timeranges[hora1].list_values[0].text != visibilidad.list_timeranges[hora3].list_values[0].text ):
 
-          retorno = f"VIS {transformarNumeroAVisibilidad(visibilidad.list_timeranges[1].list_values[0].text)} TO  {transformarNumeroAVisibilidad(visibilidad.list_timeranges[5].list_values[0].text)}"
+          retorno = f"VIS {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora1].list_values[0].text)} TO  {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora3].list_values[0].text)}"
         
         else: 
 
-          retorno = f"VIS {transformarNumeroAVisibilidad(visibilidad.list_timeranges[1].list_values[0].text)}"
+          retorno = f"VIS {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora1].list_values[0].text)}"
 
 
-        if (visibilidad.list_timeranges[1].list_values[0].text != visibilidad.list_timeranges[3].list_values[0].text ):
+        if (visibilidad.list_timeranges[hora1].list_values[0].text != visibilidad.list_timeranges[hora2].list_values[0].text ):
           
-          if (visibilidad.list_timeranges[5].list_values[0].text != visibilidad.list_timeranges[3].list_values[0].text ):
+          if (visibilidad.list_timeranges[hora3].list_values[0].text != visibilidad.list_timeranges[hora2].list_values[0].text ):
 
-            retorno = retorno + f", OCNL {transformarNumeroAVisibilidad(visibilidad.list_timeranges[3].list_values[0].text)}"
+            retorno = retorno + f", OCNL {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora2].list_values[0].text)}"
 
         retorno = retorno +". "
         
@@ -550,11 +640,20 @@ def escribirPronostico(pronostico):
         #5 ---pronostico del tiempo.... 0,2,4 son las 12, 00 y 12(+1)
 
         retorno = ". "
+        
+        hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(pronostico)
 
         #escribo los tres fenomenos que usaremos
-        fenomeno1 = codigoAFenomeno(pronostico.list_timeranges[0].list_values[0].text)
-        fenomeno2 = codigoAFenomeno(pronostico.list_timeranges[2].list_values[0].text)
-        fenomeno3 = codigoAFenomeno(pronostico.list_timeranges[4].list_values[0].text)
+        fenomeno1 = codigoAFenomeno(pronostico.list_timeranges[hora1].list_values[0].text)
+        fenomeno2 = codigoAFenomeno(pronostico.list_timeranges[hora2].list_values[0].text)
+        fenomeno3 = codigoAFenomeno(pronostico.list_timeranges[hora2].list_values[0].text)
+
+
+
+        print(f"\nPRUEBA DE HORARIOS DE FENOMENO: {pronostico.list_timeranges[hora1]}{pronostico.list_timeranges[hora2]}{pronostico.list_timeranges[hora3]}")
+        
+
+
 
         #Si hay algun fenomeno significativo
         if (not(fenomeno1 == "WORSENING" and fenomeno2 == "WORSENING" and fenomeno3 == "WORSENING") ):
@@ -657,8 +756,16 @@ def areaAtexto(area):
 
 
 
+def calcularOrdenAreas(idPimet):
+  
+    listaOrden = [284,283,285,3546,739,751,752,753,754,756,757,758,730,729,728,720,721,722,723,724,725,726,727,731,732,733,734,735,736,737,738,755]
 
-
+    
+    try:
+      return  listaOrden.index(idPimet)
+    except:
+      return 999
+    
 
 
 #Para cargar la base de datos con las areas, no ejecutar más de una vez
@@ -678,12 +785,14 @@ def cargarAreasDesdeElXML(nombreArchivo):
       if (area.tag == 'area'):
           #instancio un area
           a = Area(area.attrib['id'],area.attrib['latitude'],area.attrib['longitude'],area.attrib['description'], area.attrib['domain'])
-        
+
+          idPimet=float(area.attrib['id'])
+          ordenNav = calcularOrdenAreas(idPimet)
           
-          areaModels = Area(idPimet=float(area.attrib['id']), latitude=area.attrib['latitude'],
+          areaModels = Area(idPimet=idPimet, latitude=area.attrib['latitude'],
                             longitude=area.attrib['longitude'], description=area.attrib['description'],
-                            domain= area.attrib['domain'])
-          print("--->", areaModels)
+                            domain= area.attrib['domain'], orden=ordenNav)
+          
           areaModels.save()
           
           
@@ -787,5 +896,24 @@ def definirTipoDePronostico(area):
                   tipo= "Metarea VI - S"
                 if ("Gerlache" in area.description):
                   tipo= "Metarea VI - S"
+                  
+                if ("ZonaMalvinas" in area.description):
+                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  
+          
+                #Esto es domain Costas, pero de esa forma no aparece en navegante. lo dejamos en offshore
+                if ("RIO DE LA PLATA INTERIOR" in area.description):
+                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  
+                if ("RIO DE LA PLATA INTERMEDIO" in area.description):
+                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  
+                if ("RIO DE LA PLATA EXTERIOR" in area.description):
+                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  
+                if ("DESEMBOCADURA RIO DE LA PLATA" in area.description):
+                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  
+              
                   
   return tipo

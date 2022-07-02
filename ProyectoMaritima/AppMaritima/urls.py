@@ -4,7 +4,7 @@ from AppMaritima import views
 
 urlpatterns = [
     
-    path('', views.BoletinCreacion.as_view(), name='NewBoletin'),
+   
     path('cargarAreas', views.cargarAreas), #Ejecutarlo la primera vez para cargas las areas PIMET
     path('cargarPronosticos', views.cargarPronosticos),
     path('escaterometro', views.escaterometro, name="Escaterometro"),
@@ -14,8 +14,7 @@ urlpatterns = [
     
     #BOLETIN
     path('boletin/ultimo', views.ultimoBoletin, name='UltimoBoletin'),
-    
-    
+    path('', views.BoletinCreacion.as_view(), name='NewBoletin'),
     path('boletin/list', views.BoletinList.as_view(), name='ListBoletin'),
     path('boletin/listTodos', views.BoletinListTodos.as_view(), name='ListBoletinTodos'),
     path('boletin/<pk>', views.BoletinDetalle.as_view(), name='DetailBoletin'),

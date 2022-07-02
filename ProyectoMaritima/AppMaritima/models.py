@@ -14,8 +14,10 @@ class Area(models.Model): #son fijas, son las areas pimet
     description = models.CharField(max_length=50)
     domain = models.CharField(max_length=30)
     
+    orden = models.IntegerField(default=999)
+    
     def __str__(self):
-        return f"{self.description} ({self.domain} {self.latitude}  {self.longitude})"
+        return f"IDPIME: {self.idPimet}--- {self.description} ({self.domain} {self.latitude}  {self.longitude})"
     
 
 class Boletin(models.Model):
