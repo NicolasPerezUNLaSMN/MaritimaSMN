@@ -108,7 +108,7 @@ def leerXML(nombreArchivo): #en este caso el argumento a recibir debe ser 'prueb
           #instancio un area
           a = AreaXML(area.attrib['id'],area.attrib['latitude'],area.attrib['longitude'],area.attrib['description'], area.attrib['domain'])
         
-          print(f"TRABAJO CON AREA: {a}")
+          print(f"------>TRABAJO CON AREA: {a.description}")
 
           #Accedo a cada parametro
           for parameter in area: 
@@ -144,10 +144,10 @@ def leerXML(nombreArchivo): #en este caso el argumento a recibir debe ser 'prueb
               a.list_parameters.append(p)
           
           #antes de terminar el area la agrego a la lista de area del pronostico que corresponde
-          print(f"--------FIN DEL AREA---> {a}")
+         
 
           if (a.domain == 'Metarea VI'):
-            print(f"--------META---> \n")
+           
             if ( float(a.latitude) <= -60):
               forecastSur60.list_area.append(a)
 
@@ -157,11 +157,11 @@ def leerXML(nombreArchivo): #en este caso el argumento a recibir debe ser 'prueb
           if (a.domain == 'Costas'):
 
             if (a.description.find('OFFSHORE')!=-1):
-              print(f"--------OFF--> \n")
+              
               forecastOffShore.list_area.append(a)
             else:
                 forecastCostas.list_area.append(a)
-                print(f"--------COSTAS---> \n")
+                
           
           if (a.domain == 'Rio de la Plata'):
             forecastRio.list_area.append(a)
@@ -208,7 +208,7 @@ def agregarONoRafagas(velBeaufort):
 def ktABeaufort(velo):
 
       vel = 0
-      print("VELOOOO", velo , type(velo))
+     
       
       #Si llega un digito lo paso a float
       if (velo.isdigit()):
@@ -278,38 +278,39 @@ def tomarHorasIndicadasSegunTurno(elemento):
         hora2 = 0
         hora3 = 0
        
+        #Hora actual en hora local :) 
         if (horaActual < 18): #Si se crea el boletin en el turno diurno
           
           for i,horasDelXML in enumerate(elemento.list_timeranges):
-            
-            if horasDelXML.h == 12:
+            #OJO SON STRING NO INT
+            if horasDelXML.h == "12":
               
               hora1 = i
               
-            if horasDelXML.h == 24:
+            if horasDelXML.h == "24":
               
               hora2 = i
               
-            if horasDelXML.h == 36:
+            if horasDelXML.h == "36":
               
               hora3 = i
         else:  #Si se ejecuta para el turno noche
           
             for i,horasDelXML in enumerate(elemento.list_timeranges):
             
-              if horasDelXML.h == 24:
+              if horasDelXML.h == "24":
                 
                 hora1 = i
                 
-              if horasDelXML.h == 36:
+              if horasDelXML.h == "36":
                 
                 hora2 = i
                 
-              if horasDelXML.h == 48:
+              if horasDelXML.h == "48":
                 
                 hora3 = i
 
-
+      
         return hora1,hora2,hora3 #Retorno las tres horaas que uso para el pronos
 
 def escribirTextoOlas(direccion, altura):
@@ -329,7 +330,7 @@ def escribirTextoOlas(direccion, altura):
         alturaMedia = altura.list_timeranges[hora2].list_values[0].text
         alturaFinal = altura.list_timeranges[hora3].list_values[0].text
         
-        print(f"\nPRUEBA DE HORARIOS DE OLAS: {altura.list_timeranges[hora1]}{altura.list_timeranges[hora2]}{altura.list_timeranges[hora3]}")
+        #print(f"\nPRUEBA DE HORARIOS DE OLAS: {altura.list_timeranges[hora1]}//{altura.list_timeranges[hora2]}//{altura.list_timeranges[hora3]}")
         
 
         #Value[1] direccion en 16 cuadrantes
@@ -337,7 +338,8 @@ def escribirTextoOlas(direccion, altura):
         dirMedia = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora2].list_values[1].text)
         dirFinal = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora3].list_values[1].text)
 
-     
+      
+
         #Acá se guarda el texto final
         retorno = ""
 
@@ -419,7 +421,7 @@ def escribirTextoViento(direccion, velocidad):
         hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(velocidad)
         ########
          
-        print(f"\nPRUEBA DE HORARIOS DE VEINTO: {velocidad.list_timeranges[hora1]}{velocidad.list_timeranges[hora2]}{velocidad.list_timeranges[hora3]}")
+        #print(f"\nPRUEBA DE HORARIOS DE VEINTO: {velocidad.list_timeranges[hora1]}{velocidad.list_timeranges[hora2]}{velocidad.list_timeranges[hora3]}")
         
 
         velInicial = int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )
@@ -438,6 +440,7 @@ def escribirTextoViento(direccion, velocidad):
         dirMedia = direccion.list_timeranges[hora2].list_values[1].text
         dirFinal = direccion.list_timeranges[hora3].list_values[1].text
 
+       
      
         #Acá se guarda el texto final
         retorno = ""
@@ -540,9 +543,10 @@ def escribirVisibilidad(visibilidad):
  
         hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(visibilidad)
  
-        print(f"\nPRUEBA DE HORARIOS DE VEINTO: {visibilidad.list_timeranges[hora1]}{visibilidad.list_timeranges[hora2]}{visibilidad.list_timeranges[hora3]}")
+       # print(f"\nPRUEBA DE HORARIOS DE VEINTO: {visibilidad.list_timeranges[hora1]}{visibilidad.list_timeranges[hora2]}{visibilidad.list_timeranges[hora3]}")
         
-
+      
+        
         
         
         if (visibilidad.list_timeranges[hora1].list_values[0].text != visibilidad.list_timeranges[hora3].list_values[0].text ):
@@ -646,13 +650,12 @@ def escribirPronostico(pronostico):
         #escribo los tres fenomenos que usaremos
         fenomeno1 = codigoAFenomeno(pronostico.list_timeranges[hora1].list_values[0].text)
         fenomeno2 = codigoAFenomeno(pronostico.list_timeranges[hora2].list_values[0].text)
-        fenomeno3 = codigoAFenomeno(pronostico.list_timeranges[hora2].list_values[0].text)
+        fenomeno3 = codigoAFenomeno(pronostico.list_timeranges[hora3].list_values[0].text)
 
 
 
-        print(f"\nPRUEBA DE HORARIOS DE FENOMENO: {pronostico.list_timeranges[hora1]}{pronostico.list_timeranges[hora2]}{pronostico.list_timeranges[hora3]}")
-        
-
+        #print(f"\nPRUEBA DE HORARIOS DE FENOMENO: {pronostico.list_timeranges[hora1]}{pronostico.list_timeranges[hora2]}{pronostico.list_timeranges[hora3]}")
+      
 
 
         #Si hay algun fenomeno significativo

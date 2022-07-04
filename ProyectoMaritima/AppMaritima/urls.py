@@ -1,9 +1,15 @@
 from django.urls import path
 from AppMaritima import views
+from AppMaritima import viewsLogin
 
 
 urlpatterns = [
     
+   #urls para Iridium
+   
+  
+   
+ 
    
     path('cargarAreas', views.cargarAreas), #Ejecutarlo la primera vez para cargas las areas PIMET
     path('cargarPronosticos', views.cargarPronosticos),
@@ -51,6 +57,13 @@ urlpatterns = [
     #Otros url
     path('crearTXT/<pk>', views.crearTXT, name='CrearTXT'),
     path('editor', views.editor, name='Editor'),
+    path("bordeDeHielos", views.bordeDeHielos, name="BordeDeHielos"),
     
+    #Para el logueo
+    #path('welcome', viewsLogin.welcome, name="Welcome"),
+    path('register', viewsLogin.register, name="Register"),
+    path('login', viewsLogin.login, name="Login"),
+    path('logout', viewsLogin.logout, name="Logout"),
+   
     
 ]

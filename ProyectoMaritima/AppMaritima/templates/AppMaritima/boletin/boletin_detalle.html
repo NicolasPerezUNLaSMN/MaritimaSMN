@@ -31,28 +31,35 @@
                                     <a href="{% url 'NewSituacion' %}" class="btn btn-info">+Nueva situación</a>
                                     <a href="{% url 'NewHielo' %}" class="btn btn-info">+Nuevo hielo</a>
 
+
+                                    
+
                                     <br><br>
                                       <h5 class="card-title">Avisos del boletín:</h5>
     
-                                     
+                                      
                                   
                                         {% for aviso in avisosDelBoletin %}
     
-                                       
-                                            <h6 class="card-header">Número: {{ aviso.numero}}</h6>
-                                            <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
-                                            <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
-                                            <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
                                           
+                                         
+                                              <h6 class="card-header">Número: {{ aviso.numero}}</h6>
+                                              <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
+                                              <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
+                                              <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
+                                              <h6 class="card-header">Activo: {{ aviso.activo}}</h6>
+                                              <h6 class="card-header">Navtex: {{ aviso.navtex}}</h6>
+                                            
     
     
-                                           
-                                            <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
-                                            <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark">Cesar</a>
-                                            <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
+                                            
+                                              <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
+                                              <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark">Cesar</a>
+                                              <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
     
     
-                                        
+                                            
+                                         
     
                                   
                                         {% endfor %}    

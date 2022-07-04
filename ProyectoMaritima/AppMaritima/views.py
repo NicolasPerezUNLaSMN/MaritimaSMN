@@ -17,14 +17,15 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import  UpdateView, DeleteView
 
-#Esto es para el envio de mails
-from django.conf import settings
-from django.core.mail import send_mail
+
+from django.contrib.admin.views.decorators import staff_member_required
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
 
-# Create your views here.
+
 
 
 #VISTAS genericas
@@ -50,7 +51,17 @@ def escaterometro(request):
     return render(request, 'AppMaritima/escaterometro.html')
 
 
+def bordeDeHielos(request):
+    
+    
+    
+    return render(request, 'AppMaritima/borde.html')
+
+
+
+
 #Ejectucarlo solo una vez, y con permisos de admin 
+@staff_member_required
 def cargarAreas(request):
     
     cantidadAreas =  Area.objects.all().count()
@@ -143,9 +154,11 @@ class BoletinDetalle(DetailView):
  
         return context
     
-
-class BoletinCreacion(FormView):
+#Necesitas estar logueado para crearlo
+class BoletinCreacion(LoginRequiredMixin,FormView):
     
+    login_url = 'Login'
+   
 
     
     template_name = "AppMaritima/boletin/boletin_form.html"
@@ -293,7 +306,8 @@ class AvisoCreacion(FormView):
                     hasta = form.cleaned_data.get("hasta"),
                     horaHasta = horaH,
                     activo = True,
-                    provoca = form.cleaned_data.get("provoca"))
+                    provoca = form.cleaned_data.get("provoca"),
+                    navtex = False)
                     #boletin = Boletin.objects.all().order_by("-id")[0] 
                     
                     aviso.save()
@@ -305,8 +319,19 @@ class AvisoCreacion(FormView):
                     for s in situacionQueLogenera:
                         aviso.situacion.add(s)
                     
+                    entraAlNavtex = False
+                    
                     for a in lista:
+                        #Si las areas afectadas son de la costa, entra al navtex
+                        if (a.domain == "Rio de la Plata" or a.domain == "Costas"):
+                            entraAlNavtex = True
+                        #Siempre agrego las areas, sean o no del navtex
                         aviso.area.add(a)
+                        
+                    #Si en verdad entraba lo actualizo
+                    if(entraAlNavtex):
+                        aviso.navtex = entraAlNavtex
+                    
                     
                     #Le asigno el ultimo boletin
                     boletin = (Boletin.objects.all().order_by("-id")[0])
@@ -359,7 +384,8 @@ class AvisoUpdate(FormView):
                     hasta = form.cleaned_data.get("hasta"),
                     horaHasta = horaH,
                     activo = True, 
-                    provoca = form.cleaned_data.get("provoca"))
+                    provoca = form.cleaned_data.get("provoca"),
+                    navtex = False)
                     #boletin = Boletin.objects.all().order_by("-id")[0] 
                     
                     
@@ -380,6 +406,20 @@ class AvisoUpdate(FormView):
                     
                     for a in lista:
                         aviso.area.add(a)
+                        
+                        
+                    entraAlNavtex = False
+                    
+                    for a in lista:
+                        #Si las areas afectadas son de la costa, entra al navtex
+                        if (a.domain == "Rio de la Plata" or a.domain == "Costas"):
+                            entraAlNavtex = True
+                        #Siempre agrego las areas, sean o no del navtex
+                        aviso.area.add(a)
+                        
+                    #Si en verdad entraba lo actualizo
+                    if(entraAlNavtex):
+                        aviso.navtex = entraAlNavtex
                     
                     #Le asigno el ultimo boletin
                     aviso.boletin.add(Boletin.objects.all().order_by("-id")[0])
@@ -733,8 +773,9 @@ class HieloDelete(DeleteView):
 ##################################################################
 ##################### ESCRITURA DE tXT #############################
 ##################################################################
-    
-def crearTXT(request, pk):
+
+#Vista que escribe todo los txt y los muestra en un html
+def crearTXT(request, pk): 
     
     #Uso get porque es uno solo
     boletin = Boletin.objects.get(id = pk)
@@ -749,6 +790,21 @@ def crearTXT(request, pk):
     
     pronosticosMetarea = Pronostico.objects.filter(boletin = pk,tipo = "Metarea VI - N").order_by("area__orden")
     
+    avisosNavtex =  Aviso.objects.filter(boletin = pk, navtex = True)
+    
+    #Envio toda la info
+    crearTXTnavegante(boletin,avisos, situaciones,hielos,pronosticosOffshore,pronosticosMetarea)
+    crearTXTnavtex(boletin,avisosNavtex, situaciones,pronosticosOffshore)
+    
+    diccionario = {"texto":"texto0000"}
+    
+    return render(request, 'AppMaritima/editor.html', diccionario)
+
+
+#escfitura del boletin 
+def crearTXTnavegante(boletin,avisos, situaciones,hielos,pronosticosOffshore,pronosticosMetarea):
+    
+    
     #Encabezado "casi" fijo
     textoEnIngles = f"""FQST02 SABM {boletin.valido}{boletin.hora}
 1:31:06:01:00 
@@ -759,12 +815,15 @@ Please be aware wind gust can be a further 40 percent stronger than the averages
 and maximum waves may be up to twice the significant height, sea ice and icebergs issued by SHN
                     
 PART 1 GALE WARNING\n"""
-                    
-    #Escritura de los avisos
-    for a in avisos: 
-        
-        #Defino en un metodo del modelo la escritura de txt
-        textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+    
+    if (len(avisos)!=0):            
+        #Escritura de los avisos
+        for a in avisos: 
+            
+            #Defino en un metodo del modelo la escritura de txt
+            textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+    else:
+        textoEnIngles = textoEnIngles +"NO WARNINGS"
         
     #Escritura de las situaciones
     textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
@@ -804,22 +863,69 @@ PART 1 GALE WARNING\n"""
     #Por si algo quedó mal lo paso todo a mayusculas
     textoEnIngles = textoEnIngles.upper()
     
-    #Abro el archivo, escribo y lo cierro
-    nombreArchivo = f"{boletin.valido}_{boletin.hora}.txt"
+    #Abro el archivo, escribo y lo cierro... boletin maritimo en ingles
+    nombreArchivo = f"{boletin.valido}_{boletin.hora}_nav_ing.txt"
     f = open (f"txtGuardados/{nombreArchivo}",'w')
     f.write(textoEnIngles)
     f.close()
     
-    texto = textoEnIngles
-    
-    diccionario = {"texto": texto, "nombreArchivo":nombreArchivo}
+   
 
+#escfitura de TODOS los navtex  
+def crearTXTnavtex(boletin,avisosNavtex, situaciones,pronosticosOffshore):
     
-    #Ademas podria enviar el archivo por mail:
-    #Por ahora lo envio de acá:
-    #pronossm@gmail.com
-    #pronos_smn
-    #Ya no se acepta iniciar con smtplib :( )
-    #enviarMail('nico_perez_velez@hotmail.com',texto)
- 
-    return render(request, 'AppMaritima/editor.html', diccionario)
+    #solo lo hago para estaciones NAVTEX, si quiro para todas, sacar el IF
+    
+    for p in pronosticosOffshore:
+            
+        if(p.area.description in ["DESEMBOCADURA RIO DE LA PLATA","OFFSHORE BAHIA BLANCA","OFFSHORE MAR DEL PLATA","OFFSHORE SAN JORGE","OFFSHORE FIN DEL MUNDO","OFFSHORE PATAGONIA SUR"]) :
+        
+            #Encabezado "casi" fijo
+            textoEnIngles = f"""WWST03 SABM {boletin.valido}{boletin.hora}
+WEATHER BULLETIN FOR NAVTEX STATIONS - METAREA 6 -
+{boletin.valido}, {boletin.hora}:00UTC
+NATIONAL WEATHER SERVICE
+SEA ICE AND ICEBERGS ISSUED BY SHN
+PRESSURE HPA
+BEAUFORT SCALE WINDS.
+                            
+GALE WARNING\n"""
+                            
+            if (len(avisosNavtex)!=0):            
+                #Escritura de los avisos
+                for a in avisosNavtex: 
+                    
+                    #Defino en un metodo del modelo la escritura de txt
+                    textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+            else:
+                textoEnIngles = textoEnIngles +"NO WARNINGS"
+                
+            #Escritura de las situaciones
+            textoEnIngles = textoEnIngles +"\nGENERAL SYNOPSIS\n"
+        
+            
+            for s in situaciones: 
+                
+                textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
+            textoEnIngles = textoEnIngles +"\n"
+            
+            
+            #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
+            textoEnIngles = textoEnIngles +"FORECAST\n"
+            
+            textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+            
+                
+            
+            #Cierre pedido por comunicaciones
+            textoEnIngles = textoEnIngles + "-----------------------------------------------------------------\nNNNN="
+            
+            #Por si algo quedó mal lo paso todo a mayusculas
+            textoEnIngles = textoEnIngles.upper()
+            
+            #Abro el archivo, escribo y lo cierro... boletin maritimo en ingles
+            nombreArchivo = f"{boletin.valido}_{boletin.hora}_navtex_ing_{p.area.description}.txt"
+            f = open (f"txtGuardados/{nombreArchivo}",'w')
+            f.write(textoEnIngles)
+            f.close()
+        

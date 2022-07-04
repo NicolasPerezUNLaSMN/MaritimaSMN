@@ -128,6 +128,8 @@ class Aviso(models.Model):
     
     provoca = models.CharField(default="PROVOKE", max_length=30)
     
+    navtex = BooleanField(default = False, null=True, blank=True)
+    
     def __str__(self):
         return f"NUMERO: ---->  {self.numero} TIPO: ---> {self.tipo} ---> DIRECCIÓN ---> {self.direccion}"
     

@@ -8,9 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Maritima SMN</title>
+   
+
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'AppMaritima/images/wmo.PNG' %}">
     <!-- Custom Stylesheet -->
+    <link href="{% static 'AppMaritima/plugins/fullcalendar/css/fullcalendar.min.css' %}" rel="stylesheet">
     <link href="{% static 'AppMaritima/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
 
     <!-- Page plugins css -->
@@ -32,6 +35,13 @@
     <link href="{% static 'AppMaritima/css/style.css' %}" rel="stylesheet">
 
     <link href="{% static 'AppMaritima/plugins/summernote/dist/summernote.css' %}" rel="stylesheet">
+
+
+
+    <!-- Por si necesito css o js particular en las plantillas heredadas-->
+    {% block extra_css %}
+    {% endblock %}
+    
 
 </head>
 
@@ -65,10 +75,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="#">
-                    <b class="logo-abbr"><img src="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}" alt=""> </b>
-                    <span class="logo-compact"><img src="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}" alt=""></span>
+                    <b class="logo-abbr"><img style="width: 20%;"src="{% static 'AppMaritima/images/wmo.PNG' %}" alt=""> </b>
+                    <span class="logo-compact"><img style="width: 20%;" src="{% static 'AppMaritima/images/wmo.PNG' %}" alt=""></span>
                     <span class="brand-title">
-                        <img src="{% static 'AppMaritima/images/logoSMN-recortado.gif' %}" alt="">
+                        <img style="width: 50%;" src="{% static 'AppMaritima/images/wmo.PNG' %}" alt="">
                     </span>
                 </a>
             </div>
@@ -83,54 +93,63 @@
         <div class="header">    
             <div class="header-content clearfix">
                 
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="toggle-icon"><i class="icon-menu"></i></span>
-                    </div>
-                </div>
-                <div class="header-left">
-                    <div class="input-group icons">
-                        <!-- 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                        </div>
-                       <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard"> -->
-                        <div class="drop-down animated flipInX d-md-none">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1"></span>
-                            </a>
-                            
-                        </li>
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-bell-outline"></i>
-                                <span class="badge badge-pill gradient-2"></span>
-                            </a>
-                            
-                            
-                        </li>
-                       
+
+                        {% if user.is_authenticated %}
                         <li class="icons dropdown">
+                            <span>Hola, {{ user.get_username }}!!!   n__n   </span>
+                        </li>
+                        {% else %}
+                        <li class="icons dropdown">
+                            <span>No sé quién eres :( </span>
+                        </li>
+                        {% endif %}
+                     
+                        <li class="icons dropdown">
+                            {% if user.is_authenticated %}
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
+                                <img src="{% static 'AppMaritima/images/user/1.jpg' %}" height="40" width="40" alt="">
                                
                             </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                            {% else %}
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="{% static 'AppMaritima/images/user/5.jpg' %}" height="40" width="40" alt="">
+                               
+                            </div>
+                            {% endif %}
+                            
+                            <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
-                                   
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'Login' %}"><i class="icon-user"></i> <span>Login</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="http://correo.smn.gob.ar/"><i class="icon-envelope-open"></i> <span>E-Mail SMN</span> </a>
+                                        </li>
+                                        
+                                        <hr class="my-2">
+                                        <li>
+                                            <a href="{% url 'Register' %}"><i class="icon-lock"></i> <span>Crear cuenta</span></a>
+                                        </li>
+                                        <li><a href="{% url 'Logout' %}"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
+                
+
+
+
+
+
+
             </div>
         </div>
         <!--**********************************
@@ -197,16 +216,23 @@
                     <li class="nav-label">Externos</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-list menu-icon"></i><span class="nav-text">ASCAT-C</span>
+                            <i class="icon-list menu-icon"></i><span class="nav-text">Productos-Imágenes</span>
                             
                         </a>
                        
                         <ul aria-expanded="false">
-                            <li><a href="{% url 'Escaterometro' %}">Procductos</a></li>
+                            <li><a href="{% url 'Escaterometro' %}">ASCAT-C</a></li>
+
+                            
+                            <li><a href="{% url 'BordeDeHielos' %}">Borde de hielos</a></li> 
+                    
+                             <li><a target="_blank" href="https://www.aoml.noaa.gov/phod/gdp/interactive/drifter_array.html">Boyas</a></li>
+                   
                             
                         </ul>
                     </li>
-                   
+
+
                     
                     
                     
@@ -283,7 +309,7 @@
 
 
 
-    <script src="{% static 'AppMaritima/plugins/moment/moment.js' %}"></script>
+   
     <script src="{% static 'AppMaritima/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
     <!-- Clock Plugin JavaScript -->
     <script src="{% static 'AppMaritima//plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
@@ -300,17 +326,13 @@
     <script src="{% static 'AppMaritima/js/plugins-init/form-pickers-init.js' %}"></script>
 
         <!-- Editor texto-->
-    <script src="{% static 'AppMaritima/plugins/common/common.min.js' %}"></script>
-    <script src="{% static 'AppMaritima/js/custom.min.js' %}"></script>
-    <script src="{% static 'AppMaritima/js/settings.js' %}"></script>
-    <script src="{% static 'AppMaritima/js/gleek.js' %}"></script>
-    <script src="{% static 'AppMaritima/js/styleSwitcher.js' %}"></script>
-
     <script src="{% static 'AppMaritima/plugins/summernote/dist/summernote.min.js' %}"></script>
     <script src="{% static 'AppMaritima/plugins/summernote/dist/summernote-init.js' %}"></script>
 
-
-   
+    <!-- menu-->
+    <script src="{% static 'AppMaritima/plugins/jqueryui/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/plugins/fullcalendar/js/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'AppMaritima/js/plugins-init/fullcalendar-init.js' %}"></script>
     
 
 </body>
