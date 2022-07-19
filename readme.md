@@ -68,6 +68,7 @@ Repetir los pasos 6 y 7.
 - [x] Persistencia de todos los datos en tablas 
 - [x] Escaterometro y borde de hielos visibles desde la web. 
 - [ ] Definir qué hacer con las divisiones Rio De la Plata.
+- [!] Documentar los manuales de usuario y de desarrollo.
 - [!] Cada ciclo terminado, con todos los txt guadados ocuparia 11/12Kb en el servidor. 
 
 
