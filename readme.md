@@ -2,7 +2,7 @@
 Aplicativo web desarrollado con Python 3.9 y Django 4.0.4, para la generación automáctica de boletines de navegación maritima en la METAREA VI
 
 
-# Instalación  (Primer despliegue)
+# Instalación  (Primer despliegue) A VER SI ME DEJA
 **Seguir los pasos para desplegar por primera vez el proyecto**
 
 1) Instalar Python3
