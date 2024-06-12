@@ -1,0 +1,181 @@
+@startuml
+
+title Packages - Diagrama de Clases - Maritima
+
+
+
+package "LecturaXML" {
+  
+  
+  class Value{
+
+	String text
+	String unit
+
+}
+
+class Timerange{
+
+	int h
+	datetime datetime
+	Value list_values
+
+}
+
+
+class Parameter{
+
+
+	int id
+	Timerange list_timeranges
+
+}
+
+class AreaXML{
+
+	int id
+	float latitude
+	float longitude
+	String description
+	String domain
+	Parameter list_parameters
+
+}
+
+
+class Forecast{
+
+	int year
+	int month
+	int day
+	int hour
+	int minute
+	AreaXMN list_area
+
+
+}
+
+}
+
+
+Forecast *-- "1..*" AreaXML
+AreaXML *-- "1..*" Parameter
+Parameter *-- "1..*" Timerange
+Timerange *-- "1..*" Value
+
+
+
+
+
+
+cloud PimetXML {
+}
+
+
+cloud Servidor {
+}
+
+
+PimetXML "FTP"--> Servidor
+Servidor --> Forecast
+
+
+
+ Node "Clases Modelo BD" {
+  
+  
+  class Area{
+
+	idPimet IntegerField
+	latitude  CharField
+  longitude  CharField
+  description  CharField
+  domain  CharField
+
+}
+
+class Boletin{
+
+		emitido DateTimeField
+		modificado DateTimeField
+		valido DateField
+		hora IntegerField
+}
+
+
+class Aviso{
+
+
+	numero IntegerField
+	actualizacion IntegerField
+	tipo CharField
+	direccion CharField
+	desde DateField
+	horaDesde IntegerField
+	hasta DateField
+	horaHasta IntegerField
+	activo BooleanField
+
+}
+
+
+class Situacion{
+
+	sistema CharField
+	valorInicial IntegerField
+	movimiento CharField
+	evolucion CharField
+	posicionInicial CharField
+	momentoInicial DateField
+	horaInicial IntegerField
+	posicionFinal CharField
+	momentoFinal DateField
+	horaFinal IntegerField
+	navtex BooleanField
+	activo BooleanField
+
+
+}
+
+class Hielo{
+
+	creado DateField
+	texto TextField
+	activo BooleanField
+
+}
+
+class Pronostico{
+
+
+	tipo TextField
+	texto TextField
+	
+
+
+}
+
+
+
+
+}
+
+database "PostgreSQL" {
+    
+}
+
+
+
+LecturaXML -->"Genera cada" Pronostico
+Boletin *-- "1..*" Pronostico
+Boletin *-- "1..*" Situacion
+Boletin *-- "1..*" Aviso
+Boletin *-- "1" Hielo
+Pronostico --> Area
+Aviso *-- "1..*" Area
+"Clases Modelo BD" --> "PostgreSQL"
+
+
+
+
+@enduml

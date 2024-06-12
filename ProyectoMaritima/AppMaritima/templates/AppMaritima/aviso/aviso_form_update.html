@@ -1,0 +1,50 @@
+{% extends "AppMaritima/padre.html" %}
+
+
+{% load static %}
+
+        {% block contenido %}
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                         <div class="card">
+                            <a href="javascript:history.back()" class="btn btn-primary">-Atrás</a>
+                            <div class="card-body">
+                                <h4 class="card-title">Actualizar el aviso</h4>
+                               
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    
+                             
+
+                                    {{form.as_ul}}
+
+                                    
+                                    
+                                
+
+                                <input class="btn btn-success" type="submit" value="Enviar" />
+
+                                </form>
+
+                                
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        {% endblock %}

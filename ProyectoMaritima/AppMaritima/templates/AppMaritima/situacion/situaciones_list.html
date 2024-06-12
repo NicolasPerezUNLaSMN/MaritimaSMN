@@ -1,0 +1,58 @@
+{% extends "AppMaritima/padre.html" %}
+
+
+{% load static %}
+
+        {% block contenido %}
+
+                    <div class="row m-b-30">
+                       <div class="col-xl-12">
+                            <div class="card border-warning">
+                                <div class="card-header">Información de los sistemas:</div>
+
+                                <a href="javascript:history.back()" class="btn btn-primary">-Atrás</a>
+                              
+
+                               <!--Info del boletín-->
+
+                               <div class="card-body">
+                                 
+                                  <a href="{% url 'NewSituacion' %}" class="btn btn-primary">+Nueva situación</a><BR></BR>
+                                  <h5 class="card-title">Situaciones activas:</h5>
+
+                                  
+
+                                  
+                              
+
+                              
+                                    {% for situacion in situaciones %}
+
+                                   
+                                        <h6 class="card-header">Sistema {{situacion.sistema}}</h6>
+                                        <h6 class="card-header">Movimioento: {{ situacion.movimiento}}</h6>
+                                        <h6 class="card-header">Evolucion: {{ situacion.evolucion}}</h6>
+                                        <h6 class="card-header">Navtex: {{ situacion.navtex}}</h6>
+                                      
+
+
+                                       
+                                        <a href="{% url 'EditSituacion' situacion.id %}" class="btn btn-warning">Actualizar</a>
+                                        <a href="{% url 'CesarSituacion' situacion.id %}" class="btn btn-dark">Cesar</a>
+                                        <a href="{% url 'DeleteSituacion' situacion.id %}"  class="btn btn-danger">Borrar</a>
+
+
+                                    
+
+                              
+                                    {% endfor %}    
+                            
+                                </div>
+
+
+                            </div>
+                        </div>
+                      
+                    </div>
+       
+         {% endblock %}
