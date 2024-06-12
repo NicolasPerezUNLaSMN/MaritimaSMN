@@ -171,6 +171,7 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label">Navegantes</li>
                     
+                    
                    <li>
                         <a class="has-arrow" href="{% url 'UltimoBoletin' %}" aria-expanded="false">
                             <i class="icon-key menu-icon"></i><span class="nav-text">Ir a último Boletín</span>
@@ -187,6 +188,8 @@
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
+                    
+
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Avisos</span>
@@ -218,6 +221,15 @@
                             <li><a href="{% url 'ListSituacion' %}">Activos</a></li>
                            
                         </ul>
+                    </li>
+
+                     <li>
+                        <a class="has-arrow" href="{% url 'Descargar' %}" aria-expanded="false">
+                            <i class="icon-list menu-icon"></i><span class="nav-text">Descargar boletines .txt</span>
+                        </a>
+                        <a class="has-arrow" href="{% url 'Verificar' %}" aria-expanded="false">
+                            <i class="icon-list menu-icon"></i><span class="nav-text">Veriricar datos Pimet</span>
+                        </a>
                     </li>
 
 

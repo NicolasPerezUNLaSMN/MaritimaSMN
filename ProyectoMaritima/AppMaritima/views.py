@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 
 from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML, enviarMail
 
-from AppMaritima.form import AvisoForm, BoletinForm,SituacionForm,AvisoFormUpdate, HieloForm, HieloFormUpdate
+from AppMaritima.form import AvisoForm, BoletinForm,SituacionForm,SituacionFormUpdate,AvisoFormUpdate, HieloForm, HieloFormUpdate
 
 
 from AppMaritima.models import *
@@ -22,6 +22,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.contrib.auth.models import User
 
 
 
@@ -59,27 +60,6 @@ def bordeDeHielos(request):
 
 
 
-
-#Ejectucarlo solo una vez, y con permisos de admin 
-@staff_member_required
-def cargarAreas(request):
-    
-    cantidadAreas =  Area.objects.all().count()
-    print("------->", cantidadAreas)
-    
-    #Solo permite cargar areas cuando no hay nada en la base de datos
-    #Esto lo podemos mejorar, actualizando. 
-    if ( cantidadAreas == 0):
-        
-        archivo = "xmlPIMET/prueba.xml"
-        cargarAreasDesdeElXML(archivo)
-        return HttpResponse("Areas cargadas")
-    
-   
-    return HttpResponse("No se cargaron las areas, ya estaban en la base")
-    
-    
-
 #Carga los pronosticos de cada area al ultimo bolerin
 def cargarPronosticos(idBoletin):
     
@@ -89,11 +69,19 @@ def cargarPronosticos(idBoletin):
     archivo = "xmlPIMET/prueba.xml"
     
     #Función que genera los textos en ingles para cada area y asigna los pronos al boletín que se creo. 
-    print("QUIERO CARGAR LOS PRONOSTICOS EN EL BOLETIN: ID:" ,idBoletin)
-    cargarPronosticosDesdeElXML(archivo, idBoletin)
+    #print("QUIERO CARGAR LOS PRONOSTICOS EN EL BOLETIN: ID:" ,idBoletin)
+    lista_areas_candidatas_temporal = cargarPronosticosDesdeElXML(archivo, idBoletin)
     
-    return HttpResponse("Pronosticos cargados")
-
+    #Guardo las areas posibles, por si las uso más adelante. No creo que sea objetivo implementarlo o persistirlo
+    f = open (f"xmlPIMET/lista_areas_candidatas_temporal.txt",'w')  
+    if (lista_areas_candidatas_temporal):  
+        f.write("Areas candidatas para temporales: ")
+        for a in lista_areas_candidatas_temporal:
+            f.write("\n--> " +a.description )
+    else:
+        f.write("No hay areas candidatas para temporales.")
+    f.close()
+    
 
 
 #CBV
@@ -163,7 +151,7 @@ class BoletinCreacion(LoginRequiredMixin,FormView):
     
     template_name = "AppMaritima/boletin/boletin_form.html"
     form_class = BoletinForm
-    success_url = "boletin/list" 
+    success_url = "boletin/ultimo" 
     
     def form_valid(self, form):
                     
@@ -199,9 +187,9 @@ class BoletinCreacion(LoginRequiredMixin,FormView):
                     
                     print("Nuevo bOletin con ID: ", boletin.id) 
                     cargarPronosticos( boletin.id)   
-
+                   
                     
-                    return redirect("boletin/list")    
+                    return redirect("boletin/ultimo")    
                 
                 
     
@@ -279,8 +267,16 @@ class AvisoCreacion(FormView):
                 form_class = AvisoForm
                 success_url = "boletin/list" 
                 
-                
-                
+                def get_context_data(self, **kwargs):
+                    # Call the base implementation first to get a context
+                    context = super().get_context_data(**kwargs)
+                    # Add in a QuerySet of all the books
+                    archivo = open("xmlPIMET/lista_areas_candidatas_temporal.txt")
+                    texto = archivo.read()
+                    archivo.close()
+                    
+                    context['tooltip'] = texto
+                    return context
                 
                 def form_valid(self, form):
                     
@@ -350,7 +346,16 @@ class AvisoUpdate(FormView):
                 form_class = AvisoFormUpdate
                 success_url = "boletin/list" 
                 
-                
+                def get_context_data(self, **kwargs):
+                    # Call the base implementation first to get a context
+                    context = super().get_context_data(**kwargs)
+                    # Add in a QuerySet of all the books
+                    archivo = open("xmlPIMET/lista_areas_candidatas_temporal.txt")
+                    texto = archivo.read()
+                    archivo.close()
+                    
+                    context['tooltip'] = texto
+                    return context
                 
                 
                 def form_valid(self, form):
@@ -476,6 +481,18 @@ class AvisoDelete(DeleteView):
 ##################### CRUD - Situacion ###########################
 ##################################################################
 
+def ultimoSituacion():
+    
+    ultimo = 0
+    situaciones = Situacion.objects.all()
+    
+    for a in situaciones:
+        
+        if a.numero > 0:
+            ultimo = a.numero
+    
+    return ultimo 
+
 def  cesarSituacion(request,pk):
     
                    
@@ -551,7 +568,8 @@ class SituacionCreacion(FormView):
                         
 
                     situacion = Situacion(
-                        
+                       numero = ultimoSituacion() + 1,
+                       actualizacion = 0,
                        sistema =  form.cleaned_data.get("sistema"),
                        valorInicial =  valorI,
                        movimiento =  form.cleaned_data.get("movimiento"),
@@ -563,6 +581,7 @@ class SituacionCreacion(FormView):
                        momentoFinal =  form.cleaned_data.get("momentoFinal"),
                        horaFinal =  horaH,
                        navtex =  form.cleaned_data.get("navtex")=="Incluir",
+                       esPresente=  form.cleaned_data.get("esPresente")=="Es presente",
                        activo = True
                         
                         
@@ -579,23 +598,92 @@ class SituacionCreacion(FormView):
                     situacion.save()
                     
                     return redirect("situacion/list")
+                
+
+
+class SituacionUpdate(FormView):
+    
+                template_name="AppMaritima/situacion/situacion_form_update.html"
+                form_class = SituacionFormUpdate
+                success_url = "situacion/list" 
+                
+               
+                
+                
+                def form_valid(self, form):
+                    
+                    
+                    #id de la situación a actualizar
+                    pk = int(self.kwargs['pk'])
+                    
+                    situacionVieja =Situacion.objects.get(id=pk)
+                     
+                    print(f"ID DE LA SITUACIÖN QUE VOY A ACTUALIZAR {pk}")
+                    print(form.cleaned_data)
+                    
+                    #Si se cargo la hora la paso a entera, sino, NULL
+                    valorI = -1
+                    horaI = -1
+                    horaH = -1
+                    
+                    
+                    
+                    if not (form.cleaned_data.get("valorInicial") is None):
+                        valorI = int (form.cleaned_data.get("valorInicial"))
+                    
+                    if form.cleaned_data.get("horaInicial") != ' ':
+                        
+                        horaI  = int(form.cleaned_data.get("horaInicial"))
+                        
+                    if form.cleaned_data.get("horaFinal") != ' ':
+                        
+                        horaH  =int(form.cleaned_data.get("horaFinal"))
+                        
+                        
+
+                    situacion = Situacion(
+                       numero = situacionVieja.numero,
+                       actualizacion =situacionVieja.actualizacion +1,
+                       sistema =  form.cleaned_data.get("sistema"),
+                       valorInicial =  valorI,
+                       movimiento =  form.cleaned_data.get("movimiento"),
+                       evolucion =  form.cleaned_data.get("evolucion"),
+                       posicionInicial =  form.cleaned_data.get("posicionInicial"),
+                       momentoInicial =  form.cleaned_data.get("momentoInicial"),
+                       horaInicial = horaI,
+                       posicionFinal =  form.cleaned_data.get("posicionFinal"),
+                       momentoFinal =  form.cleaned_data.get("momentoFinal"),
+                       horaFinal =  horaH,
+                       navtex =  form.cleaned_data.get("navtex")=="Incluir",
+                       esPresente=  form.cleaned_data.get("esPresente")=="Es presente",
+                       activo = True
+                        
+                        
+                    )
+                    
+                  
+                  
+                    situacion.save()
+                    
+                    #Pongo inactivo el aviso desactualizado
+                    print(situacionVieja)
+                    situacionVieja.activo = False
+                    situacionVieja.save()
+                    
+                    boletin =  (Boletin.objects.all().order_by("-id"))[0]
+                    
+                    situacion.boletin.add(boletin)
+                    
+                    situacion.save()
+                    
+                    return redirect("../situacion/list")
+                    
                     
                 
              
             
           
 
-    
-    
-    
-  
-class SituacionUpdate(UpdateView):
-    
-    model = Situacion
-    success_url = "../situacion/list"
-    template_name = "AppMaritima/situacion/situacion_form.html"
-    fields = ["sistema", "valorInicial", "movimiento", "evolucion", "posicionInicial","momentoInicial", "horaInicial","posicionFinal","momentoFinal", "horaFinal", "navtex" ]
-  
 
 class SituacionDelete(DeleteView):
     
@@ -770,162 +858,4 @@ class HieloDelete(DeleteView):
 
 #FIN - CRUD - Hielo
 
-##################################################################
-##################### ESCRITURA DE tXT #############################
-##################################################################
 
-#Vista que escribe todo los txt y los muestra en un html
-def crearTXT(request, pk): 
-    
-    #Uso get porque es uno solo
-    boletin = Boletin.objects.get(id = pk)
-    
-    avisos =  Aviso.objects.filter(boletin = pk)
-  
-    situaciones = Situacion.objects.filter(boletin = pk, activo = True)
-        
-    hielos = Hielo.objects.filter(boletin = pk, activo = True)
-    
-    pronosticosOffshore = Pronostico.objects.filter(boletin = pk, tipo = "Offshore").order_by("area__orden")
-    
-    pronosticosMetarea = Pronostico.objects.filter(boletin = pk,tipo = "Metarea VI - N").order_by("area__orden")
-    
-    avisosNavtex =  Aviso.objects.filter(boletin = pk, navtex = True)
-    
-    #Envio toda la info
-    crearTXTnavegante(boletin,avisos, situaciones,hielos,pronosticosOffshore,pronosticosMetarea)
-    crearTXTnavtex(boletin,avisosNavtex, situaciones,pronosticosOffshore)
-    
-    diccionario = {"texto":"texto0000"}
-    
-    return render(request, 'AppMaritima/editor.html', diccionario)
-
-
-#escfitura del boletin 
-def crearTXTnavegante(boletin,avisos, situaciones,hielos,pronosticosOffshore,pronosticosMetarea):
-    
-    
-    #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST02 SABM {boletin.valido}{boletin.hora}
-1:31:06:01:00 
-SECURITE 
-WEATHER BULLETIN ON METAREA VI
-SMN ARGENTINA, {boletin.valido} AT {boletin.hora}UTC WIND SPEED IN BEAUFORT SCALE WAVES IN METERS
-Please be aware wind gust can be a further 40 percent stronger than the averages 
-and maximum waves may be up to twice the significant height, sea ice and icebergs issued by SHN
-                    
-PART 1 GALE WARNING\n"""
-    
-    if (len(avisos)!=0):            
-        #Escritura de los avisos
-        for a in avisos: 
-            
-            #Defino en un metodo del modelo la escritura de txt
-            textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
-    else:
-        textoEnIngles = textoEnIngles +"NO WARNINGS"
-        
-    #Escritura de las situaciones
-    textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
-    
-    
-    #Escribo los hielos, aún es uno solo
-    
-    for h in hielos:
-        
-        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
-    textoEnIngles = textoEnIngles +"\n"
-    
-       
-    for s in situaciones: 
-        
-        textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
-    textoEnIngles = textoEnIngles +"\n"
-    
-    
-    #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
-    textoEnIngles = textoEnIngles +"PART 3 FORECAST\n"
-    
-    textoEnIngles = textoEnIngles +"COASTAL AREAS:\n"
-   
-    
-    for p in pronosticosOffshore:
-        
-        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
-        
-    textoEnIngles = textoEnIngles +"OCEANIC AREAS:\n"
-    for p in pronosticosMetarea:
-        
-        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
-    #Cierre pedido por comunicaciones
-    textoEnIngles = textoEnIngles + "-----------------------------------------------------------------\nNNNN="
-    
-    #Por si algo quedó mal lo paso todo a mayusculas
-    textoEnIngles = textoEnIngles.upper()
-    
-    #Abro el archivo, escribo y lo cierro... boletin maritimo en ingles
-    nombreArchivo = f"{boletin.valido}_{boletin.hora}_nav_ing.txt"
-    f = open (f"txtGuardados/{nombreArchivo}",'w')
-    f.write(textoEnIngles)
-    f.close()
-    
-   
-
-#escfitura de TODOS los navtex  
-def crearTXTnavtex(boletin,avisosNavtex, situaciones,pronosticosOffshore):
-    
-    #solo lo hago para estaciones NAVTEX, si quiro para todas, sacar el IF
-    
-    for p in pronosticosOffshore:
-            
-        if(p.area.description in ["DESEMBOCADURA RIO DE LA PLATA","OFFSHORE BAHIA BLANCA","OFFSHORE MAR DEL PLATA","OFFSHORE SAN JORGE","OFFSHORE FIN DEL MUNDO","OFFSHORE PATAGONIA SUR"]) :
-        
-            #Encabezado "casi" fijo
-            textoEnIngles = f"""WWST03 SABM {boletin.valido}{boletin.hora}
-WEATHER BULLETIN FOR NAVTEX STATIONS - METAREA 6 -
-{boletin.valido}, {boletin.hora}:00UTC
-NATIONAL WEATHER SERVICE
-SEA ICE AND ICEBERGS ISSUED BY SHN
-PRESSURE HPA
-BEAUFORT SCALE WINDS.
-                            
-GALE WARNING\n"""
-                            
-            if (len(avisosNavtex)!=0):            
-                #Escritura de los avisos
-                for a in avisosNavtex: 
-                    
-                    #Defino en un metodo del modelo la escritura de txt
-                    textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
-            else:
-                textoEnIngles = textoEnIngles +"NO WARNINGS"
-                
-            #Escritura de las situaciones
-            textoEnIngles = textoEnIngles +"\nGENERAL SYNOPSIS\n"
-        
-            
-            for s in situaciones: 
-                
-                textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
-            textoEnIngles = textoEnIngles +"\n"
-            
-            
-            #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
-            textoEnIngles = textoEnIngles +"FORECAST\n"
-            
-            textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
-            
-                
-            
-            #Cierre pedido por comunicaciones
-            textoEnIngles = textoEnIngles + "-----------------------------------------------------------------\nNNNN="
-            
-            #Por si algo quedó mal lo paso todo a mayusculas
-            textoEnIngles = textoEnIngles.upper()
-            
-            #Abro el archivo, escribo y lo cierro... boletin maritimo en ingles
-            nombreArchivo = f"{boletin.valido}_{boletin.hora}_navtex_ing_{p.area.description}.txt"
-            f = open (f"txtGuardados/{nombreArchivo}",'w')
-            f.write(textoEnIngles)
-            f.close()
-        

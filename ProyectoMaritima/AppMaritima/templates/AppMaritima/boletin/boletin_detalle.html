@@ -10,7 +10,7 @@
                             <div class="card border-warning">
                                 <div class="card-header">Información del boletín</div>
 
-                                <a href="{% url 'ListBoletin' %}" class="btn btn-primary">-Atrás</a>
+                               
                               
 
                                <!--Info del boletín-->
@@ -23,13 +23,50 @@
                                   <h5 class="card-title">Emitido: {{ boletin.emitido}}</h5>
                                  <!--<h5 class="card-title">Modificado: {{ boletin.modificado}}</h5> --> 
                                   <h5 class="card-title">HORA: {{ boletin.hora}} Z</h5>
+                                  <h5 class="card-title">PRONOSTICOS DEL: {{ boletin.pronosticosGuardados}} Z</h5>
                                   <br>
-
                                  
-                                  <!-- BLOQUE PARA LOS AVISOS-->
-                                    <a href="{% url 'NewAviso' %}" class="btn btn-info">+Nuevo aviso</a> 
-                                    <a href="{% url 'NewSituacion' %}" class="btn btn-info">+Nueva situación</a>
-                                    <a href="{% url 'NewHielo' %}" class="btn btn-info">+Nuevo hielo</a>
+                                 <!-- OPCIONES GENERALES ------------------------------------------------------------------>
+                                 <a href="{% url 'NewSituacion' %}" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar otro sistema.">+Nueva situación</a>
+                                 <a href="{% url 'NewAviso' %}" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar otro aviso.">+Nuevo aviso</a> 
+                                 <a href="{% url 'NewHielo' %}" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar nuevos hielos.">+Nuevo hielo</a> 
+                                  
+                                
+
+                                 <!-- BLOQUE PARA LAS SITUACIONES ------------------------------------------------------------------>
+                                 <br> <br>
+                                  <h5 class="card-title">Situaciones del boletín:</h5>
+
+                                  
+
+                                  
+                              
+
+                              
+                                    {% for situacion in situacionesDelBoletin %}
+
+                                        <h6 class="card-header"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{ situacion }}">Número:  {{situacion.id}}</h6>
+                                        <h6 class="card-header">Sistema: {{situacion.sistema}}</h6>
+                                        <h6 class="card-header">Movimiento: {{ situacion.movimiento}}</h6>
+                                        <h6 class="card-header">Evolucion: {{ situacion.evolucion}}</h6>
+                                        <h6 class="card-header">Navtex: {{ situacion.navtex}}</h6>
+                                      
+
+
+                                       
+                                        <a href="{% url 'EditSituacion' situacion.id %}" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Modificar un fenomeno ya existente.">Actualizar</a>
+                                        <a href="{% url 'CesarSituacion' situacion.id %}" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Quitar uno de los sistemas que ya no deberia estar en el boletín.">Cesar</a>
+                                         <!--<a href="{% url 'DeleteSituacion' situacion.id %}"  class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar sistemas de la BD, solo para ERRORES de situación.">Borrar</a> -->
+
+
+                                    
+
+                              
+                                    {% endfor %}    
+
+                                  <!-- BLOQUE PARA LOS AVISOS---------------------------------------------------------------------->
+                                    <br><br>
+                                    
 
 
                                     
@@ -41,9 +78,9 @@
                                   
                                         {% for aviso in avisosDelBoletin %}
     
-                                          
+                                              
                                          
-                                              <h6 class="card-header">Número: {{ aviso.numero}}</h6>
+                                              <h6 class="card-header"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{ aviso }}">Número: {{ aviso.numero}}</h6>
                                               <h6 class="card-header">Actualización: {{ aviso.actualizacion}}</h6>
                                               <h6 class="card-header">Tipo: {{ aviso.tipo}}</h6>
                                               <h6 class="card-header">Dirección: {{ aviso.direccion}}</h6>
@@ -53,51 +90,18 @@
     
     
                                             
-                                              <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning">Actualizar</a>
-                                              <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark">Cesar</a>
-                                              <a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger">Borrar</a>
+                                              <a href="{% url 'EditAviso' aviso.id %}" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Modificar un aviso para seguirlo utilizando.">Actualizar</a>
+                                              <a href="{% url 'CesarAviso' aviso.id %}" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Cese de un aviso que ya no estaría vigente.">Cesar</a>
+                                               <!--<a href="{% url 'DeleteAviso' aviso.id %}"  class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Borrar una aviso, solo para avisos con ERRORES, borra de la BD.">Borrar</a>-->
     
     
-                                            
+                                              
                                          
     
                                   
-                                        {% endfor %}    
-                                
+                                        {% endfor %}     
 
-                                 <!-- BLOQUE PARA LAS SITUACIONES-->
-                                 <br><br>
-                                  <h5 class="card-title">Situaciones del boletín:</h5>
-
-                                  
-
-                                  
-                              
-
-                              
-                                    {% for situacion in situacionesDelBoletin %}
-
-                                   
-                                        <h6 class="card-header">Sistema {{situacion.sistema}}</h6>
-                                        <h6 class="card-header">Movimioento: {{ situacion.movimiento}}</h6>
-                                        <h6 class="card-header">Evolucion: {{ situacion.evolucion}}</h6>
-                                        <h6 class="card-header">Navtex: {{ situacion.navtex}}</h6>
-                                      
-
-
-                                       
-                                        <a href="{% url 'EditSituacion' situacion.id %}" class="btn btn-warning">Actualizar</a>
-                                        <a href="{% url 'CesarSituacion' situacion.id %}" class="btn btn-dark">Cesar</a>
-                                        <a href="{% url 'DeleteSituacion' situacion.id %}"  class="btn btn-danger">Borrar</a>
-
-
-                                    
-
-                              
-                                    {% endfor %}    
-                                    
-
-                                    <!-- BLOQUE PARA Los hielos-->
+                                  <!-- BLOQUE PARA Los hielos------------------------------------------------------------------>
                                   <br><br>
                                   <h5 class="card-title">Hielos del boletín:</h5>
 
@@ -111,9 +115,9 @@
 
 
                                    
-                                    <a href="{% url 'EditHielo' hielo.id %}" class="btn btn-warning">Actualizar</a>
-                                    <a href="{% url 'CesarHielo' hielo.id %}" class="btn btn-dark">Cesar</a>
-                                    <a href="{% url 'DeleteHielo' hielo.id %}"  class="btn btn-danger">Borrar</a>
+                                    <a href="{% url 'EditHielo' hielo.id %}" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Actualizar información de los hielos.">Actualizar</a>
+                                    <!--<a href="{% url 'CesarHielo' hielo.id %}" class="btn btn-dark">Cesar</a>
+                                    <a href="{% url 'DeleteHielo' hielo.id %}"  class="btn btn-danger">Borrar</a> -->
 
 
                                 

@@ -11,7 +11,8 @@ class Area(models.Model): #son fijas, son las areas pimet
     idPimet = models.IntegerField()
     latitude = models.CharField(max_length=20)
     longitude = models.CharField(max_length=20)
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=50) #castellano
+    descriptionIngles= models.CharField(max_length=50,default='INGLES')  #En ingles
     domain = models.CharField(max_length=30)
     
     orden = models.IntegerField(default=999)
@@ -26,9 +27,10 @@ class Boletin(models.Model):
     emitido = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
     #Fecha del boletin
-    valido = models.DateField()
-    
+    valido = models.DateField()  
     hora = models.IntegerField(null=True)
+    
+    pronosticosGuardados = models.CharField(max_length=60 ,default='0000000')
     
     def __str__(self):
         return f"Boletín para -------> {self.valido}:{self.hora}  --> Generado/id: {self.emitido}{self.id}"
@@ -36,12 +38,17 @@ class Boletin(models.Model):
 #Parte II SItuacion 
 class Situacion(models.Model):
     
+    #Inicia en cero cada año
+    numero = models.IntegerField(null=True, blank=True)
+    #incrementa en uno cada vez que se actualiza, no cabia el numero
+    actualizacion = models.IntegerField(null=True, blank=True)
+    
     sistema = models.CharField(max_length=60)
     
     valorInicial = models.IntegerField(null=True, blank=True)
 
     
-    movimiento = models.CharField(max_length=4,null=True, blank=True)
+    movimiento = models.CharField(max_length=8,null=True, blank=True)
     evolucion = models.CharField(max_length=30,null=True, blank=True)
     
     posicionInicial = models.CharField(max_length=60,null=True, blank=True)
@@ -53,6 +60,8 @@ class Situacion(models.Model):
     horaFinal = models.IntegerField(null=True, blank=True)
     
     navtex = BooleanField(null=True, blank=True)
+
+    esPresente = BooleanField(null=True, blank=True)
     
     #Si la situacion está vigente lo mantenemos activo
     activo = models.BooleanField(null=True, blank=True)
@@ -61,12 +70,12 @@ class Situacion(models.Model):
     boletin = models.ManyToManyField(Boletin)
     
     def __str__(self):
-        return f"  {self.sistema}// {self.evolucion}// {self.movimiento} "
+        return self.paraTXTEnIngles()
     
     def paraTXTEnIngles(self): #Texto en ingles que aparece en el boletín
         
         #Solo me interesan los activos, cesados no aparecen en el boletin
-        if ( self.activo):
+        #if ( self.activo):
             
             #mejorar esto, porque en la base de datos en vez de vacio se guarda con -1
             valorInicial = ""
@@ -130,8 +139,11 @@ class Aviso(models.Model):
     
     navtex = BooleanField(default = False, null=True, blank=True)
     
-    def __str__(self):
+    def __str__2(self):
         return f"NUMERO: ---->  {self.numero} TIPO: ---> {self.tipo} ---> DIRECCIÓN ---> {self.direccion}"
+    
+    def __str__(self):
+        return self.paraTXTEnIngles()
     
     
     def paraTXTEnIngles(self):

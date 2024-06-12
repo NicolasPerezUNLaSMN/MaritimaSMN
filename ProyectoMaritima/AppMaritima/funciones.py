@@ -1,6 +1,6 @@
 from cgi import print_form
 from xml.etree.ElementTree import parse
-
+from django.shortcuts import render
 
 from AppMaritima.models import Pronostico, Boletin, Area
 
@@ -207,9 +207,7 @@ def agregarONoRafagas(velBeaufort):
 
 def ktABeaufort(velo):
 
-      vel = 0
-     
-      
+       
       #Si llega un digito lo paso a float
       if (velo.isdigit()):
         
@@ -217,36 +215,39 @@ def ktABeaufort(velo):
         
         if (velo <= 0.1):
           vel = 0
+          
       #Si no llega un digito lo pongo en 0    
       else:
         velo = float (0)    
         
 
       retorno = ""
+      
+    
 
-      if ( vel >= 0 and vel<= 3):
+      if ( velo >= 0 and velo<= 3):
         retorno = 1
-      if ( vel >= 4 and vel<= 6):
+      if ( velo >= 4 and velo<= 6):
         retorno = 2
-      if ( vel >= 7 and vel<= 10):
+      if ( velo >= 7 and velo<= 10):
         retorno = 3
-      if ( vel >= 11 and vel<= 16):
+      if ( velo >= 11 and velo<= 16):
         retorno = 4
-      if ( vel >= 17 and vel<= 21):
+      if ( velo >= 17 and velo<= 21):
         retorno = 5
-      if ( vel >= 22 and vel<= 27):
+      if ( velo >= 22 and velo<= 27):
         retorno = 6
-      if ( vel >= 28 and vel<= 33):
+      if ( velo >= 28 and velo<= 33):
         retorno = 7
-      if ( vel >= 34 and vel<= 40):
+      if ( velo >= 34 and velo<= 40):
         retorno = 8
-      if ( vel >= 41 and vel<= 47):
+      if ( velo >= 41 and velo<= 47):
         retorno = 9
-      if ( vel >= 48 and vel<= 55):
+      if ( velo >= 48 and velo<= 55):
         retorno = 10
-      if ( vel >= 56 and vel<= 63):
+      if ( velo >= 56 and velo<= 63):
         retorno = 11
-      if ( vel >= 64):
+      if ( velo >= 64):
         retorno = 12
 
       return str(retorno)
@@ -255,6 +256,8 @@ def ktABeaufort(velo):
   
 def transformarASectores(vientoD):
   retorno = vientoD
+
+  ###!!!!!!!!!!!!!En 8 Cuadrantes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   if ( vientoD == "N" or vientoD == "NNE" or vientoD == "NNW"):
     retorno = "SECTOR N"
@@ -283,6 +286,7 @@ def tomarHorasIndicadasSegunTurno(elemento):
           
           for i,horasDelXML in enumerate(elemento.list_timeranges):
             #OJO SON STRING NO INT
+            #print(f"Horas de los pronos: {horasDelXML.h } -- INDICE: {i}")
             if horasDelXML.h == "12":
               
               hora1 = i
@@ -297,6 +301,8 @@ def tomarHorasIndicadasSegunTurno(elemento):
         else:  #Si se ejecuta para el turno noche
           
             for i,horasDelXML in enumerate(elemento.list_timeranges):
+
+              #print(f"Horas de los pronos: {horasDelXML.h } -- INDICE: {i}")
             
               if horasDelXML.h == "24":
                 
@@ -341,7 +347,7 @@ def escribirTextoOlas(direccion, altura):
       
 
         #Acá se guarda el texto final
-        retorno = ""
+        retorno = "\nWAVES: "
 
 
         #Si la inicial es igual a la final
@@ -362,7 +368,7 @@ def escribirTextoOlas(direccion, altura):
                 #Si la intermedia es distinta, le hago un cambio temporario
                 if (not  dirInicial == dirMedia):
 
-                        retorno = retorno +" TEMPO BACK " +dirMedia +f" {alturaMedia} "
+                        retorno = retorno +" TEMPORARY CHANGE " +dirMedia +f" {alturaMedia} "
 
 
 
@@ -424,26 +430,49 @@ def escribirTextoViento(direccion, velocidad):
         #print(f"\nPRUEBA DE HORARIOS DE VEINTO: {velocidad.list_timeranges[hora1]}{velocidad.list_timeranges[hora2]}{velocidad.list_timeranges[hora3]}")
         
 
-        velInicial = int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )
+        #print(f"HORAS DEL PRONOS 2022: {hora1} {hora2} {hora3}")
+
+        #GRAN CAMBIO 2023, compara con las siguientes horas
+        #Supongo que me quedo con las horas dadas
+        hora1Maxima = hora1
+        hora2Maxima = hora2
+        hora3Maxima = hora3
+
+        #Si la hora siguiente es mayor, me quedo con la siguiente
+
+        if((int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora1-1].list_values[0].text) )):
+          hora1Maxima = hora1 -1
+
+        if((int(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora2-1].list_values[0].text) )):
+          hora2Maxima = hora2 -1
+
+        if((int(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora3-1].list_values[0].text) )):
+          hora3Maxima = hora3 -1
+
+        #print(f"HORAS DEL PRONOS 2023: {hora1Maxima} {hora2Maxima} {hora3Maxima}")
+
+        #Ahora ya se cual es mi dato más importante, uso ese
+
+        velInicial = int(ktABeaufort(velocidad.list_timeranges[hora1Maxima ].list_values[0].text) )
       
-        velMedia = int(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text))
+        velMedia = int(ktABeaufort(velocidad.list_timeranges[hora2Maxima ].list_values[0].text))
         
-        velFinal = int(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text) )
+        velFinal = int(ktABeaufort(velocidad.list_timeranges[hora3Maxima ].list_values[0].text) )
         
 
-        velInicialConRafagas = ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) +" " +agregarONoRafagas(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text))
-        velMediaConRafagas = ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text) +" " +agregarONoRafagas(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text))
-        velFinalConRafagas = ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text)+" "  +agregarONoRafagas(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text))
+        velInicialConRafagas = ktABeaufort(velocidad.list_timeranges[hora1Maxima ].list_values[0].text) +" " +agregarONoRafagas(ktABeaufort(velocidad.list_timeranges[hora1Maxima ].list_values[0].text))
+        velMediaConRafagas = ktABeaufort(velocidad.list_timeranges[hora2Maxima ].list_values[0].text) +" " +agregarONoRafagas(ktABeaufort(velocidad.list_timeranges[hora2Maxima ].list_values[0].text))
+        velFinalConRafagas = ktABeaufort(velocidad.list_timeranges[hora3Maxima ].list_values[0].text)+" "  +agregarONoRafagas(ktABeaufort(velocidad.list_timeranges[hora3Maxima ].list_values[0].text))
 
 
-        dirInicial = direccion.list_timeranges[hora1].list_values[1].text
-        dirMedia = direccion.list_timeranges[hora2].list_values[1].text
-        dirFinal = direccion.list_timeranges[hora3].list_values[1].text
+        dirInicial = direccion.list_timeranges[hora1Maxima ].list_values[1].text
+        dirMedia = direccion.list_timeranges[hora2Maxima ].list_values[1].text
+        dirFinal = direccion.list_timeranges[hora3Maxima ].list_values[1].text
 
        
      
         #Acá se guarda el texto final
-        retorno = ""
+        retorno = "\nWINDS: "
 
 
         #Si la inicial es igual a la final
@@ -452,10 +481,10 @@ def escribirTextoViento(direccion, velocidad):
                 #Aumento o disminuyo?
                 cambio = "SIN CAMBIO"
                 if (velInicial < velFinal):
-                  cambio = "INCR"
+                  cambio = "INCREASING"
 
                 if (velInicial > velFinal):
-                  cambio = "DISM"
+                  cambio = "DECREASING"
 
                 #Si cambio la velocidad
                 if (not( cambio == "SIN CAMBIO")):
@@ -468,7 +497,7 @@ def escribirTextoViento(direccion, velocidad):
                 #Si la intermedia es distinta, le hago un cambio temporario
                 if (not  dirInicial == dirMedia):
 
-                        retorno = retorno +" TEMPO BACK " +dirMedia +f" {velMediaConRafagas} "
+                        retorno = retorno +" TEMPORARY CHANGE " +dirMedia +f" {velMediaConRafagas} "
 
 
 
@@ -537,7 +566,7 @@ def escribirVisibilidad(visibilidad):
 
         #tengo que pararme en 12z, 00z y 12z+1 ... eso son las posiciones 1 - 3 - 5
 
-        retorno = " "
+        retorno = ""
 
         #Si 1 y 5 son distintas agrego el TO
  
@@ -551,11 +580,11 @@ def escribirVisibilidad(visibilidad):
         
         if (visibilidad.list_timeranges[hora1].list_values[0].text != visibilidad.list_timeranges[hora3].list_values[0].text ):
 
-          retorno = f"VIS {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora1].list_values[0].text)} TO  {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora3].list_values[0].text)}"
+          retorno = f"\nVISIBILITY:  {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora1].list_values[0].text)} TO  {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora3].list_values[0].text)}"
         
         else: 
 
-          retorno = f"VIS {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora1].list_values[0].text)}"
+          retorno = f"\nVISIBILITY: {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora1].list_values[0].text)}"
 
 
         if (visibilidad.list_timeranges[hora1].list_values[0].text != visibilidad.list_timeranges[hora2].list_values[0].text ):
@@ -573,8 +602,10 @@ def codigoAFenomeno(codigo):
 
   
 
-  retorno = "WORSENING"   #Inicialmente desmejorando, para que simplifique el algoritmo
+  retorno = "WORSENING"  #Inicialmente desmejorando, para que simplifique el algoritmo
 
+  
+ 
 
   if codigo == "74":
     retorno = "SHOWERS"
@@ -591,8 +622,7 @@ def codigoAFenomeno(codigo):
   if codigo == "71":
     retorno = "DRIZZLE"
 
-  if codigo == "74":
-    retorno = "SHOWERS"
+  
 
   if codigo == "77":
     retorno = "RAIN AND SNOW"
@@ -633,6 +663,22 @@ def codigoAFenomeno(codigo):
   if codigo == "92":
     retorno = "BLOWING SNOW"
 
+  #NUEVAS AL 2023
+  if codigo == "78":
+    retorno = "FREEZING RAIN"
+
+  if codigo == "80":
+    retorno = "ISOLATED SNOWFALL"
+
+  if codigo == "86":
+    retorno = "STORM WITH SNOWFALL"
+
+  if codigo == "87":
+    retorno = "HEAVY RAIN AND HEAVY SNOW"
+
+  if codigo == "75":
+    retorno = "LIGTH SNOW"
+
   return retorno
 
 
@@ -643,7 +689,7 @@ def escribirPronostico(pronostico):
         
         #5 ---pronostico del tiempo.... 0,2,4 son las 12, 00 y 12(+1)
 
-        retorno = ". "
+        retorno = "\nFORECAST: "
         
         hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(pronostico)
 
@@ -722,13 +768,52 @@ def escribirPronostico(pronostico):
 
             retorno =retorno + fenomeno1 + " LATER " +fenomeno2 +"."
 
+        #En caso que no hay fenomenos importantes
+        #else:
+           #retorno = retorno +"WITHOUT PRECIPITATION"
+
+        if (retorno == "\nFORECAST: "):
+           retorno = retorno +"WITHOUT PRECIPITATION"
+           
         retorno = retorno +". "
 
         return retorno
+   
+#Esta funcion retorna el area de pronostico recibida solo si tiene pronostico de temporal
+def areaParaTemporal(area): #Retorna el area solo si tiene pronostico de temporal
+        #Agarro el parametro velocidad del area pronosticada
+        velocidad = area.list_parameters[6]
+        
+        print(velocidad)
+        
+        #####Checkear y validar esto entre diuno y nocturno y distintos modelos
+        hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(velocidad)
+        ########
+  
+       
+        velInicial = int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )
+      
+        velMedia = int(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text))
+        
+        velFinal = int(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text) )
+
+        #Si antes hubo temporal tambien-- cambiio 2023
+        velInicialPrevias = int(ktABeaufort(velocidad.list_timeranges[hora1-1].list_values[0].text) )
+      
+        velMediaPrevias = int(ktABeaufort(velocidad.list_timeranges[hora2-1].list_values[0].text))
+        
+        velFinalPrevias = int(ktABeaufort(velocidad.list_timeranges[hora3-1].list_values[0].text) )
+
+     
+        
+        if velInicial > 7 or velMedia >7 or velFinal > 7 or velInicialPrevias > 7 or velMediaPrevias>7 or velFinalPrevias > 7:
+          
+            return area
+     
     
 def areaAtexto(area):
 
-  texto = f"{area.description}: ".upper()
+  texto = f"\n{traducirAreas(area.description)}: ".upper()
 
   #genero el viento del area, solo con los parametros 1 y 6
   viento = escribirTextoViento(area.list_parameters[1], area.list_parameters[6])
@@ -794,6 +879,7 @@ def cargarAreasDesdeElXML(nombreArchivo):
           
           areaModels = Area(idPimet=idPimet, latitude=area.attrib['latitude'],
                             longitude=area.attrib['longitude'], description=area.attrib['description'],
+                            descriptionIngles=traducirAreas(area.attrib['description']),
                             domain= area.attrib['domain'], orden=ordenNav)
           
           areaModels.save()
@@ -802,7 +888,11 @@ def cargarAreasDesdeElXML(nombreArchivo):
           
 def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
   
+    lista_areas_para_temporales = []
+  
     root = definirRoot(nombreArchivo)
+    pronosticosGuardados = "" #Variable para identificar cuándo se guardaron los
+    #pronosticos en PIMET
     
     for pronostico in root: 
     #Instancia vacia
@@ -811,14 +901,17 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
     #Accedo a cada Area, elimino la posicion 0 porque es issue y esta vacio
       for area in pronostico:
 
-      
+          if (area.tag == "issue"):
+            for x in area:
+              if(x.tag == "timestamp"):
+                pronosticosGuardados =x.text 
       
           ###################ESTRUCTURA PRINCIPAL; CARGA AREAS CON PRONOSTICOS######
           if (area.tag == 'area'):
               #instancio un area
               a = AreaXML(area.attrib['id'],area.attrib['latitude'],area.attrib['longitude'],area.attrib['description'], area.attrib['domain'])
             
-              print(f"TRABAJO CON AREA: {a}")
+              
 
               #Accedo a cada parametro
               for parameter in area: 
@@ -863,6 +956,12 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
 
               pronos = Pronostico(texto = areaAtexto(a), area =  queAreaEs, tipo = tipo)
               
+              #LISTA DE AREAS DE POSIBLE TEMPORAL !!!¡¡????? PENSAR
+              
+              if (areaParaTemporal(a)!=None):
+                lista_areas_para_temporales.append(queAreaEs)
+              
+              
               #Guardo el pronostico pero aun no le asigne el boletín
               pronos.save()
               
@@ -874,7 +973,13 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
               
               pronos.save()
               
-              
+    #Una vez que guarde todos los pronos en el boletín seteo 
+    #Y guardo el horario del xml para saber cuando se actualizo pimet
+    b = Boletin.objects.get(id = idBoletin)
+    b.pronosticosGuardados = pronosticosGuardados
+    b.save()    
+    
+    return lista_areas_para_temporales #retorno las areas candidatas a temporales        
 
 #Esto es para no estar consultando el area ya que las divisiones de PIMET no se adaptan al boletin en cuanto 
 #al subdomino.... Importante separar Norte y sur de 60 para no agregar areas antartida          
@@ -920,3 +1025,89 @@ def definirTipoDePronostico(area):
               
                   
   return tipo
+
+
+
+def verificar(request):
+  
+    nombreArchivo = "xmlPIMET/prueba.xml"
+  
+    root = definirRoot(nombreArchivo)
+    pronosticosGuardados = "" #Variable para identificar cuándo se guardaron los
+    #pronosticos en PIMET
+    
+    for pronostico in root: 
+    #Instancia vacia
+    #Por ahora no se usaria
+
+    #Accedo a cada Area, elimino la posicion 0 porque es issue y esta vacio
+      for area in pronostico:
+
+          if (area.tag == "issue"):
+            for x in area:
+              if(x.tag == "timestamp"):
+                pronosticosGuardados =x.text 
+    
+    
+    diccionario = {"pronosticosGuardados":pronosticosGuardados} #retorno las areas candidatas a temporales        
+    return render(request, 'AppMaritima/verificar.html', diccionario)
+
+def traducirAreas(areaCastellano):
+  areaCastellano = areaCastellano.upper()
+  areaIngles = areaCastellano
+
+  #Oceanicas
+  if("AREA SUDOESTE" in areaCastellano):
+     areaIngles = areaCastellano.replace("AREA SUDOESTE" ,"SOUTH WEST AREA")
+
+  if("AREA SUDESTE" in areaCastellano):
+     areaIngles = areaCastellano.replace("AREA SUDESTE","SOUTH EAST AREA")
+
+  if("AREA CENTRO OESTE" in areaCastellano):
+     areaIngles = areaCastellano.replace("AREA CENTRO OESTE","CENTRAL WEST AREA")
+
+  if("AREA CENTRO ESTE" in areaCastellano):
+     areaIngles = areaCastellano.replace("AREA CENTRO ESTE","CENTRAL EAST AREA")
+
+  if("AREA NORTE" in areaCastellano):
+     areaIngles = areaCastellano.replace("AREA NORTE","NORTH AREA")
+
+  if("DRAKE AREA" in areaCastellano):
+     areaIngles = areaCastellano.replace("DRAKE AREA" ,"DRAKE AREA")
+
+  #OFF SHORE
+  if("ZONAMALVINAS" in areaCastellano):
+     areaIngles = areaCastellano.replace("ZONAMALVINAS","ISLAS MALVINAS COASTS")
+
+  if("FIN DEL MUNDO" in areaCastellano):
+     areaIngles = areaCastellano.replace("FIN DEL MUNDO","FIN DEL MUNDO COASTS")
+
+  if("PATAGONIA SUR" in areaCastellano):
+     areaIngles = areaCastellano.replace("PATAGONIA SUR","SOUTH PATAGONIA COASTS")
+
+  if("SAN JORGE" in areaCastellano):
+     areaIngles = areaCastellano.replace("SAN JORGE" ,"GOLFO DE SAN JORGE COASTS")
+
+  if("VALDES" in areaCastellano):
+     areaIngles = areaCastellano.replace("VALDES" ,"PENINSULA DE VALDES COASTS")
+
+  if("BAHIA BLANCA" in areaCastellano):
+     areaIngles = areaCastellano.replace("BAHIA BLANCA" ,"RINCON BAHIA BLANCA COASTS")
+
+  if("MAR DEL PLATA" in areaCastellano):
+     areaIngles = areaCastellano.replace("MAR DEL PLATA" ,"MAR DEL PLATA COASTS")
+
+  if("DESEMBOCADURA RIO DE LA PLATA" in areaCastellano):
+     areaIngles = areaCastellano.replace("DESEMBOCADURA RIO DE LA PLATA","RIO DE LA PLATA MOUTH")
+
+  if("RIO DE LA PLATA EXTERIOR" in areaCastellano):
+     areaIngles = areaCastellano.replace("RIO DE LA PLATA EXTERIOR" ,"OUTER RIO DE LA PLATA")
+
+  if("RIO DE LA PLATA INTERIOR" in areaCastellano):
+     areaIngles = areaCastellano.replace("RIO DE LA PLATA INTERIOR" ,"INNER RIO DE LA PLATA")
+
+  if("RIO DE LA PLATA INTERMEDIO" in areaCastellano):
+     areaIngles = areaCastellano.replace("RIO DE LA PLATA INTERMEDIO" ,"INTERMEDIATE RIO DE LA PLATA")
+
+  return areaIngles
+

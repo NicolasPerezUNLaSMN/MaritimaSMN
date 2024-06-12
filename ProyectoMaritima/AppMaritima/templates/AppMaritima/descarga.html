@@ -1,0 +1,56 @@
+{% extends "AppMaritima/padre.html" %}
+
+
+{% load static %}
+
+        {% block contenido %}
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                         <div class="card">
+                              
+                            <div class="card-body">
+                                <h4 class="card-title">Buscar archivos</h4>
+                               
+                                 <br> <br>
+                                  
+
+                                  <form method="POST" id="carform">
+                                    {% csrf_token %}
+
+                                    <label for="cars">Seleción del archivo para descargar:</label>
+                                    <select id="cars" name="listatxt" form="carform">
+                                  
+
+                                      {% for archivo in listaArchivos %}
+
+                                        
+                                        
+                                        <option class="card-header"  value={{archivo}}>{{archivo}}</option>
+                                       
+
+                                    {% endfor %}  
+
+
+                                    </select>
+                                    <br>
+                                    <input class="btn btn-success" type="submit" value="Descargar" />
+                                </form>
+
+                                  
+                              
+
+                              
+                                   
+                                
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        {% endblock %}

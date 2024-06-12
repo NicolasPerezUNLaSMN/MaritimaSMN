@@ -19,10 +19,12 @@
                                   
                                   <a href="{% url 'DetailBoletin' boletin.id %}" class="btn btn-success">Ver más</a>
                                   <a href="{% url 'EditBoletin' boletin.id %}" class="btn btn-warning">Editar</a>
-                                  <a href="{% url 'DeleteBoletin' boletin.id %}" class="btn btn-danger">Borrar</a>
+                                  <!--<a href="{% url 'DeleteBoletin' boletin.id %}" class="btn btn-danger">Borrar</a>-->
                               </div>
 
-                              <div class="card-footer"><small>Emitido el: {{ boletin.emitido}}</small>
+                              <div class="card-footer">
+                              <small>Emitido el: {{ boletin.emitido}}</small>
+                              <small>Usando el pronostico del: {{ boletin.pronosticosGuardados}}</small>
                               </div>
 
                               {% endfor %}

@@ -17,7 +17,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="summernote">
-                                    <pre id="texTareaI" >{{texto}}</pre>
+                                    <pre id="texTareaI" >{{textoAltamar}}</pre>
                                    
                                 </div>
                             </div>
@@ -27,6 +27,47 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="summernote">
+                                    <pre id="texTareaI" >{{textoOff}}</pre>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+            {% for textoArray in array_navtex %}
+
+                 <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="summernote">
+                                            <pre id="texTareaI" >{{textoArray}}</pre>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                 </div>
+
+            {% endfor %}
+
+
             <!-- #/ container -->
         </div>
 

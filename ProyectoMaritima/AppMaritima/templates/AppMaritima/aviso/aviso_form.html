@@ -11,9 +11,9 @@
             <div class="row">
                 <div class="col-12">
                          <div class="card">
-                            <a href="javascript:history.back()" class="btn btn-primary">-Atrás</a>
+                              <a href="{% url 'UltimoBoletin' %}" class="btn btn-primary">-Último boletín</a>
                             <div class="card-body">
-                                <h4 class="card-title">Crear un nuevo aviso</h4>
+                                <h4 class="card-title" data-bs-toggle="tooltip" data-bs-placement="top" title="{{tooltip}}">Crear un nuevo aviso</h4>
                                
                                 <form method="POST">
                                     {% csrf_token %}
