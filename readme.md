@@ -1,4 +1,4 @@
-# Proyecto Maritima SMN
+# Proyecto Maritima SMN - SANTI
 Aplicativo web desarrollado con Python 3.9 y Django 4.0.4, para la generación automáctica de boletines de navegación maritima en la METAREA VI
 
 
