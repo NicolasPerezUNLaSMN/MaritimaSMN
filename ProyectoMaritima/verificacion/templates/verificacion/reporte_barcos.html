@@ -1,0 +1,50 @@
+
+<!-- verificacion/reporte_barcos.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Barcos</title>
+</head>
+<body>
+    <h1>Reporte de Barcos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Fecha del Reporte</th>
+                <th>Nombre del Buque</th>
+                <th>Matrícula</th>
+                <th>IMO</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Mar Beaufort</th>
+                <th>Viento Beaufort</th>
+                <th>Dirección del Viento</th>
+                <th>Mar Medido</th>
+                <th>Viento Medido</th>
+                <th>Dirección Medida</th>
+                <th>Presión</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for barco in barcos %}
+            <tr>
+                <td>{{ barco.fecha_reporte }}</td>
+                <td>{{ barco.nombre_buque }}</td>
+                <td>{{ barco.matricula }}</td>
+                <td>{{ barco.imo }}</td>
+                <td>{{ barco.latitud }}</td>
+                <td>{{ barco.longitud }}</td>
+                <td>{{ barco.marbeaufort }}</td>
+                <td>{{ barco.vientobeaufort }}</td>
+                <td>{{ barco.direccion_viento }}</td>
+                <td>{{ barco.marmedido }}</td>
+                <td>{{ barco.vientomedido }}</td>
+                <td>{{ barco.direccionmedido }}</td>
+                <td>{{ barco.presion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
