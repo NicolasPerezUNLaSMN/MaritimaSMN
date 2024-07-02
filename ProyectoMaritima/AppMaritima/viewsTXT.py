@@ -69,20 +69,22 @@ PART 1 GALE WARNING\n"""
     textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
     
     
-    #Escribo los hielos, aún es uno solo
     
-    for h in hielos:
-        
-        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
-    textoEnIngles = textoEnIngles +"\n"
     
-       
+    #escribo la situación   
     for s in situaciones: 
         
         if (s.esPresente):
             textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
 
 
+    textoEnIngles = textoEnIngles +"\n"
+
+    #Escribo los hielos, aún es uno solo
+    
+    for h in hielos:
+        
+        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
     textoEnIngles = textoEnIngles +"\n"
     
     
@@ -96,7 +98,7 @@ PART 1 GALE WARNING\n"""
         
     #   textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
         
-    textoEnIngles = textoEnIngles +"OCEANIC AREAS:\n"
+    textoEnIngles = textoEnIngles +"\nCEANIC AREAS\n"
     for p in pronosticosMetarea:
         
         textoEnIngles = textoEnIngles +p.paraTXTEnIngles()

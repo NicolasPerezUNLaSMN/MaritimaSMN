@@ -32,6 +32,8 @@ def cargarAreas(request):
    
     return HttpResponse("No se cargaron las areas, ya estaban en la base")
 
+
+
 #Ejectucarlo solo una vez, y con permisos de admin 
 @staff_member_required
 def cargarUsuarios(request):
@@ -59,7 +61,10 @@ def cargarUsuarios(request):
                         "cgaravaglia",
                         "gramirez",
                         "amontero",
-                        "mcorvalan"
+                        "mcorvalan",
+                        "sgalgano",
+                        "rvidal",
+                        "ngiletto"
                         ]
         
        for n in lista_usuarios:

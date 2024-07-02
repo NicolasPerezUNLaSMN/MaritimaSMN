@@ -1162,6 +1162,15 @@ def traducirAreas(areaCastellano):
   if("PATAGONIA SUR" in areaCastellano):
      areaIngles = areaCastellano.replace("PATAGONIA SUR","SOUTH PATAGONIA COASTS (48ºS - 54ºS)")
 
+  if("OFSHORE SAN JORGE" in areaCastellano):
+     areaIngles = areaCastellano.replace("OFSHORE SAN JORGE" ,"GOLFO DE SAN JORGE  COASTS (45ºS - 48ºS)")
+
+  #if("SAN JORGE SUR" in areaCastellano):
+     #areaIngles = areaCastellano.replace("SAN JORGE SUR" ,"GOLFO DE SAN JORGE SUR COASTS (47ºS - 48ºS)")
+
+  #if("SAN JORGE NORTE" in areaCastellano):
+     #areaIngles = areaCastellano.replace("SAN JORGE NORTE" ,"GOLFO DE SAN JORGE NORTE COASTS (45ºS - 47ºS)")
+
   if("SAN JORGE" in areaCastellano):
      areaIngles = areaCastellano.replace("SAN JORGE" ,"GOLFO DE SAN JORGE COASTS (45ºS - 48ºS)")
 
@@ -1172,7 +1181,7 @@ def traducirAreas(areaCastellano):
      areaIngles = areaCastellano.replace("BAHIA BLANCA" ,"RINCON BAHIA BLANCA COASTS (38º30S - 41ºS)")
 
   if("MAR DEL PLATA" in areaCastellano):
-     areaIngles = areaCastellano.replace("MAR DEL PLATA" ,"MAR DEL PLATA COASTS (36º17S - 38º30S")
+     areaIngles = areaCastellano.replace("MAR DEL PLATA" ,"MAR DEL PLATA COASTS (36º17S - 38º30S)")
 
   if("DESEMBOCADURA RIO DE LA PLATA" in areaCastellano):
      areaIngles = areaCastellano.replace("DESEMBOCADURA RIO DE LA PLATA","RIO DE LA PLATA MOUTH")
