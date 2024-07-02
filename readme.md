@@ -2,7 +2,7 @@
 Aplicativo web desarrollado con Python 3.9 y Django 4.0.4, para la generación automáctica de boletines de navegación maritima en la METAREA VI
 
 
-# Instalación  (Primer despliegue) A VER SI ME DEJA
+# Instalación  (Primer despliegue) 
 **Seguir los pasos para desplegar por primera vez el proyecto**
 
 1) Instalar Python3
@@ -108,23 +108,8 @@ python manage.py runserver
 # Sobre la versión actual
 ** Tareas a realizar **
 
-- [x] Verificar generación de pronosticos nocturnos (00UTC)
-- [x] Definir nombre del archivo PIMET generado diariamente y leer ese archivo, no leer el archivo de prueba.
-- [x] Crear TXT para NAVTEX
-- [ ] Crear informes en español #0%
-- [ ] Mejorar formato de horas y días, a definir #0%
-- [ ] Definir en qué orden deben aparecer las areas, mantener o no? #0%
-- [ ] Definir módulo de estadisticas
-- [x] Documentar DER
-- [x] Documentar DC
-- [x] Documentar flujo de trabajo
-- [ ] Redefinir algunos redireccionamientos para mejor experiencia con el usuario #75%
-- [x] Versión estable para crear boletín en ingles
-- [x] Persistencia de todos los datos en tablas 
-- [x] Escaterometro y borde de hielos visibles desde la web. 
-- [ ] Definir qué hacer con las divisiones Rio De la Plata.
-- [x] Documentar los manuales de usuario y de desarrollo.
-- [x] Cada ciclo terminado, con todos los txt guadados ocuparia 12/13Kb en el servidor. 
+- [x] Ver detalles en Trello: (https://trello.com/b/D9mFdRxZ/proyectos-cpr-maritima)
+
 
 
 Reportar pedidos o mejoras a: [PEDIDOS] (https://forms.gle/NtPh4itKtTzjiWRt6)
