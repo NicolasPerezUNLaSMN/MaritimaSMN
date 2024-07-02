@@ -106,12 +106,16 @@ class BoletinListTodos(ListView):
     
 def ultimoBoletin(request):
     
-        
+       try: 
         #id del Boletin 
         pk = ((Boletin.objects.all().order_by("-id"))[0]).id
         print("------>, el boletin : ", pk)
 
         return redirect(f"../boletin/{pk}")  
+       except IndexError:
+        diccionario = {"error": "No hay elementos para mostrar. Debe hacer el primer boletín."}
+        return render(request, 'AppMaritima/inicio.html', diccionario)
+             
  
        
 

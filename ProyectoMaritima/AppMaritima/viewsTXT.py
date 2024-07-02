@@ -46,7 +46,7 @@ def crearTXTnaveganteAltamar(boletin,avisos, situaciones,hielos,pronosticosMetar
     
     
     #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST02 SABM {boletin.valido[-2:]} {boletin.hora}00
+    textoEnIngles = f"""FQST02 SABM {boletin.valido} {boletin.hora}00
 1:31:06:01:00 
 SECURITE 
 WEATHER BULLETIN ON METAREA VI
@@ -127,7 +127,7 @@ def crearTXTnaveganteOffShore(boletin,avisos, situaciones,hielos,pronosticosOffs
     
     
     #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST04 SABM {boletin.valido}{boletin.hora}
+    textoEnIngles = f"""FQST04 SABM {boletin.valido} {boletin.hora}00
 1:31:06:01:00 
 SECURITE 
 WEATHER BULLETIN ON METAREA VI
@@ -311,6 +311,9 @@ def descargar_archivo(request):
         for fichero in directorio.iterdir():
         
             listaArchivos.append(fichero.name)
+
+        # Ordenar la lista por orden alfabético
+        listaArchivos.sort(reverse=True)
      
         diccionario = {"listaArchivos":listaArchivos} 
         

@@ -11,8 +11,8 @@ class Area(models.Model): #son fijas, son las areas pimet
     idPimet = models.IntegerField()
     latitude = models.CharField(max_length=20)
     longitude = models.CharField(max_length=20)
-    description = models.CharField(max_length=50) #castellano
-    descriptionIngles= models.CharField(max_length=50,default='INGLES')  #En ingles
+    description = models.CharField(max_length=80) #castellano
+    descriptionIngles= models.CharField(max_length=80,default='INGLES')  #En ingles
     domain = models.CharField(max_length=30)
     
     orden = models.IntegerField(default=999)

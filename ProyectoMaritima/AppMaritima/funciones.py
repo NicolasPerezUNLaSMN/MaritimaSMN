@@ -1,6 +1,7 @@
 from cgi import print_form
 from xml.etree.ElementTree import parse
 from django.shortcuts import render
+from datetime import datetime
 
 from AppMaritima.models import Pronostico, Boletin, Area
 
@@ -1047,10 +1048,86 @@ def verificar(request):
             for x in area:
               if(x.tag == "timestamp"):
                 pronosticosGuardados =x.text 
+
+    fecha_objeto = datetime.strptime(pronosticosGuardados, "%Y%m%d%H%M%S")
+
+#   Crear el diccionario
+    diccionario = {
+      "pronosticosGuardados":pronosticosGuardados,
+      "año": fecha_objeto.year,
+      "mes": fecha_objeto.month,
+      "día": fecha_objeto.day,
+      "hora": fecha_objeto.hour,
+      "minuto": fecha_objeto.minute,
+      "segundo": fecha_objeto.second
+  }       
+
+    # Obtener la fecha actual
+    fecha_actual = datetime.now()     
+
+    # Comprobar si la fecha del diccionario es igual a la fecha actual
+    if (diccionario["año"] == fecha_actual.year and
+      diccionario["mes"] == fecha_actual.month and
+      diccionario["día"] == fecha_actual.day):
+      resultado = "El día es correcto"
+    else:
+      resultado = "No es el día de hoy"
     
     
-    diccionario = {"pronosticosGuardados":pronosticosGuardados} #retorno las areas candidatas a temporales        
+    diccionario["texto"] = resultado
+    
     return render(request, 'AppMaritima/verificar.html', diccionario)
+
+
+def verificarConRetorno(request):
+  
+    nombreArchivo = "xmlPIMET/prueba.xml"
+  
+    root = definirRoot(nombreArchivo)
+    pronosticosGuardados = "" #Variable para identificar cuándo se guardaron los
+    #pronosticos en PIMET
+    
+    for pronostico in root: 
+    #Instancia vacia
+    #Por ahora no se usaria
+
+    #Accedo a cada Area, elimino la posicion 0 porque es issue y esta vacio
+      for area in pronostico:
+
+          if (area.tag == "issue"):
+            for x in area:
+              if(x.tag == "timestamp"):
+                pronosticosGuardados =x.text 
+
+    fecha_objeto = datetime.strptime(pronosticosGuardados, "%Y%m%d%H%M%S")
+
+#   Crear el diccionario
+    diccionario = {
+      "pronosticosGuardados":pronosticosGuardados,
+      "año": fecha_objeto.year,
+      "mes": fecha_objeto.month,
+      "día": fecha_objeto.day,
+      "hora": fecha_objeto.hour,
+      "minuto": fecha_objeto.minute,
+      "segundo": fecha_objeto.second
+  }       
+
+    # Obtener la fecha actual
+    fecha_actual = datetime.now()     
+
+    # Comprobar si la fecha del diccionario es igual a la fecha actual
+    if (diccionario["año"] == fecha_actual.year and
+      diccionario["mes"] == fecha_actual.month and
+      diccionario["día"] == fecha_actual.day):
+      resultado = "El día es correcto"
+    else:
+      resultado = "No es el día de hoy"
+    
+    
+    diccionario["texto"] = resultado
+    
+    return diccionario
+
 
 def traducirAreas(areaCastellano):
   areaCastellano = areaCastellano.upper()
@@ -1080,22 +1157,22 @@ def traducirAreas(areaCastellano):
      areaIngles = areaCastellano.replace("ZONAMALVINAS","ISLAS MALVINAS COASTS")
 
   if("FIN DEL MUNDO" in areaCastellano):
-     areaIngles = areaCastellano.replace("FIN DEL MUNDO","FIN DEL MUNDO COASTS")
+     areaIngles = areaCastellano.replace("FIN DEL MUNDO","FIN DEL MUNDO COASTS (54ºS - 55ºS)")
 
   if("PATAGONIA SUR" in areaCastellano):
-     areaIngles = areaCastellano.replace("PATAGONIA SUR","SOUTH PATAGONIA COASTS")
+     areaIngles = areaCastellano.replace("PATAGONIA SUR","SOUTH PATAGONIA COASTS (48ºS - 54ºS)")
 
   if("SAN JORGE" in areaCastellano):
-     areaIngles = areaCastellano.replace("SAN JORGE" ,"GOLFO DE SAN JORGE COASTS")
+     areaIngles = areaCastellano.replace("SAN JORGE" ,"GOLFO DE SAN JORGE COASTS (45ºS - 48ºS)")
 
   if("VALDES" in areaCastellano):
-     areaIngles = areaCastellano.replace("VALDES" ,"PENINSULA DE VALDES COASTS")
+     areaIngles = areaCastellano.replace("VALDES" ,"PENINSULA DE VALDES COASTS (41ºS - 45ºS)")
 
   if("BAHIA BLANCA" in areaCastellano):
-     areaIngles = areaCastellano.replace("BAHIA BLANCA" ,"RINCON BAHIA BLANCA COASTS")
+     areaIngles = areaCastellano.replace("BAHIA BLANCA" ,"RINCON BAHIA BLANCA COASTS (38º30S - 41ºS)")
 
   if("MAR DEL PLATA" in areaCastellano):
-     areaIngles = areaCastellano.replace("MAR DEL PLATA" ,"MAR DEL PLATA COASTS")
+     areaIngles = areaCastellano.replace("MAR DEL PLATA" ,"MAR DEL PLATA COASTS (36º17S - 38º30S")
 
   if("DESEMBOCADURA RIO DE LA PLATA" in areaCastellano):
      areaIngles = areaCastellano.replace("DESEMBOCADURA RIO DE LA PLATA","RIO DE LA PLATA MOUTH")
@@ -1108,6 +1185,10 @@ def traducirAreas(areaCastellano):
 
   if("RIO DE LA PLATA INTERMEDIO" in areaCastellano):
      areaIngles = areaCastellano.replace("RIO DE LA PLATA INTERMEDIO" ,"INTERMEDIATE RIO DE LA PLATA")
+
+
+  # Remover el subString "OFFSHORE"
+  areaIngles = areaIngles.replace("OFFSHORE ", "")
 
   return areaIngles
 
