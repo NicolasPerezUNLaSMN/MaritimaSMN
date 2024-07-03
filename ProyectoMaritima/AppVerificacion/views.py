@@ -65,10 +65,10 @@ def selector_fechas(request):
             barcos.append(barco)
 
         # Renderizar la plantilla HTML con los datos
-        return render(request, 'verificacion/reporte_barcos.html', {'barcos': barcos})
+        return render(request, 'AppVerificacion/reporte_barcos.html', {'barcos': barcos})
 
     # Si es un GET o no se ha enviado el formulario, renderizar el formulario vacío
-    return render(request, 'verificacion/seleccion_fechas.html')
+    return render(request, 'AppVerificacion/seleccion_fechas.html')
 
 
 def reporte_barcos(request):
@@ -77,4 +77,4 @@ def reporte_barcos(request):
         'titulo_reporte': 'Reporte de Barcos',
         # Otros datos que quieras pasar al template
     }
-    return render(request, 'verificacion/reporte_barcos.html', context)
+    return render(request, 'AppVerificacion/reporte_barcos.html', context)
