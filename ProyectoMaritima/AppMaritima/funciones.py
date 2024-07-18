@@ -393,7 +393,7 @@ def escribirTextoOlas(direccion, altura):
 
                             
 
-                            retorno = retorno + dirInicial  +f" {alturaInicial}/{alturaMedia} "  +f" BACK " + dirFinal +f" {alturaFinal}"
+                            retorno = retorno + dirInicial  +f" {alturaInicial}/{alturaMedia} "  +f" BACKING " + dirFinal +f" {alturaFinal}"
 
 
                       #Misma direccion que la ultima pero cambio de velocidad
@@ -401,7 +401,7 @@ def escribirTextoOlas(direccion, altura):
 
                           
 
-                            retorno = retorno + dirInicial  +f" {alturaInicial}" +f" BACK " + dirFinal +f" {alturaMedia}/{alturaFinal}"  
+                            retorno = retorno + dirInicial  +f" {alturaInicial}" +f" BACKING " + dirFinal +f" {alturaMedia}/{alturaFinal}"  
 
 
 
@@ -507,7 +507,7 @@ def escribirTextoViento(direccion, velocidad):
                 #Si la del medio no es igual a ninguna de las dos, hago el cambio
                 if (not (dirMedia == dirInicial) and not (dirMedia == dirFinal) ):
 
-                      retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACK " + dirMedia +f" {velMediaConRafagas} "+f" AND BACK " + dirFinal +f" {velFinalConRafagas}"
+                      retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACKINGING  " + dirMedia +f" {velMediaConRafagas} "+f" AND BACKINGING " + dirFinal +f" {velFinalConRafagas}"
 
 
                 else:  #Si la dirección del medio es igual a alguna de las dos
@@ -515,14 +515,14 @@ def escribirTextoViento(direccion, velocidad):
                       #Igual a la primera  o a la ultima, ignoro ese cambio
                       if ((dirMedia == dirInicial and velMedia == velInicial) or (dirMedia == dirFinal and velMedia == velFinal)):
 
-                            retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACK " + dirFinal +f" {velFinalConRafagas}"
+                            retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACKINGING  " + dirFinal +f" {velFinalConRafagas}"
 
                       #Misma direccion que la primera pero cambio de velocidad
                       if (dirMedia == dirInicial and not velMedia == velInicial):
 
                             maximo = max([velInicial, velMedia])
 
-                            retorno = retorno + dirInicial  +f" {velInicial}/{velMedia} " +agregarONoRafagas(maximo) +f" BACK " + dirFinal +f" {velFinalConRafagas}"
+                            retorno = retorno + dirInicial  +f" {velInicial}/{velMedia} " +agregarONoRafagas(maximo) +f" BACKINGING  " + dirFinal +f" {velFinalConRafagas}"
 
 
                       #Misma direccion que la ultima pero cambio de velocidad
@@ -530,7 +530,7 @@ def escribirTextoViento(direccion, velocidad):
 
                             maximo = max([velFinal, velMedia])
 
-                            retorno = retorno + dirInicial  +f" {velInicialConRafagas}" +f" BACK " + dirFinal +f" {velMedia}/{velFinal}" +agregarONoRafagas(maximo) 
+                            retorno = retorno + dirInicial  +f" {velInicialConRafagas}" +f" BACKINGING  " + dirFinal +f" {velMedia}/{velFinal}" +agregarONoRafagas(maximo) 
 
 
 
@@ -592,7 +592,7 @@ def escribirVisibilidad(visibilidad):
           
           if (visibilidad.list_timeranges[hora3].list_values[0].text != visibilidad.list_timeranges[hora2].list_values[0].text ):
 
-            retorno = retorno + f", OCNL {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora2].list_values[0].text)}"
+            retorno = retorno + f", OCCASIONALLY {transformarNumeroAVisibilidad(visibilidad.list_timeranges[hora2].list_values[0].text)}"
 
         retorno = retorno +". "
         
@@ -629,7 +629,7 @@ def codigoAFenomeno(codigo):
     retorno = "RAIN AND SNOW"
 
   if codigo == "79":
-    retorno = "OCNL SNOW"
+    retorno = "OCCASIONALLY SNOW"
 
   if codigo == "81":
     retorno = "RAIN AND THUNDERSTORM"
@@ -638,10 +638,10 @@ def codigoAFenomeno(codigo):
     retorno = "HEAVY THUNDERSTORM"
 
   if codigo == "72":
-    retorno = "OCNL RAIN"
+    retorno = "ISOLATED RAIN"
 
   if codigo == "76":
-    retorno = "OCNL STORM"
+    retorno = "ISOLATED STORM"
 
   if codigo == "51":
     retorno = "SPRAY"
@@ -714,7 +714,7 @@ def escribirPronostico(pronostico):
 
             if (fenomeno3 == "WORSENING"):
 
-              fenomeno3 = "IMPR"
+              fenomeno3 = "IMPROVING"
 
             retorno = retorno + fenomeno1  + " LATER " +fenomeno3 +"."
 
@@ -724,7 +724,7 @@ def escribirPronostico(pronostico):
 
             if (fenomeno3 == "WORSENING"):
 
-              fenomeno3 = "IMPR"
+              fenomeno3 = "IMPROVING"
 
               retorno =retorno + fenomeno1  + " LATER " +fenomeno2 +" AND LATER " +fenomeno3 +"."
 
@@ -732,9 +732,9 @@ def escribirPronostico(pronostico):
 
             if (fenomeno2 == "WORSENING"):
 
-              fenomeno2 = "IMPR"
+              fenomeno2 = "IMPROVING"
 
-              retorno =retorno + fenomeno1  + " LATER " +fenomeno3 +", OCNL  " +fenomeno2 +"."
+              retorno =retorno + fenomeno1  + " LATER " +fenomeno3 +", OCCASIONALLY " +fenomeno2 +"."
 
 
             if (fenomeno1 == "WORSENING"):
@@ -748,16 +748,16 @@ def escribirPronostico(pronostico):
 
              if (fenomeno2 == "WORSENING"):
 
-              fenomeno2 = "IMPR"
+              fenomeno2 = "IMPROVING"
 
-              retorno =retorno + fenomeno1  + " AND OCNL " +fenomeno2 +"."
+              retorno =retorno + fenomeno1  + " AND OCCASIONALLY " +fenomeno2 +"."
 
 
              if (fenomeno1 == "WORSENING"):
 
-              fenomeno2 = "IMPR"
+              fenomeno2 = "IMPROVING"
 
-              retorno =retorno +  " OCNL " +fenomeno2 +"."
+              retorno =retorno +  " OCCASIONALLY " +fenomeno2 +"."
 
           
 
@@ -765,7 +765,7 @@ def escribirPronostico(pronostico):
           if ( not (fenomeno1 == fenomeno2) and fenomeno2 == fenomeno3):
 
             if (fenomeno2 == "WORSENING"):
-              fenomeno2 = "IMPR"
+              fenomeno2 = "IMPROVING"
 
             retorno =retorno + fenomeno1 + " LATER " +fenomeno2 +"."
 
@@ -774,7 +774,7 @@ def escribirPronostico(pronostico):
            #retorno = retorno +"WITHOUT PRECIPITATION"
 
         if (retorno == "\nFORECAST: "):
-           retorno = retorno +"WITHOUT PRECIPITATION"
+           retorno = retorno +"NO SIGNIFICANT WEATHER EVENTS."
            
         retorno = retorno +". "
 
@@ -783,7 +783,9 @@ def escribirPronostico(pronostico):
 #Esta funcion retorna el area de pronostico recibida solo si tiene pronostico de temporal
 def areaParaTemporal(area): #Retorna el area solo si tiene pronostico de temporal
         #Agarro el parametro velocidad del area pronosticada
-        velocidad = area.list_parameters[6]
+
+        velocidad = next((p for p in area.list_parameters if p.id == "ws"), None)
+        #velocidad = area.list_parameters[6]
         
         print(velocidad)
         
@@ -812,20 +814,58 @@ def areaParaTemporal(area): #Retorna el area solo si tiene pronostico de tempora
             return area
      
     
-def areaAtexto(area):
+def areaAtexto(area,bole):
 
+  print(f"BOLETIN: {bole.pronosticosOlasSHN}")
+  print(f"Texto a area: {area}")
   texto = f"\n{traducirAreas(area.description)}: ".upper()
 
-  #genero el viento del area, solo con los parametros 1 y 6
-  viento = escribirTextoViento(area.list_parameters[1], area.list_parameters[6])
+  
+ 
+  parametroWd = next((p for p in area.list_parameters if p.id == "wd"), None)
+  parametroWs = next((p for p in area.list_parameters if p.id == "ws"), None)
 
-  #genero el pronostico, solo con el parametro ww
-  fenomeno = escribirPronostico(area.list_parameters[5])
+  parametroWw = next((p for p in area.list_parameters if p.id == "ww"), None)
 
-  #genero la visibilidad
-  visibilidad = escribirVisibilidad(area.list_parameters[7])
+  parametroVi = next((p for p in area.list_parameters if p.id == "visibility"), None)
 
-  ola = escribirTextoOlas(area.list_parameters[2],area.list_parameters[0])
+  parametroWad = next((p for p in area.list_parameters if p.id == "waved"), None)
+  parametroWah = next((p for p in area.list_parameters if p.id == "waveh"), None)
+
+  
+
+  #print(f"--- Parametros viento: {parametroWd} - {parametroWs}")
+  #print(f"--- Parametros fenomeno: {parametroWw}")
+  #print(f"--- Parametros visibility: {parametroVi}")
+
+  #print(f"--- Parametros olas: {parametroWad} - {parametroWah}")
+
+  if all(param is not None for param in [parametroWd, parametroWs, parametroWw, parametroVi]):
+    #genero el viento del area, solo con los parametros 1 y 6
+    viento = escribirTextoViento(parametroWd, parametroWs)
+
+    #genero el pronostico, solo con el parametro ww
+    fenomeno = escribirPronostico(parametroWw)
+
+    #genero la visibilidad
+    visibilidad = escribirVisibilidad(parametroVi)
+  else:
+     print(f"Faltan datos meteorologicos en: {area}")
+
+  #Si el pronostico de SHN no está, uso PIMET
+  if(bole.pronosticosOlasSHN == ""):
+    if all(param is not None for param in [parametroWad, parametroWah]):
+
+      ola = escribirTextoOlas(parametroWad,parametroWah)
+      #ola = "OLAS SHN"
+
+    else:
+      print(f"Faltan datos de olas  o esta congelado en: {area}")
+      ola = "\nWAVES: FROZEN SEA."
+
+  #SI hay pronostico de olas... uso SHN
+  else:
+    ola = escribirTextoOlasSHN(area)
 
   texto = texto + viento  +fenomeno  +visibilidad  +ola+"."
 
@@ -839,7 +879,7 @@ def areaAtexto(area):
   texto = texto.replace(" .", ".")
   texto = texto.replace(". ", ".")
   
-  
+  print(texto)
 
   return texto
 
@@ -894,6 +934,8 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
     root = definirRoot(nombreArchivo)
     pronosticosGuardados = "" #Variable para identificar cuándo se guardaron los
     #pronosticos en PIMET
+
+    b = Boletin.objects.get(id = idBoletin) #Boletin donde guardaré la info
     
     for pronostico in root: 
     #Instancia vacia
@@ -921,11 +963,15 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
                   #instancio el parametro
                   p = Parameter(parameter.attrib['id'])
 
+                  print(f"ESTOY EN PARAMETER: {p}")
+
                   ###################TIME RANGE#########################
                   #accedo a las horas de mi parametro
                   for timerange in parameter:
                     #instancio el timerange
                     t = Timerange(timerange.attrib['h'],timerange.attrib['datetime'])
+
+                    #print(f"ESTOY EN HORA: {t}")
 
                     ###################VALUE#########################
                     #accedo al value de ese horario
@@ -933,6 +979,8 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
 
                       #instancio al valor
                       v = Value(value.text,value.attrib['unit'])
+
+                      #print(f"ESTOY EN VALOR: {v}")
 
                       #Agrego el valor a la lista de timerange
                       t.list_values.append(v)
@@ -955,24 +1003,33 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
               tipo = definirTipoDePronostico(queAreaEs)
               
 
-              pronos = Pronostico(texto = areaAtexto(a), area =  queAreaEs, tipo = tipo)
+              pronos = Pronostico(texto = areaAtexto(a,b), area =  queAreaEs, tipo = tipo)
+
+              print(f"-----> estoy por guardar el pronos de: {queAreaEs}")
+              print(f"{pronos}")
               
               #LISTA DE AREAS DE POSIBLE TEMPORAL !!!¡¡????? PENSAR
               
+            
               if (areaParaTemporal(a)!=None):
+              
                 lista_areas_para_temporales.append(queAreaEs)
               
               
               #Guardo el pronostico pero aun no le asigne el boletín
               pronos.save()
+
+              print(f"-----> GUARDE el pronos de: {queAreaEs}")
               
               #Ahora le asigno el boletín y vuelvo a guardarlo para que se genere el vinculo, en un solo paso no se puede hacer porque
               #es una relación muchos a muchos. 
-              b = Boletin.objects.get(id = idBoletin)
+              
               
               pronos.boletin.add(b)
               
               pronos.save()
+
+              print(f"-----> EDITE y GUARDE el pronos de: {queAreaEs}")
               
     #Una vez que guarde todos los pronos en el boletín seteo 
     #Y guardo el horario del xml para saber cuando se actualizo pimet
@@ -989,7 +1046,7 @@ def definirTipoDePronostico(area):
   tipo = "Costa"
               
   if ("OFFSHORE" in area.description):
-                tipo = "Offshore"
+                tipo = "Offshore - N"
                 
   else:
                 if (area.domain == "Metarea VI"):
@@ -1006,22 +1063,40 @@ def definirTipoDePronostico(area):
                 if ("Gerlache" in area.description):
                   tipo= "Metarea VI - S"
                   
-                if ("ZonaMalvinas" in area.description):
-                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                if ("Zona Malvinas" in area.description):
+                  tipo= "Offshore - N" #Ojo en realidaden pimet es Metarea
+
+                if ("Zona Larsen" in area.description):
+                  tipo= "Offshore - S" 
+
+                if ("Mar de la Flota Oeste" in area.description):
+                  tipo= "Offshore - S" 
+
+                if ("Mar de la Flota Este" in area.description):
+                  tipo= "Offshore - S" 
+
+                if ("Drake Sur (W58W)" in area.description):
+                  tipo= "Offshore - S" 
+
+                if ("Bahia Margarita" in area.description):
+                  tipo= "Offshore - S" 
+
+                if ("Drake Sur (E58W)" in area.description):
+                  tipo= "Offshore - S" 
                   
           
                 #Esto es domain Costas, pero de esa forma no aparece en navegante. lo dejamos en offshore
                 if ("RIO DE LA PLATA INTERIOR" in area.description):
-                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  tipo= "Offshore - N" #Ojo en realidaden pimet es Metarea
                   
                 if ("RIO DE LA PLATA INTERMEDIO" in area.description):
-                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  tipo= "Offshore - N" #Ojo en realidaden pimet es Metarea
                   
                 if ("RIO DE LA PLATA EXTERIOR" in area.description):
-                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  tipo= "Offshore - N" #Ojo en realidaden pimet es Metarea
                   
                 if ("DESEMBOCADURA RIO DE LA PLATA" in area.description):
-                  tipo= "Offshore" #Ojo en realidaden pimet es Metarea
+                  tipo= "Offshore - N" #Ojo en realidaden pimet es Metarea
                   
               
                   
@@ -1201,3 +1276,7 @@ def traducirAreas(areaCastellano):
 
   return areaIngles
 
+
+def escribirTextoOlasSHN(area):
+
+  return "\nWAVES: OLAS SHN"

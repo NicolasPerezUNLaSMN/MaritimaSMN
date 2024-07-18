@@ -1,8 +1,4 @@
 Areas candidatas para temporales: 
---> COSTA BAHIA BLANCA
---> COSTA CARMEN PATAGONES
---> COSTA NECOCHEA
---> GOLFO SAN JORGE NORTE
---> GOLFO SAN MATIAS
---> Area Norte (N 40S E30W)
---> Area Norte (N 40S E40 W30)
+--> Area Centro Oeste (S 45 E 50)
+--> Area Sudoeste (N 55 E 50)
+--> Area Sudoeste (N 55 W 50)

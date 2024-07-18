@@ -5,7 +5,7 @@ from .models import *
 
 
 class AreaAdmin(admin.ModelAdmin):
-    list_display = ('id','idPimet', 'latitude', 'longitude','description','descriptionIngles','domain')
+    list_display = ('id','idPimet', 'latitude', 'longitude','description','descriptionIngles','domain', 'orden')
 
 class AvisoAdmin(admin.ModelAdmin):
     list_display = ('id','numero', 'actualizacion', 'tipo','direccion','activo','desde','hasta')

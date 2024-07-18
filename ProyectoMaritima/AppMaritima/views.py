@@ -161,8 +161,13 @@ class BoletinCreacion(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         try:
             with transaction.atomic():
-                boletin = Boletin(valido=form.cleaned_data.get("valido"), hora=int(form.cleaned_data.get("hora")))
+                pronosticosOlasSHN=form.cleaned_data.get("pronosticosOlasSHN")
+
+                print(f"OLAS: {pronosticosOlasSHN}")
+                boletin = Boletin(valido=form.cleaned_data.get("valido"), hora=int(form.cleaned_data.get("hora")),pronosticosOlasSHN=pronosticosOlasSHN)
                 boletin.save()
+
+    
 
                 listaAvisosActivos = Aviso.objects.filter(activo=True)
                 listaSituacionesActivas = Situacion.objects.filter(activo=True)
@@ -186,7 +191,7 @@ class BoletinCreacion(LoginRequiredMixin, FormView):
 
         except Exception as e:
             # Si ocurre una excepción, redirigir a una plantilla de error
-            messages.error(self.request, "El archivo XML tiene faltante de información. Por favor vuelva a PIMET, recuerde cargar METAREA-VI, COSTAS y RIO DE LA PLATA.")
+            messages.error(self.request, "El archivo XML tiene faltante de información. Por favor vuelva a PIMET, recuerde cargar METAREA-VI NORTE y SUR, COSTAS y RIO DE LA PLATA.")
             return render(self.request, "AppMaritima/boletin/error_xml.html")
 
         #return redirect(self.success_url)

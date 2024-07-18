@@ -13,6 +13,9 @@ class BoletinForm(forms.Form):
     hora = forms.ChoiceField(label="Hora validez", required=True,widget=forms.Select, choices=CHOICESHORAS)
 
 
+    pronosticosOlasSHN = forms.CharField(required=False,widget=forms.Textarea(attrs={"class":"form-control"}))
+
+
 
 
 

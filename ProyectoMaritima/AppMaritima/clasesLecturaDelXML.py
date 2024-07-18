@@ -34,7 +34,7 @@ class Parameter:
   
 
   def __str__(self):
-    return f"El parametro es: {self.id}" 
+    return f"El parametro es---: {self.id}" 
 
 
 class AreaXML:
