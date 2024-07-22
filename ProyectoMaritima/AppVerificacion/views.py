@@ -1,22 +1,32 @@
-#DJANGO MTV. Modelo ->Base de datos Template-> consultas que puede hacer el usuario View-> respuesta ante un link
+32#DJANGO MTV. Modelo ->Base de datos Template-> consultas que puede hacer el usuario View-> respuesta ante un link
 
 from django.http import HttpResponse
 import datetime
 from django.shortcuts import render
 import requests
 from openpyxl import Workbook
+import csv
 
 # ACA BAN LAS FUNCIONES VISTAS
 # COMO ARGUMENTO TIENEN UNA REQUEST Y COMO RESPUESTA UN HTTP RESPONSE POR COMO TRABAJA DJANGO
 #UNA URL VA A IR A ESTA VISTA QUE DEVUELVE UN TEXTO ->> IR A URLS.PY
 
+#FUNCION PARA PASAR LA FEXA UNIX A DATETIME
+def timestamp_to_date(timestamp):
+    timestamp_seconds = timestamp / 1000
+    date = datetime.datetime.fromtimestamp(timestamp_seconds)
+    return date.strftime('%Y-%m-%d %H:%M:%S')
 
 def selector_fechas(request):
     if request.method == 'POST':
         # Obtener las fechas del formulario
         fecha_inicio = request.POST.get('fecha_inicio')
         fecha_fin = request.POST.get('fecha_fin')
-
+        try:
+            datetime.datetime.strptime(fecha_inicio, '%Y-%m-%d')
+            datetime.datetime.strptime(fecha_fin, '%Y-%m-%d')
+        except ValueError:
+            return HttpResponse("Formato de fecha incorrecto", status=400)
         # Paso 1: Obtener Token
         url_token = "https://gis.prefecturanaval.gob.ar/portal/sharing/rest/generateToken"
         data = {
@@ -44,6 +54,7 @@ def selector_fechas(request):
         }
         response = requests.get(url_reporte, params=params)
         reporte_data = response.json()
+        print(f"API Response: {reporte_data}")  # Debugging
         barcos = []
         for reporte in reporte_data['features']:
             attributes = reporte['attributes']
@@ -63,7 +74,7 @@ def selector_fechas(request):
                 'presion': attributes.get('presion', 'N/A'),
             }
             barcos.append(barco)
-
+ 
         # Renderizar la plantilla HTML con los datos
         return render(request, 'AppVerificacion/reporte_barcos.html', {'barcos': barcos})
 
@@ -78,3 +89,4 @@ def reporte_barcos(request):
         # Otros datos que quieras pasar al template
     }
     return render(request, 'AppVerificacion/reporte_barcos.html', context)
+
