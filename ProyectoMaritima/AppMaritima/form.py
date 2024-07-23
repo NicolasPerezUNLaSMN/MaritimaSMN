@@ -16,6 +16,32 @@ class BoletinForm(forms.Form):
     pronosticosOlasSHN = forms.CharField(required=False,widget=forms.Textarea(attrs={"class":"form-control"}))
 
 
+class GroupedModelMultipleChoiceField(forms.ModelMultipleChoiceField):
+    def __init__(self, *args, **kwargs):
+        self.group_by_field = kwargs.pop('group_by_field', None)
+        super(GroupedModelMultipleChoiceField, self).__init__(*args, **kwargs)
+    
+    def label_from_instance(self, obj):
+        if self.group_by_field:
+            return f"{getattr(obj, self.group_by_field)} - {obj.description}"
+        return super(GroupedModelMultipleChoiceField, self).label_from_instance(obj)
+
+    def _get_choices(self):
+        choices = super(GroupedModelMultipleChoiceField, self)._get_choices()
+        if self.group_by_field:
+            grouped_choices = {}
+            for obj in self.queryset:
+                key = getattr(obj, self.group_by_field)
+                if key not in grouped_choices:
+                    grouped_choices[key] = []
+                grouped_choices[key].append((obj.pk, self.label_from_instance(obj)))
+            final_choices = []
+            for group, items in grouped_choices.items():
+                final_choices.append((group, items))
+            return final_choices
+        return choices
+
+    choices = property(_get_choices, forms.ModelMultipleChoiceField._set_choices)
 
 
 
@@ -54,9 +80,16 @@ class AvisoForm(forms.Form):
     
     
     
-    area = forms.ModelMultipleChoiceField(
-        queryset=Area.objects.filter(latitude__range=[-35, -58]).exclude(description__contains='COSTA' ).exclude(description__contains='GOLFO').exclude(domain__contains='Rio de la Plata' ).exclude(description__contains='DESEMBOCADURA').order_by("-domain", "description"), #Traigo todo menos al sur de 60, y no traigo las costas
-        widget=forms.CheckboxSelectMultiple
+    #area = forms.ModelMultipleChoiceField(
+     #   queryset=Area.objects.filter(latitude__range=[-35, -58]).exclude(description__contains='COSTA' ).exclude(description__contains='GOLFO').exclude(domain__contains='Rio de la Plata' ).exclude(description__contains='DESEMBOCADURA').order_by("-domain", "description"), #Traigo todo menos al sur de 60, y no traigo las costas
+     #   widget=forms.CheckboxSelectMultiple
+    #)
+
+    area = GroupedModelMultipleChoiceField(
+        queryset=Area.objects.exclude(description__icontains="COSTA").exclude(description__contains='GOLFO').order_by('orden'),
+        group_by_field='domain',
+        widget=forms.CheckboxSelectMultiple,
+        required=True
     )
     
     
@@ -209,7 +242,6 @@ class HieloFormUpdate(forms.Form):
     
             texto = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control"}))
           
-            
             
             
             

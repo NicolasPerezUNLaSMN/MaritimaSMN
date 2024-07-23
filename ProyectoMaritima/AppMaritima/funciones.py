@@ -441,14 +441,14 @@ def escribirTextoViento(direccion, velocidad):
 
         #Si la hora siguiente es mayor, me quedo con la siguiente
 
-        if((int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora1-1].list_values[0].text) )):
-          hora1Maxima = hora1 -1
+        if((int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora1+1].list_values[0].text) )):
+          hora1Maxima = hora1 +1
 
-        if((int(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora2-1].list_values[0].text) )):
-          hora2Maxima = hora2 -1
+        if((int(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora2+1].list_values[0].text) )):
+          hora2Maxima = hora2 +1
 
-        if((int(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora3-1].list_values[0].text) )):
-          hora3Maxima = hora3 -1
+        if((int(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora3+1].list_values[0].text) )):
+          hora3Maxima = hora3 +1
 
         #print(f"HORAS DEL PRONOS 2023: {hora1Maxima} {hora2Maxima} {hora3Maxima}")
 
@@ -507,7 +507,7 @@ def escribirTextoViento(direccion, velocidad):
                 #Si la del medio no es igual a ninguna de las dos, hago el cambio
                 if (not (dirMedia == dirInicial) and not (dirMedia == dirFinal) ):
 
-                      retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACKINGING  " + dirMedia +f" {velMediaConRafagas} "+f" AND BACKINGING " + dirFinal +f" {velFinalConRafagas}"
+                      retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACKING  " + dirMedia +f" {velMediaConRafagas} "+f" AND BACKING " + dirFinal +f" {velFinalConRafagas}"
 
 
                 else:  #Si la dirección del medio es igual a alguna de las dos
@@ -515,14 +515,14 @@ def escribirTextoViento(direccion, velocidad):
                       #Igual a la primera  o a la ultima, ignoro ese cambio
                       if ((dirMedia == dirInicial and velMedia == velInicial) or (dirMedia == dirFinal and velMedia == velFinal)):
 
-                            retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACKINGING  " + dirFinal +f" {velFinalConRafagas}"
+                            retorno = retorno + dirInicial +f" {velInicialConRafagas} " +f" BACKING  " + dirFinal +f" {velFinalConRafagas}"
 
                       #Misma direccion que la primera pero cambio de velocidad
                       if (dirMedia == dirInicial and not velMedia == velInicial):
 
                             maximo = max([velInicial, velMedia])
 
-                            retorno = retorno + dirInicial  +f" {velInicial}/{velMedia} " +agregarONoRafagas(maximo) +f" BACKINGING  " + dirFinal +f" {velFinalConRafagas}"
+                            retorno = retorno + dirInicial  +f" {velInicial}/{velMedia} " +agregarONoRafagas(maximo) +f" BACKING  " + dirFinal +f" {velFinalConRafagas}"
 
 
                       #Misma direccion que la ultima pero cambio de velocidad
@@ -530,7 +530,7 @@ def escribirTextoViento(direccion, velocidad):
 
                             maximo = max([velFinal, velMedia])
 
-                            retorno = retorno + dirInicial  +f" {velInicialConRafagas}" +f" BACKINGING  " + dirFinal +f" {velMedia}/{velFinal}" +agregarONoRafagas(maximo) 
+                            retorno = retorno + dirInicial  +f" {velInicialConRafagas}" +f" BACKING  " + dirFinal +f" {velMedia}/{velFinal}" +agregarONoRafagas(maximo) 
 
 
 
@@ -643,8 +643,8 @@ def codigoAFenomeno(codigo):
   if codigo == "76":
     retorno = "ISOLATED STORM"
 
-  if codigo == "51":
-    retorno = "SPRAY"
+  #if codigo == "51":
+    #retorno = "SPRAY"
 
   if codigo == "69":
     retorno = "FREEZING FOG"
@@ -696,8 +696,23 @@ def escribirPronostico(pronostico):
 
         #escribo los tres fenomenos que usaremos
         fenomeno1 = codigoAFenomeno(pronostico.list_timeranges[hora1].list_values[0].text)
+        fenomeno11 = codigoAFenomeno(pronostico.list_timeranges[hora1+1].list_values[0].text)
+
         fenomeno2 = codigoAFenomeno(pronostico.list_timeranges[hora2].list_values[0].text)
+        fenomeno22 = codigoAFenomeno(pronostico.list_timeranges[hora2+1].list_values[0].text)
+
         fenomeno3 = codigoAFenomeno(pronostico.list_timeranges[hora3].list_values[0].text)
+        fenomeno33 = codigoAFenomeno(pronostico.list_timeranges[hora3+1].list_values[0].text)
+
+        #Si los fenomenos y  su consecutivo son distintos los uno. Sino dejo el de la hora clave. 
+        if fenomeno1 != fenomeno11:
+           fenomeno1 = fenomeno1 +"/" +fenomeno11
+
+        if fenomeno2 != fenomeno22:
+           fenomeno2 = fenomeno2 +"/" +fenomeno22
+
+        if fenomeno3 != fenomeno33:
+           fenomeno3 = fenomeno3 +"/" +fenomeno33
 
 
 
@@ -840,17 +855,19 @@ def areaAtexto(area,bole):
 
   #print(f"--- Parametros olas: {parametroWad} - {parametroWah}")
 
-  if all(param is not None for param in [parametroWd, parametroWs, parametroWw, parametroVi]):
+  #if all(param is not None for param in [parametroWd, parametroWs, parametroWw, parametroVi]):
     #genero el viento del area, solo con los parametros 1 y 6
-    viento = escribirTextoViento(parametroWd, parametroWs)
+  viento = escribirTextoViento(parametroWd, parametroWs)
 
     #genero el pronostico, solo con el parametro ww
-    fenomeno = escribirPronostico(parametroWw)
+  fenomeno = escribirPronostico(parametroWw)
 
     #genero la visibilidad
-    visibilidad = escribirVisibilidad(parametroVi)
-  else:
-     print(f"Faltan datos meteorologicos en: {area}")
+  visibilidad = escribirVisibilidad(parametroVi)
+  #else:
+  #print(f"Faltan datos meteorologicos en: {area}")
+
+
 
   #Si el pronostico de SHN no está, uso PIMET
   if(bole.pronosticosOlasSHN == ""):

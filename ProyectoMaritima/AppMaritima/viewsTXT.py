@@ -56,8 +56,8 @@ def crearTXT(request, pk):
 def crearTXTnaveganteAltamar(boletin,avisos, situaciones,hielos,pronosticosMetarea):
     
     
-    #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST02 SABM {boletin.valido} {boletin.hora}00
+    #Encabezado "casi" fijo  #01 en español
+    textoEnIngles = f"""FQST02 SABM {boletin.valido} {boletin.hora}00 
 1:31:06:01:00 
 SECURITE 
 WEATHER BULLETIN ON METAREA VI
@@ -142,7 +142,7 @@ def crearTXTnaveganteAltamarS(boletin,avisos, situaciones,hielos,pronosticosMeta
     
     
     #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST02 SABM {boletin.valido} {boletin.hora}00
+    textoEnIngles = f"""FQA02 SAWB {boletin.valido} {boletin.hora}00
 1:31:06:01:00 
 SECURITE 
 WEATHER BULLETIN ON METAREA VI
@@ -226,8 +226,8 @@ PART 1 GALE WARNING\n"""
 def crearTXTnaveganteOffShore(boletin,avisos, situaciones,hielos,pronosticosOffshore):
     
     
-    #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST04 SABM {boletin.valido} {boletin.hora}00
+    #Encabezado "casi" fijo  04 español
+    textoEnIngles = f"""FQST05 SABM {boletin.valido} {boletin.hora}00
 1:31:06:01:00 
 SECURITE 
 WEATHER BULLETIN ON METAREA VI
@@ -302,12 +302,12 @@ PART 1 GALE WARNING\n"""
     
     return textoEnIngles
 
-#escfitura del boletin  OffShore
+#escfitura del boletin  OffShore - espñaol GQST04 SAWB
 def crearTXTnaveganteOffShoreS(boletin,avisos, situaciones,hielos,pronosticosOffshoreS):
     
     
     #Encabezado "casi" fijo
-    textoEnIngles = f"""FQST04 SABM {boletin.valido} {boletin.hora}00
+    textoEnIngles = f"""FQAA05 SAWB {boletin.valido} {boletin.hora}00
 1:31:06:01:00 
 SECURITE 
 WEATHER BULLETIN ON METAREA VI
