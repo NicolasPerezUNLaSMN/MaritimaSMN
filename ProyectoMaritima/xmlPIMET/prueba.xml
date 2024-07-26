@@ -2,13 +2,13 @@
 <data source="meteofactory" productioncenter="Servicio Meteorologico Nacional">
 <forecast domain='local'>
 <issue>
-<timestamp>20230703220427</timestamp>
-<year>2023</year>
+<timestamp>2024072612000000</timestamp>
+<year>2024</year>
 <month>07</month>
-<day>03</day>
-<hour>22</hour>
-<minute>04</minute>
-<second>27</second>
+<day>26</day>
+<hour>12</hour>
+<minute>00</minute>
+<second>00</second>
 </issue>
 <area id="3556" latitude="-39.6172388302877" longitude="-61.0447691960613" coordinate="-61.0447691960613 -39.6172388302877" geometry="area" type="sea" region="" level="1" description="COSTA BAHIA BLANCA"  domain="Costas"  tags="">
 <name xml:lang="es_AR">COSTA BAHIA BLANCA</name>
