@@ -11,7 +11,12 @@ sudo apt install python3.9
 
 2) Instalar PostgreSQL (recomendamos que usuario sea "postgres" y contraseña sea "root", o modificar el archivo ProyectoMaritima/settings.py)
 ```
-sudo apt install postgresql  
+sudo apt install postgresql 
+sudo -u postgres psql
+CREATE DATABASE maritima;
+ALTER USER postgres WITH PASSWORD 'root';
+barra invertida. q
+ 
 ```
 3) Crear una base de datos con nombre "maritima"
 
