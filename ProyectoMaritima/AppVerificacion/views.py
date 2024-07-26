@@ -57,7 +57,7 @@ def selector_fechas(request):
         reporte_data = response.json()
         
         print("API Response:", reporte_data)
-        print("AAAAAAAAAAAAAAAAAAAA Clause:", where_clause)
+        #print("AAAAAAAAAAAAAAAAAAAA Clause:", where_clause)
         barcos = []
         for reporte in reporte_data['features']:
             attributes = reporte['attributes']
