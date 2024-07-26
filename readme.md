@@ -54,6 +54,11 @@ python manage.py createsuperuser
 ```
 ruta/ProyectoMaritima/ 
 python manage.py runserver xx.xx.xxx.xxx:8080
+
+Carga las areas
+
+http://127.0.0.1:8000/AppMaritima/cargarAreas
+
 ```
 (SERVIDOR ACTUAL SMN 10.10.221.2:8080; sino se pone xx.xx.xxx.xxxx:8000 por defecto se asigna a 127.0.0.1:8000)
 
