@@ -24,15 +24,24 @@
     <script>
         // Mapa de conversión de direcciones de viento a grados
         const windDirectionMap = {
-            'N': 0,
-            'NE': 45,
-            'E': 90,
-            'SE': 135,
-            'S': 180,
-            'SO': 225,
-            'O': 270,
-            'NO': 315
-        };
+        'N': 0,
+        'NNE': 22.5,
+        'NE': 45,
+        'ENE': 67.5,
+        'E': 90,
+        'ESE': 112.5,
+        'SE': 135,
+        'SSE': 157.5,
+        'S': 180,
+        'SSO': 202.5,
+        'SO': 225,
+        'OSO': 247.5,
+        'O': 270,
+        'ONO': 292.5,
+        'NO': 315,
+        'NNO': 337.5
+            };
+
 
         // Función para convertir la dirección del viento a grados
         function convertWindDirectionToDegrees(direction) {
@@ -40,7 +49,12 @@
         }
 
         const barcos = {{ barcos|safe }};
-
+        //barcos.forEach(barco => {
+        //barco.latitud = barco.latitud !== None ? barco.latitud : null;
+        //barco.longitud = barco.longitud !== None ? barco.longitud : null;
+        //barco.direccion_viento = barco.direccion_viento !== None ? barco.direccion_viento : null;
+        //barco.velocidad_viento = barco.velocidad_viento !== None ? barco.velocidad_viento : null;
+        // });
         console.log(barcos);
 
         const map = L.map('map').setView([-50.0, -60.0], 5); // Coordenadas y zoom inicial

@@ -1,7 +1,5 @@
 Areas candidatas para temporales: 
---> COSTA GALLEGOS
---> COSTA SAN JULIAN
---> COSTA SANTA CRUZ
---> OFFSHORE FIN DEL MUNDO
+--> OFFSHORE SAN JORGE
+--> Area Sudeste (N 55 W 30)
+--> Area Sudeste (S 55 W 30)
 --> Area Sudoeste (N 55 W 50)
---> Drake Area

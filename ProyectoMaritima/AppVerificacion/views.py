@@ -1,4 +1,4 @@
-32#DJANGO MTV. Modelo ->Base de datos Template-> consultas que puede hacer el usuario View-> respuesta ante un link
+#DJANGO MTV. Modelo ->Base de datos Template-> consultas que puede hacer el usuario View-> respuesta ante un link
 
 from django.http import HttpResponse
 import datetime
@@ -23,8 +23,8 @@ def selector_fechas(request):
         fecha_inicio = request.POST.get('fecha_inicio')
         fecha_fin = request.POST.get('fecha_fin')
         try:
-            datetime.datetime.strptime(fecha_inicio, '%Y-%m-%d')
-            datetime.datetime.strptime(fecha_fin, '%Y-%m-%d')
+            datetime.datetime.strptime(fecha_inicio, '%Y-%m-%d').date()
+            datetime.datetime.strptime(fecha_fin, '%Y-%m-%d').date()
         except ValueError:
             return HttpResponse("Formato de fecha incorrecto", status=400)
         # Paso 1: Obtener Token
@@ -37,11 +37,12 @@ def selector_fechas(request):
             "expiration": 60,
             "f": "json"
         }
+        
         response = requests.post(url_token, data=data)
         token_data = response.json()
         token = token_data["token"]
 
-        where_clause = f"fecha >= '{fecha_inicio}' AND fecha < '{fecha_fin}'"
+        where_clause = f"fecha >= '{fecha_inicio} 00:00:00' AND fecha < '{(datetime.datetime.strptime(fecha_inicio, '%Y-%m-%d') + datetime.timedelta(days=1)).strftime('%Y-%m-%d')} 00:00:00'"
         #where_clause = f'1=1'
         # Paso 2: Ejecutar Reporte SELECCIONAR LA FECHA
 
@@ -54,24 +55,26 @@ def selector_fechas(request):
         }
         response = requests.get(url_reporte, params=params)
         reporte_data = response.json()
-        print(f"API Response: {reporte_data}")  # Debugging
+        
+        print("API Response:", reporte_data)
+        print("AAAAAAAAAAAAAAAAAAAA Clause:", where_clause)
         barcos = []
         for reporte in reporte_data['features']:
             attributes = reporte['attributes']
             barco = {
-                'fecha_reporte': attributes.get('fecha', 'N/A'),
-                'nombre_buque': attributes.get('nombre', 'N/A'),
-                'matricula': attributes.get('matricula', 'N/A'),
-                'imo': attributes.get('imo', 'N/A'),
-                'latitud': reporte['geometry'].get('y', 'N/A'),
-                'longitud': reporte['geometry'].get('x', 'N/A'),
-                'marbeaufort': attributes.get('marbeaufort', 'N/A'),
-                'vientobeaufort': attributes.get('vientobeaufort', 'N/A'),
-                'direccion_viento': attributes.get('direccion', 'N/A'),
-                'marmedido': attributes.get('marmedido', 'N/A'),
-                'vientomedido': attributes.get('vientomedido', 'N/A'),
-                'direccionmedido': attributes.get('direccionmedido', 'N/A'),
-                'presion': attributes.get('presion', 'N/A'),
+                'fecha_reporte': attributes.get('fecha') or 'null',
+                'nombre_buque': attributes.get('nombre') or 'null',
+                'matricula': attributes.get('matricula') or 'null',
+                'imo': attributes.get('imo') or 'null',
+                'latitud': reporte['geometry'].get('y') or 'null',
+                'longitud': reporte['geometry'].get('x') or 'null',
+                'marbeaufort': attributes.get('marbeaufort') or 'null',
+                'vientobeaufort': attributes.get('vientobeaufort') or 'null',
+                'direccion_viento': attributes.get('direccion') or 'null',
+                'marmedido': attributes.get('marmedido') or 'null',
+                'vientomedido': attributes.get('vientomedido') or 'null',
+                'direccionmedido': attributes.get('direccionmedido') or 'null',
+                'presion': attributes.get('presion') or 'null',
             }
             barcos.append(barco)
  

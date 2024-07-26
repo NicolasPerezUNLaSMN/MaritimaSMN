@@ -19,6 +19,6 @@ from AppVerificacion.views import selector_fechas,reporte_barcos
 
 #ACA VAN LAS URLS, Cuando se llama a una funcion que estsa en otro archivo hay que importarla
 urlpatterns = [
-    path('', selector_fechas, name='selector_fechas'),
-    path('reporte/',reporte_barcos, name='reporte_barcos'),
+    path('selector_fechas/', selector_fechas, name='selector_fechas'),
+    path('reporte_barcos/',reporte_barcos, name='reporte_barcos'),
 ]
