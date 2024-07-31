@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <h1>Reporte de Barcos</h1>
+    <h1>Reporte de Barcos </h1>
 
     <div id="map"></div>
 
@@ -108,8 +108,8 @@
 
                 L.marker([barco.latitud, barco.longitud], { icon: windBarbIcon }).addTo(map);
 
-                //L.marker([barco.latitud, barco.longitud]).bindPopup(`
-                  //  <b>${barco.nombre_buque}</b><br>
+                L.marker([barco.latitud, barco.longitud]).bindPopup(`
+                    //<b>${barco.nombre_buque}</b><br>
                     //Matrícula: ${barco.matricula}<br>
                     //IMO: ${barco.imo}<br>
                     //Fecha del Reporte: ${fechaReporte.toLocaleString()}<br>
