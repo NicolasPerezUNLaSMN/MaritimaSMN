@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de Barcos</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{% static 'js/leaflet-windbarb.js' %}"></script>
     <style>
         #map {
             height: 100vh;
-            margin: 0; /* Elimina los márgenes que podrían causar espacio adicional */
-            padding: 0; /* Elimina el padding */
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -18,48 +20,73 @@
     <h1>Reporte de Barcos</h1>
 
     <div id="map"></div>
-    {% load static %}
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="{% static 'AppVerificacion/leaflet-windbarb.js' %}"></script>
 
     <script>
-        // Mapa de conversión de direcciones de viento a grados
         const windDirectionMap = {
-        'N': 0,
-        'NNE': 22.5,
-        'NE': 45,
-        'ENE': 67.5,
-        'E': 90,
-        'ESE': 112.5,
-        'SE': 135,
-        'SSE': 157.5,
-        'S': 180,
-        'SSO': 202.5,
-        'SO': 225,
-        'OSO': 247.5,
-        'O': 270,
-        'ONO': 292.5,
-        'NO': 315,
-        'NNO': 337.5
-            };
+            'N': 0, 'NNE': 22.5, 'NE': 45, 'ENE': 67.5, 'E': 90,
+            'ESE': 112.5, 'SE': 135, 'SSE': 157.5, 'S': 180, 'SSO': 202.5,
+            'SO': 225, 'OSO': 247.5, 'O': 270, 'ONO': 292.5, 'NO': 315, 'NNO': 337.5
+        };
 
-
-        // Función para convertir la dirección del viento a grados
         function convertWindDirectionToDegrees(direction) {
-            return windDirectionMap[direction] || 0; // Devuelve 0° si la dirección no está en el mapa
+            return windDirectionMap[direction] || 0;
         }
 
         const barcos = {{ barcos|safe }};
 
-        console.log(barcos);
+        const map = L.map('map').setView([-50.0, -60.0], 5);
 
-        const map = L.map('map').setView([-50.0, -60.0], 5); // Coordenadas y zoom inicial
+        let ignLayerLoaded = false;
+        let osmLayerLoaded = false;
 
-        L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png', {
+        const ignLayer = L.tileLayer('https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png', {
             attribution: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> | <a href="http://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2" target="_blank">Instituto Geográfico Nacional</a> + <a href="http://www.osm.org/copyright" target="_blank">OpenStreetMap</a>',
             minZoom: 3,
             maxZoom: 18
-        }).addTo(map);
+        });
+
+        const osmLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors',
+            minZoom: 3,
+            maxZoom: 18
+        });
+
+        ignLayer.on('load', () => {
+            if (!osmLayerLoaded) {
+                ignLayerLoaded = true;
+                map.addLayer(ignLayer);
+                map.removeLayer(osmLayer);
+            }
+        });
+
+        osmLayer.on('load', () => {
+            if (!ignLayerLoaded) {
+                osmLayerLoaded = true;
+                map.addLayer(osmLayer);
+                map.removeLayer(ignLayer);
+            }
+        });
+
+        ignLayer.on('tileerror', () => {
+            if (!osmLayerLoaded) {
+                map.addLayer(osmLayer);
+                map.removeLayer(ignLayer);
+            }
+        });
+
+        osmLayer.on('tileerror', () => {
+            if (!ignLayerLoaded) {
+                map.addLayer(ignLayer);
+                map.removeLayer(osmLayer);
+            }
+        });
+
+        // Agregar ambas capas inicialmente, la que cargue primero será la visible
+        map.addLayer(ignLayer);
+        map.addLayer(osmLayer);
 
         barcos.forEach(barco => {
             barco.nombre_buque = barco.nombre_buque.trim();
@@ -72,29 +99,29 @@
 
                 const windBarbIcon = L.WindBarb.icon({
                     lat: barco.latitud,
-                    deg: windDirectionDegrees, // Dirección del viento en grados
-                    speed: barco.velocidad_viento ? barco.velocidad_viento : 0, // Velocidad del viento
+                    deg: windDirectionDegrees,
+                    speed: barco.velocidad_viento ? barco.velocidad_viento : 0,
                     pointRadius: 5,
-                    strokeLength: 20
+                    strokeLength: 20,
+                    forceDir: true
                 });
 
                 L.marker([barco.latitud, barco.longitud], { icon: windBarbIcon }).addTo(map);
 
-                L.marker([barco.latitud, barco.longitud]).bindPopup(`
-                    <b>${barco.nombre_buque}</b><br>
-                    Matrícula: ${barco.matricula}<br>
-                    IMO: ${barco.imo}<br>
-                    Fecha del Reporte: ${fechaReporte.toLocaleString()}<br>
-                    Latitud: ${barco.latitud}<br>
-                    Longitud: ${barco.longitud}<br>
-                    Dirección del Viento: ${barco.direccion_viento}<br>
-                    Intensidad del Viento Beaufort : ${barco.vientobeaufort}
-                `).addTo(map);
+                //L.marker([barco.latitud, barco.longitud]).bindPopup(`
+                  //  <b>${barco.nombre_buque}</b><br>
+                    //Matrícula: ${barco.matricula}<br>
+                    //IMO: ${barco.imo}<br>
+                    //Fecha del Reporte: ${fechaReporte.toLocaleString()}<br>
+                    //Latitud: ${barco.latitud}<br>
+                    //Longitud: ${barco.longitud}<br>
+                    //Dirección del Viento: ${barco.direccion_viento}<br>
+                    //Intensidad del Viento Beaufort : ${barco.vientobeaufort}
+                //`).addTo(map);
             } else {
                 console.warn("Datos de barco incompletos:", barco);
             }
         });
     </script>
-    
 </body>
 </html>

@@ -23,7 +23,7 @@
             strokeLength: 15,
             barbSpaceing: 5,
             barbHeight: 15,
-            forceDir: false
+            forceDir: true
         },
 
         initialize: function (options) {
