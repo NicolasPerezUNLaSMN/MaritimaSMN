@@ -184,12 +184,13 @@ class SituacionForm(forms.Form):
     
     navtex = forms.ChoiceField(label="Incluir en navtex", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESNAVTEX)
     esPresente = forms.ChoiceField(label="¿Es presente?:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESFUTURO)
-    
+
+
 class SituacionFormUpdate(forms.Form):
-    
-    CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
 
     CHOICESFUTURO =(('Es presente','Es presente'),("Es a futuro","Es a futuro"))
+
+    CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
       
     CHOICESTIPO = (('HIGH PRESSURE','ANTICICLON'),('LOW PRESSURE','DEPRESION'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
                    ('COLD FRONT','FRENTE FRIO'),('STATIONARY FRONT','FRENTE ESTACIONARIO'),('WARM FRONT','FRENTE CALIENTE'),('OCCLUSION','FRENTE OCLUIDO'),
@@ -223,12 +224,7 @@ class SituacionFormUpdate(forms.Form):
     horaFinal = forms.ChoiceField(label="Hora final", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
     
     navtex = forms.ChoiceField(label="Incluir en navtex", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESNAVTEX)
-
-
     esPresente = forms.ChoiceField(label="¿Es presente?:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESFUTURO)
-    
-    
-    
 
 class HieloForm(forms.Form):
     

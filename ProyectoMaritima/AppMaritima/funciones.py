@@ -831,8 +831,8 @@ def areaParaTemporal(area): #Retorna el area solo si tiene pronostico de tempora
     
 def areaAtexto(area,bole):
 
-  print(f"BOLETIN: {bole.pronosticosOlasSHN}")
-  print(f"Texto a area: {area}")
+  #print(f"BOLETIN: {bole.pronosticosOlasSHN}")
+  #print(f"Texto a area: {area}")
   texto = f"\n{traducirAreas(area.description)}: ".upper()
 
   
@@ -882,7 +882,7 @@ def areaAtexto(area,bole):
 
   #SI hay pronostico de olas... uso SHN
   else:
-    ola = escribirTextoOlasSHN(area)
+    ola = escribirTextoOlasSHN(area, bole)
 
   texto = texto + viento  +fenomeno  +visibilidad  +ola+"."
 
@@ -896,7 +896,7 @@ def areaAtexto(area,bole):
   texto = texto.replace(" .", ".")
   texto = texto.replace(". ", ".")
   
-  print(texto)
+  #print(texto)
 
   return texto
 
@@ -980,7 +980,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
                   #instancio el parametro
                   p = Parameter(parameter.attrib['id'])
 
-                  print(f"ESTOY EN PARAMETER: {p}")
+                  #print(f"ESTOY EN PARAMETER: {p}")
 
                   ###################TIME RANGE#########################
                   #accedo a las horas de mi parametro
@@ -1022,8 +1022,8 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
 
               pronos = Pronostico(texto = areaAtexto(a,b), area =  queAreaEs, tipo = tipo)
 
-              print(f"-----> estoy por guardar el pronos de: {queAreaEs}")
-              print(f"{pronos}")
+              #print(f"-----> estoy por guardar el pronos de: {queAreaEs}")
+              #print(f"{pronos}")
               
               #LISTA DE AREAS DE POSIBLE TEMPORAL !!!¡¡????? PENSAR
               
@@ -1036,7 +1036,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
               #Guardo el pronostico pero aun no le asigne el boletín
               pronos.save()
 
-              print(f"-----> GUARDE el pronos de: {queAreaEs}")
+              #print(f"-----> GUARDE el pronos de: {queAreaEs}")
               
               #Ahora le asigno el boletín y vuelvo a guardarlo para que se genere el vinculo, en un solo paso no se puede hacer porque
               #es una relación muchos a muchos. 
@@ -1046,7 +1046,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
               
               pronos.save()
 
-              print(f"-----> EDITE y GUARDE el pronos de: {queAreaEs}")
+              #print(f"-----> EDITE y GUARDE el pronos de: {queAreaEs}")
               
     #Una vez que guarde todos los pronos en el boletín seteo 
     #Y guardo el horario del xml para saber cuando se actualizo pimet
@@ -1294,6 +1294,27 @@ def traducirAreas(areaCastellano):
   return areaIngles
 
 
-def escribirTextoOlasSHN(area):
+def escribirTextoOlasSHN(area, bole):
 
-  return "\nWAVES: OLAS SHN"
+  #print(f"Voy a hacer el pronostico de olas de {area.description}")
+  #print(f"El id de boletín en cuestion es: {bole.id}")
+
+  #Uso get porque es uno solo
+  boletin = Boletin.objects.get(id = bole.id)
+
+  print(f"--------> BOLETIN: {boletin.pronosticosOlasSHN}")
+
+  texto = get_second_attribute(boletin.pronosticosOlasSHN, area.description)
+  print(f"--------> TEXTO: {texto}")
+  return f"\nWAVES: {texto}"
+
+
+def get_second_attribute(datos, first_attribute):
+        print(f"BUSCO en la linea: {first_attribute}")
+        lines = datos.split('\n')
+        for line in lines:
+            if ';' in line:
+                attrs = line.split(';')
+                if attrs[0].strip().upper() in first_attribute.upper():
+                    return attrs[1].strip()
+        return "Waves Forecast not found"

@@ -32,7 +32,7 @@ class Boletin(models.Model):
     
     pronosticosGuardados = models.CharField(max_length=60 ,default='0000000')
 
-    pronosticosOlasSHN = models.CharField(max_length=600000 ,default='0000000')
+    pronosticosOlasSHN = models.TextField(default='0000000')
     
     def __str__(self):
         return f"Boletín para -------> {self.valido}:{self.hora}  --> Generado/id: {self.emitido}{self.id}"
@@ -84,7 +84,11 @@ class Situacion(models.Model):
             if ( self.valorInicial != -1):
                 valorInicial = self.valorInicial
             
-            texto = f"{self.sistema} {valorInicial} MOVING {self.movimiento} {self.evolucion}"
+
+            if ( self.movimiento != "NOT MOV"):
+                texto = f"{self.sistema} {valorInicial} MOVING {self.movimiento} {self.evolucion}"
+            else:
+                texto = f"NOT MOV {self.evolucion}"
             
             
             #Si tiene posición inicial

@@ -173,22 +173,29 @@
                     
                     
                    <li>
-                        <a class="has-arrow" href="{% url 'UltimoBoletin' %}" aria-expanded="false">
-                            <i class="icon-key menu-icon"></i><span class="nav-text">Ir a último Boletín</span>
+                        <a class="" href="{% url 'UltimoBoletin' %}" aria-expanded="false">
+                            <i class="icon-key"></i><span class="nav-text">Ir a último Boletín</span>
                         </a>
                     </li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text">Boletin</span>
+                        <a class="" href="{% url 'NewBoletin' %}" aria-expanded="false">
+                            <i class="icon-note"></i><span class="nav-text">+Nuevo Boletín</span>
                         </a>
+
+                        <!--
                         <ul aria-expanded="false">
                             <li><a href="{% url 'NewBoletin' %}">+Nuevo boletín</a></li>
                             <li><a href="{% url 'ListBoletin' %}">Boletines(ultimos)</a></li>
                             <li><a href="{% url 'ListBoletinTodos' %}">Boletines(todos)</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
+                           
                         </ul>
+                    -->
+
+
                     </li>
                     
+
+                    <!--
 
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -201,6 +208,8 @@
                                
                         </ul>
                     </li>
+
+
                    
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -223,18 +232,21 @@
                         </ul>
                     </li>
 
+                    -->
+                    <br><br><br>
+                    <li class="nav-label">Archivos</li>
                      <li>
                         <a href="{% url 'Descargar' %}" aria-expanded="false">
-                            <i class="menu-icon"></i><span class="nav-text">Descargar boletines .txt</span>
+                            <i class="icon-graph  menu-icon"></i><span class="nav-text">Descargar boletines .txt</span>
                         </a>
                     </li>
                     <li>
                         <a  href="{% url 'Verificar' %}" aria-expanded="false">
-                            <i class=" menu-icon"></i><span class="nav-text">Veriricar datos Pimet</span>
+                            <i class="icon-grid  menu-icon"></i><span class="nav-text">Veriricar datos Pimet</span>
                         </a>
                     </li>
 
-
+                    <br><br><br>
                     <li class="nav-label">Externos</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">

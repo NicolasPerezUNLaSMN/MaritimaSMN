@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db import transaction
+from datetime import datetime
 
 
 from AppMaritima.funciones import cargarAreasDesdeElXML, cargarPronosticosDesdeElXML, enviarMail
@@ -320,7 +321,7 @@ class AvisoCreacion(FormView):
     
                 template_name="AppMaritima/aviso/aviso_form.html"
                 form_class = AvisoForm
-                success_url = "boletin/list" 
+                success_url = "boletin/ultimo"
                 
                 def get_context_data(self, **kwargs):
                     # Call the base implementation first to get a context
@@ -399,7 +400,7 @@ class AvisoUpdate(FormView):
     
                 template_name="AppMaritima/aviso/aviso_form_update.html"
                 form_class = AvisoFormUpdate
-                success_url = "boletin/list" 
+                success_url = "boletin/ultimo"
                 
                 def get_context_data(self, **kwargs):
                     # Call the base implementation first to get a context
@@ -505,7 +506,7 @@ def  cesarAviso(request,pk):
                    
                     
                     
-                    return redirect(f"../aviso/list")    
+                    return redirect("boletin/ultimo")    
     
     
     
@@ -523,7 +524,7 @@ class AvisoDelete(DeleteView):
     
     model = Aviso
     template_name = "AppMaritima/aviso/aviso_confirm_delete.html"
-    success_url = "../aviso/list"
+    success_url = "boletin/ultimo"
     
     
    
@@ -560,7 +561,7 @@ def  cesarSituacion(request,pk):
                     
             
                     
-                    return redirect(f"../situacion/list")  
+                    return redirect(f"../boletin/ultimo")  
                 
                 
 class SituacionList(ListView):
@@ -592,7 +593,7 @@ class SituacionCreacion(FormView):
     
                 template_name="AppMaritima/situacion/situacion_form.html"
                 form_class = SituacionForm
-                success_url = "situacion/list" 
+                success_url = "boletin/ultimo"
                 
                
                 
@@ -652,30 +653,27 @@ class SituacionCreacion(FormView):
                     
                     situacion.save()
                     
-                    return redirect("situacion/list")
+                    return redirect("boletin/ultimo")
                 
 
-
 class SituacionUpdate(FormView):
-    
-                template_name="AppMaritima/situacion/situacion_form_update.html"
-                form_class = SituacionFormUpdate
-                success_url = "situacion/list" 
+
+                template_name="AppMaritima/situacion/situacion_form.html"
+                form_class = SituacionForm
+                success_url = "../boletin/ultimo"
                 
                
                 
                 
                 def form_valid(self, form):
                     
-                    
-                    #id de la situación a actualizar
+
+                     #id de la situación a actualizar
                     pk = int(self.kwargs['pk'])
-                    
                     situacionVieja =Situacion.objects.get(id=pk)
-                     
-                    print(f"ID DE LA SITUACIÖN QUE VOY A ACTUALIZAR {pk}")
-                    print(form.cleaned_data)
                     
+                     
+                    print(form.cleaned_data)
                     #Si se cargo la hora la paso a entera, sino, NULL
                     valorI = -1
                     horaI = -1
@@ -719,9 +717,7 @@ class SituacionUpdate(FormView):
                   
                   
                     situacion.save()
-                    
-                    #Pongo inactivo el aviso desactualizado
-                    print(situacionVieja)
+
                     situacionVieja.activo = False
                     situacionVieja.save()
                     
@@ -731,20 +727,13 @@ class SituacionUpdate(FormView):
                     
                     situacion.save()
                     
-                    return redirect("../situacion/list")
-                    
-                    
-                
-             
-            
-          
-
+                    return redirect("../boletin/ultimo")
 
 class SituacionDelete(DeleteView):
     
     model = Situacion
     template_name = "AppMaritima/situacion/situacion_confirm_delete.html"
-    success_url = "../situacion/list"
+    success_url =reverse_lazy("UltimoBoletin")
     
     
    
@@ -802,7 +791,7 @@ class HieloCreacion(FormView):
     
                 template_name="AppMaritima/hielo/hielo_form.html"
                 form_class = HieloForm
-                success_url = "boletin/list" 
+                success_url = "boletin/ultimo"
                 
                 
                 
@@ -829,14 +818,14 @@ class HieloCreacion(FormView):
                     
                     idBoletin = (Boletin.objects.all().order_by("-id")[0])
                     
-                    return redirect(f"boletin/{idBoletin.id}")
+                    return redirect("boletin/ultimo")
                     
                 
 class HieloUpdate(FormView):
     
                 template_name="AppMaritima/hielo/hielo_form_update.html"
                 form_class = HieloFormUpdate
-                success_url = "boletin/list" 
+                success_url = "boletin/ultimo"
                 
                 
                 
@@ -874,7 +863,7 @@ class HieloUpdate(FormView):
                     
                     idBoletin = (Boletin.objects.all().order_by("-id")[0])
                     
-                    return redirect(f"../boletin/{idBoletin.id}")       
+                    return redirect("../boletin/ultimo")       
             
           
 def  cesarHielo(request,pk):
@@ -890,7 +879,7 @@ def  cesarHielo(request,pk):
                    
                     
                     
-                    return redirect(f"../hielo/list")    
+                    return redirect("boletin/ultimo")    
     
     
     
