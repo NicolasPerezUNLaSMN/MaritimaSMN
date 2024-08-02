@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppVerificacion.views import selector_fechas,reporte_barcos
+from AppVerificacion.views import *
 
 #ACA VAN LAS URLS, Cuando se llama a una funcion que estsa en otro archivo hay que importarla
 urlpatterns = [
     path('', selector_fechas, name='selector_fechas'),
     path('reporte_barcos/',reporte_barcos, name='reporte_barcos'),
+    path('reporte_barcos_hoy/',fecha_hoy, name='reporte_barcos_hoy'),
 ]

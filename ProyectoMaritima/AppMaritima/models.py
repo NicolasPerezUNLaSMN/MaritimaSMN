@@ -241,3 +241,13 @@ class Pronostico (models.Model):
     
     
     
+class Credential(models.Model):
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    client = models.CharField(max_length=100)
+    referer = models.CharField(max_length=100)
+    expiration = models.IntegerField()
+    f = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.username

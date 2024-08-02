@@ -14,10 +14,14 @@
             margin: 0;
             padding: 0;
         }
+
+        .transparent-icon {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Reporte de Barcos </h1>
+    <h1>Reporte de Barcos</h1>
 
     <div id="map"></div>
 
@@ -97,27 +101,46 @@
             if (barco.latitud && barco.longitud) {
                 const windDirectionDegrees = convertWindDirectionToDegrees(barco.direccion_viento);
 
-                const windBarbIcon = L.WindBarb.icon({
+                let strokeColor;
+                if (barco.vientoKt > 33) {
+                    strokeColor = 'red';
+                } else if (barco.vientoKt > 25) {
+                    strokeColor = 'yellow';
+                } else {
+                    strokeColor = '#2B85C7';
+                }
+
+                const windBarbIconOptions = {
                     lat: barco.latitud,
                     deg: windDirectionDegrees,
-                    speed: barco.velocidad_viento ? barco.velocidad_viento : 0,
+                    speed: barco.vientoKt ? barco.vientoKt : 0,
                     pointRadius: 5,
                     strokeLength: 20,
-                    forceDir: true
-                });
+                    forceDir: true,
+                    fillColor: strokeColor // Cambiar color según la velocidad del viento
+                };
+
+                const windBarbIcon = L.WindBarb.icon(windBarbIconOptions);
 
                 L.marker([barco.latitud, barco.longitud], { icon: windBarbIcon }).addTo(map);
 
-                L.marker([barco.latitud, barco.longitud]).bindPopup(`
-                    //<b>${barco.nombre_buque}</b><br>
-                    //Matrícula: ${barco.matricula}<br>
-                    //IMO: ${barco.imo}<br>
-                    //Fecha del Reporte: ${fechaReporte.toLocaleString()}<br>
-                    //Latitud: ${barco.latitud}<br>
-                    //Longitud: ${barco.longitud}<br>
-                    //Dirección del Viento: ${barco.direccion_viento}<br>
-                    //Intensidad del Viento Beaufort : ${barco.vientobeaufort}
-                //`).addTo(map);
+                // Icono transparente para el popup
+                const transparentIcon = L.divIcon({
+                    className: 'transparent-icon',
+                    iconSize: [20, 20]
+                });
+
+                L.marker([barco.latitud, barco.longitud], { icon: transparentIcon }).bindPopup(`
+                    <b>${barco.nombre_buque}</b><br>
+                    Matrícula: ${barco.matricula}<br>
+                    IMO: ${barco.imo}<br>
+                    Fecha del Reporte: ${fechaReporte.toLocaleString()}<br>
+                    Latitud: ${barco.latitud}<br>
+                    Longitud: ${barco.longitud}<br>
+                    Dirección del Viento: ${barco.direccion_viento}<br>
+                    Intensidad del Viento Beaufort: ${barco.vientobeaufort}<br>
+                    Intensidad del Viento Kt: ${barco.vientoKt}
+                `).addTo(map);
             } else {
                 console.warn("Datos de barco incompletos:", barco);
             }
