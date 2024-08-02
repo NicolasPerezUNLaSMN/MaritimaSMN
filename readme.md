@@ -1,8 +1,12 @@
 # Proyecto Maritima SMN
 Aplicativo web desarrollado con Python 3.9 y Django 4.0.4, para la generación automáctica de boletines de navegación maritima en la METAREA VI
 
+<<<<<<< HEAD
 
 # Instalación  (Primer despliegue) 
+=======
+# Instalación  (Primer despliegue)
+>>>>>>> origin/Santi
 **Seguir los pasos para desplegar por primera vez el proyecto**
 
 1) Instalar Python3
@@ -12,11 +16,17 @@ sudo apt install python3.9
 
 2) Instalar PostgreSQL (recomendamos que usuario sea "postgres" y contraseña sea "root", o modificar el archivo ProyectoMaritima/settings.py)
 ```
-sudo apt install postgresql  
+sudo apt install postgresql 
+sudo -u postgres psql
+CREATE DATABASE maritima;
+ALTER USER postgres WITH PASSWORD 'root';
+barra invertida. q
+ 
 ```
 3) Crear una base de datos con nombre "maritima"
+
 ```
-create database maritima
+create database maritima.
 ```
 
 4) Clonar el repositorio en la "ruta" deseada
@@ -54,8 +64,31 @@ python manage.py createsuperuser
 ```
 ruta/ProyectoMaritima/ 
 python manage.py runserver xx.xx.xxx.xxx:8080
+
+Carga las areas
+
+http://127.0.0.1:8000/AppMaritima/cargarAreas
+
 ```
 (SERVIDOR ACTUAL SMN 10.10.221.2:8080; sino se pone xx.xx.xxx.xxxx:8000 por defecto se asigna a 127.0.0.1:8000)
+
+1) Comandos git
+Añadir repositorio nuevo
+```
+git remote add origin <url-del-repositorio-remoto>
+```
+Ver ramas remotas / locales / cambiar de rama
+```
+git fetch
+git branch
+git checkout <rama nueva>
+```
+Pushear al remoto
+```
+git push -u origin <rama>
+
+```
+
 
 
   #######################################################
