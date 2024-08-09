@@ -22,4 +22,5 @@ urlpatterns = [
     path('', selector_fechas, name='selector_fechas'),
     path('reporte_barcos/',reporte_barcos, name='reporte_barcos'),
     path('reporte_barcos_hoy/',fecha_hoy, name='reporte_barcos_hoy'),
+    path('reporte_barcos_hoy/<int:numero>/', fecha_hoy, name='reporte_barcos_hoy_numero'),
 ]

@@ -7,6 +7,7 @@
     <title>Reporte de Barcos</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
     <script src="{% static 'js/leaflet-windbarb.js' %}"></script>
     <style>
         #map {
@@ -91,6 +92,19 @@
         // Agregar ambas capas inicialmente, la que cargue primero será la visible
         map.addLayer(ignLayer);
         map.addLayer(osmLayer);
+
+        // Cargar y agregar el archivo KML usando Leaflet Omnivore
+        const kmlUrl = '{% static "kml/mapa_metarea.kml" %}';
+        console.log('Cargando KML desde:', kmlUrl);
+
+        omnivore.kml(kmlUrl)
+            .on('ready', function() {
+                console.log('KML cargado correctamente');
+            })
+            .on('error', function(error) {
+                console.error('Error cargando KML:', error);
+            })
+            .addTo(map);
 
         barcos.forEach(barco => {
             barco.nombre_buque = barco.nombre_buque.trim();

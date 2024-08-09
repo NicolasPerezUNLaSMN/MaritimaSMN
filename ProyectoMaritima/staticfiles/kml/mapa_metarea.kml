@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="metarea_modificado_2" id="metarea_modificado_2">
+	<SimpleField name="gid" type="float"></SimpleField>
+	<SimpleField name="type" type="string"></SimpleField>
+	<SimpleField name="province" type="string"></SimpleField>
+	<SimpleField name="DOMAIN" type="string"></SimpleField>
+	<SimpleField name="local_name" type="string"></SimpleField>
+	<SimpleField name="LAT" type="string"></SimpleField>
+	<SimpleField name="LONG" type="string"></SimpleField>
+	<SimpleField name="CLASS" type="string"></SimpleField>
+	<SimpleField name="DOMAIN_ALT" type="string"></SimpleField>
+	<SimpleField name="warnings_m" type="string"></SimpleField>
+	<SimpleField name="weather_mo" type="string"></SimpleField>
+	<SimpleField name="picto_coor" type="string"></SimpleField>
+	<SimpleField name="tags" type="string"></SimpleField>
+	<SimpleField name="has_data" type="string"></SimpleField>
+	<SimpleField name="FID" type="float"></SimpleField>
+</Schema>
+<Folder><name>metarea_modificado_2</name>
+  <Placemark>
+	<name>DESEMBOCADURA RIO DE LA PLATA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3546</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-54.9517458175883,-34.9740284349746 -55.2408011349677,-36.2935407960668 -56.745557292192,-36.3082474621056 -56.7744347145032,-36.3209574689265 -56.7768076885359,-36.2932295117656 -54.9517458175883,-34.9740284349746</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA VIEDMA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3557</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-61.9520368156029,-42.1564284848846 -63.8014983731158,-42.0624551517482 -63.8179370317702,-41.1503683610377 -63.7902016369921,-41.1578945201899 -63.6000419524518,-41.1540658017093 -63.5470780134691,-41.1598088794303 -63.437321417023,-41.1617232386706 -63.3208645632358,-41.1515133227221 -63.2305706190665,-41.1585326399367 -63.1441053933778,-41.1575754603165 -63.053013799525,-41.1438558857607 -62.996061612125,-41.1099557742131 -62.8323963603523,-41.0562128804614 -62.7896666017591,-41.0241637212358 -62.7434093464944,-41.0377653620396 -62.7109886258441,-41.0378557207928 -62.7106488457743,-41.0380326993167 -61.1978264560967,-41.0375541095066 -61.9520368156029,-42.1564284848846</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Oeste (N 45 W 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">724</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-51.75,-40 -50,-40 -50,-45 -60,-45 -53,-41.0375 -51.75,-40</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Oeste (N 45 E 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">725</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">3</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-50,-40 -40,-40 -40,-45 -50,-45 -50,-40</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Oeste (S 45 E 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">727</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">4</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-50,-45 -40,-45 -40,-50 -50,-50 -50,-45</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Norte (N40S W40W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">728</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">5</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-50,-35.833333 -40,-35.833333 -40,-40 -51.75,-40 -50,-38.5 -50,-35.833333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Norte (N40S E40W W30W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">729</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">6</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-35.833333 -30,-35.833333 -30,-40 -40,-40 -40,-35.833333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Norte (N40S E30W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">730</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">7</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-35.833333 -20,-35.833333 -20,-40 -30,-40 -30,-35.833333</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudeste (N 55 W 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">731</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">8</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-50 -30,-50 -30,-55.1175 -40,-55.1175 -40,-50</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE BAHIA BLANCA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">752</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">9</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-55.1627560999522,-38.493953686981 -50,-38.5 -53,-41.0375 -61.2004970499761,-41.043546313019 -55.1627560999522,-38.493953686981</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE VALDES</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">753</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-61.1944507369571,-41.031453686981 -53,-41.0375 -60,-45 -63.8849760416728,-44.993953686981 -61.1944507369571,-41.031453686981</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE SAN JORGE</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">754</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">11</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-64.7571566946575,-47.9536239097611 -63.8876525058688,-44.9955125020562 -60,-45 -60,-47.95179 -64.7571566946575,-47.9536239097611</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE PATAGONIA SUR</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">756</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">12</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-66.5486882729122,-54.0007557891274 -67.4291943188565,-51.2290879362153 -64.7709338116618,-47.957836313019 -60,-47.95179 -60,-50 -62,-50 -62,-54 -66.5486882729122,-54.0007557891274</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE FIN DEL MUNDO</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">757</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">13</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-66.5456651164027,-53.9992442108726 -60,-54 -60,-55.1175 -63.4781518727863,-55.1175 -63.8005067655472,-54.6646291929381 -64.9023045766829,-54.3748151003074 -65.7267563380626,-54.323384197558 -66.5456651164027,-53.9992442108726</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Sur (W50W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">743</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-70</SimpleData>
+		<SimpleData name="LONG">-58</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">14</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-65.6245914598152,-67.993953686981 -50,-68 -50,-78 -68.57,-78 -68.5859480585943,-76.0163287337147 -64.3672092625002,-75.2785121646465 -63.3003214160204,-74.5966562352823 -61.9684274694334,-74.4478984586081 -60.8199834617457,-73.6933694318515 -60.6866233441835,-73.1687694477876 -61.0893163013857,-72.3958742263472 -61.5082813549667,-71.0870500535005 -62.2766990923626,-70.387966870646 -63.1735864236044,-69.2275941272839 -64.8059031883604,-68.6735877532461 -65.6245914598152,-67.993953686981</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Sur (W40W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">744</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-68</SimpleData>
+		<SimpleData name="LONG">-45</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">15</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-50,-68 -40,-68 -40,-78 -50,-78 -50,-68</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>GOLFO NUEVO</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">719</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">16</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-64.1428564119924,-42.873752168708 -64.1439860643994,-42.8765313135679 -64.3203149809626,-42.9381847808977 -64.3304502429437,-42.9371927999126 -64.3968249974804,-42.9604297404956 -64.4330660188589,-42.9503327121554 -64.4969204511333,-42.949322619147 -64.5248865993673,-42.9243487683375 -64.6195529448776,-42.9219182834385 -64.6956848623959,-42.8988054839637 -64.7061679171967,-42.8870362053553 -64.8190098299454,-42.8406138176495 -64.8593189923285,-42.8355802963988 -64.8906852544359,-42.8156747839075 -64.9972512521481,-42.7799400780879 -65.0361765567017,-42.7620727251781 -65.038090915942,-42.7301667378391 -64.9966131324013,-42.6963463912598 -64.9857650967061,-42.652316128732 -64.9232293615217,-42.6140289439252 -64.8345307167193,-42.6102002254445 -64.7490226706509,-42.5387308138052 -64.6871250552133,-42.5132060239341 -64.6309705174967,-42.4940624315307 -64.5607773453509,-42.4915099525436 -64.4902651133318,-42.4998055092517 -64.4002902290359,-42.5167156825413 -64.3604077448622,-42.5337853857677 -64.3297779970167,-42.537773634185 -64.2119651387676,-42.6323748866451 -64.2484974942707,-42.6817494020522 -64.2451473656001,-42.7158888085049 -64.2601431796494,-42.7474757359705 -64.2422758267396,-42.7822532621699 -64.1449625653557,-42.8735043859594 -64.1428564119924,-42.873752168708</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Sur (W30W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">745</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-68</SimpleData>
+		<SimpleData name="LONG">-35</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">17</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-68 -30,-68 -30.0030231565095,-77.1232846122511 -32.2145559596256,-77.6449500242512 -34.584716064513,-77.993953686981 -40,-78 -40,-68</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Sur (E30W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">746</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-68</SimpleData>
+		<SimpleData name="LONG">-25</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">18</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-68 -20,-68 -20,-75.6661231746822 -22.4969990033188,-76.1136913002841 -25.4759898563541,-76.2748727677665 -28.8715190833664,-76.6522811748965 -29.993953686981,-77.12933092527 -30,-68</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Drake Sur (E58W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">747</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-61</SimpleData>
+		<SimpleData name="LONG">-56</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">19</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-53.9989279887411,-59.9999994076212 -53.9995432259617,-62.00999664786 -58.0000335943898,-62.0026659898188 -58.0014724137923,-60.0000001416907 -53.9989279887411,-59.9999994076212</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Este (N 45 W 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">720</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">20</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-40 -30,-40 -30,-45 -40,-45 -40,-40</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Este (N 45 E 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">721</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">21</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-40 -20,-40 -20,-45 -30,-45 -30,-40</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Este (S 45 W 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">722</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">22</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-45 -30,-45 -30,-50 -40,-50 -40,-45</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Este (S 45 E 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">723</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">23</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-45 -20,-45 -20,-50 -30,-50 -30,-45</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Centro Oeste (S 45 W 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">726</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">24</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-60,-45 -50,-45 -50,-50 -60,-50 -60,-45</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudeste (N 55 E 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">732</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">25</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-50 -20,-50 -20,-55.1175 -30,-55.1175 -30,-50</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudeste (S 55 W 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">733</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">26</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-55.1175 -30,-55.1175 -30,-60 -40,-60 -40,-55.1175</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudeste (S 55 E 30)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">734</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">27</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-55.1175 -20,-55.1175 -20,-60 -30,-60 -30,-55.1175</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudoeste (N 55 W 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">735</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">28</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-56,-50 -50,-50 -50,-55.1175 -60,-55.1175 -60,-54 -56,-54 -56,-50</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudoeste (N 55 E 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">736</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">29</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-50,-50 -40,-50 -40,-55.1175 -50,-55.1175 -50,-50</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudoeste (S 55 W 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">737</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-60,-55.1175 -50,-55.1175 -50,-60 -60,-60 -60,-55.1175</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Area Sudoeste (S 55 E 50)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">738</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">31</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-50,-55.1175 -40,-55.1175 -40,-60 -50,-60 -50,-55.1175</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Norte (W40W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">740</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-60</SimpleData>
+		<SimpleData name="LONG">-48</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">32</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-53.9989276552609,-59.9998885376618 -40,-60 -40,-68 -54.0015119896569,-68.0009443935972 -53.9989276552609,-59.9998885376618</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Norte (W30W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">741</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-60</SimpleData>
+		<SimpleData name="LONG">-35</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">33</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-60 -30,-60 -30,-68 -40,-68 -40,-60</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Weddell Norte (E30W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">742</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-60</SimpleData>
+		<SimpleData name="LONG">-25</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">34</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-30,-60 -20,-60 -20,-68 -30,-68 -30,-60</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Mar de la Flota Este</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">748</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-62.8</SimpleData>
+		<SimpleData name="LONG">-56</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">35</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-53.9995432259617,-62.00999664786 -54.000058973636,-63.5023945961525 -62.5000000611272,-63.5008175628462 -62.4995254032013,-63.5006595373344 -59.5745040107501,-62.5268466361306 -58.0000335943898,-62.0026659898189 -53.9995432259617,-62.00999664786</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Zona Gerlache</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">749</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-64.5</SimpleData>
+		<SimpleData name="LONG">-66</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">36</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-67.2636368434905,-66.8774222534857 -67.266660098763,-63.4999449202871 -62.5000000173361,-63.5008175627346 -58.8879316664356,-63.5014788197682 -58.8859087189573,-63.5015667740064 -58.8843255426699,-63.5014788197682 -59.8949584329942,-63.9667005081296 -60.6918897228647,-64.0634429191254 -62.0466746161808,-64.5784925143893 -63.013154656616,-64.6429842099645 -64.568353836612,-65.6048677195007 -67.2636368434905,-66.8774222534857</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Zona Erebus y Terror</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">750</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-64</SimpleData>
+		<SimpleData name="LONG">-54.5</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">37</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-57.0335188072609,-63.5017499710065 -56.7716901963164,-63.5018819022822 -54.000058973636,-63.5023945961525 -54.0008753214922,-66.0000112295586 -59.2144617387091,-66.001209606054 -59.9715718210467,-65.9983950704319 -61.0326517505681,-65.9998023382429 -62.1021752869558,-66.0012096060539 -62.3709634388637,-66.0012096060539 -62.5628645248452,-65.8551922572771 -62.5093658261674,-65.0868487443845 -62.0272943580965,-64.7794444777887 -59.8234483480143,-64.2195604123366 -59.027213343702,-64.3615631701795 -57.5800300270283,-63.8453533320998 -57.2223914027002,-63.5196341719227 -57.2653234329897,-63.5017884509619 -57.0335188072609,-63.5017499710065</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>ZonaDrake</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">755</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">38</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-66.41666,-55.1175 -60,-55.1175 -60,-60 -67.26666,-60 -67.26666,-58.35027 -67.26666,-56.36888 -65.71833,-56.36888 -65.71833,-55.36916 -66.06861,-55.18333 -66.41666,-55.1175</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE RIO DE LA PLATA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">739</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">39</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-53.370502,-33.743653 -50,-35.833333 -50,-36.29279 -55.2438196496941,-36.29279 -54.9517966998164,-34.9741308493137 -54.9357023189065,-34.9528121361567 -53.8048073975765,-34.3984057231726 -53.370502,-33.743653</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>OFFSHORE MAR DEL PLATA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">751</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">40</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-55.2347501801657,-36.286743686981 -50,-36.29279 -50,-38.5 -55.1748487259901,-38.506046313019 -55.2347501801657,-36.286743686981</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>GOLFO SAN JORGE NORTE</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3562</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">41</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-64.1817557575782,-45.992711323672 -67.5945889506609,-45.992711323672 -67.5933118238477,-45.9870352045023 -67.5486434415732,-45.9538529776698 -67.5527912199273,-45.9244994693179 -67.4746215509467,-45.8605279647033 -67.4549196037649,-45.819369241036 -67.4264435100648,-45.8103557996127 -67.3670983736143,-45.7743020339197 -67.3760320500692,-45.7264430529112 -67.3607171761465,-45.7226143344306 -67.3632696551336,-45.6683741559543 -67.344764182477,-45.6179626959587 -67.284142806533,-45.5669131162164 -67.2330932267906,-45.5318165301435 -67.1684836024292,-45.4608257083143 -67.1514138992028,-45.43689621781 -67.0732442302224,-45.3625552673102 -67.0697345716151,-45.3510691118682 -67.0174087523792,-45.3070388493404 -66.9660401127634,-45.2732185027611 -66.8891466832765,-45.2411529854854 -66.8414472322048,-45.2299858899167 -66.7817032709126,-45.231660954252 -66.7510735230671,-45.2228868077338 -66.7044907815522,-45.2240035172906 -66.6679584260491,-45.2120387720385 -66.5548517009324,-45.2117197121651 -66.5184389928818,-45.222487982892 -66.5280905540519,-45.1867133945882 -66.5882333401858,-45.1751075916936 -66.6021523271625,-45.1484660922656 -66.5557291155844,-45.141686069956 -66.4734116682498,-45.1643393209667 -66.4663923510352,-45.1439194890698 -66.5250993677389,-45.149024447044 -66.53084244546,-45.109780082617 -66.4951077396403,-45.0976558074282 -66.4654351714151,-45.0762787959111 -66.4265098668615,-45.0708547780635 -66.3666861406009,-45.04205962449 -66.2744778371913,-45.0487598818312 -66.1966272280842,-44.9825549581029 -66.1483295397498,-44.991089809716 -66.1188563839454,-44.9851473195741 -66.0048722441769,-45.0055272689869 -65.9580502077569,-45.0437745713095 -65.931907239381,-45.04893935301 -65.8943778217736,-45.0235940343176 -65.8931813472484,-45.008757750205 -65.8490713197522,-45.0015789030537 -65.7981812699466,-45.0240726241277 -65.7394742532428,-45.0215201451406 -65.736283654509,-45.0387493783036 -65.6705573205907,-45.0432162165311 -65.6115312440129,-45.0330063005823 -65.6258889383154,-45.0097149298248 -65.5850093920374,-44.9988469528875 -65.5849794801752,-44.9988070704039 -63.8875909243627,-44.9954070886281 -64.1817557575782,-45.992711323672</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA SANTA CRUZ</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3565</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">42</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-67.4253056446392,-51.2434098908525 -69.1347524479508,-50.7838619531422 -69.138113344111,-50.766553337917 -69.1432183020822,-50.7276280333868 -69.1247128294367,-50.6784928129142 -69.1093979555232,-50.6567967415367 -69.0819588064281,-50.5923466471506 -69.0794063274425,-50.5617168993235 -69.0494146993618,-50.5285346725109 -69.0353760649411,-50.4947143259518 -69.0085750355924,-50.4711038953351 -68.9856027247221,-50.4328167105513 -68.880951086313,-50.3345462696061 -68.8203297104052,-50.3128501982286 -68.773427909045,-50.2881230580557 -68.738809912803,-50.2898778873583 -68.634477334267,-50.2482405739059 -68.5129155225784,-50.2134630477273 -68.4069876446764,-50.1858643686955 -68.364552681541,-50.1651254769376 -68.3616811426822,-50.1352933787936 -68.4015636268321,-50.1301884208224 -68.4108163631548,-50.1155116666553 -68.4522941466706,-50.1113638883037 -68.4998340677773,-50.0820103799694 -68.5129155225784,-50.0532949913815 -68.5110011633392,-50.0191555849493 -68.5413118512931,-50.0019263517965 -68.5805562156965,-49.9652344663787 -68.5741750182326,-49.936838137664 -68.5295066359847,-49.9349237784248 -68.5103630435928,-49.9362000179176 -68.4567609848955,-49.989802076615 -68.4152832013797,-50.0574427697331 -68.3642336216679,-50.0906249965458 -68.3552999452183,-50.1148735469088 -68.3272226763768,-50.1225309838656 -68.2066180443078,-50.1174260258944 -68.1402535906825,-50.1027492717273 -68.0470881077085,-50.0695670449146 -67.9188260386826,-50.0070313097677 -67.8639477404925,-49.9668297657447 -67.7926378588326,-49.8869052675084 -67.7337713122275,-49.7834501036238 -67.7165420790747,-49.6992182970994 -67.7197326778067,-49.6354063224597 -67.7063321631324,-49.5983953771686 -67.705694043386,-49.5607463121312 -67.6817899802423,-49.4656413764152 -66.3742120521991,-49.9326334935736 -67.4297870180376,-51.2293098015078 -67.4253056446392,-51.2434098908525</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA VALDES</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">718</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">43</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-63.8186736858896,-42.0762052850217 -63.8125059825578,-42.0610316431965 -62.0029455792776,-42.1517103836684 -61.9571687169585,-42.1549131258693 -62.2884104255189,-42.6423014769856 -62.6019774883383,-43.1063657437452 -64.3203149809626,-42.9381847808977 -64.1439860643994,-42.8765313135679 -64.1428564119924,-42.873752168708 -64.1069944404223,-42.8779712241869 -64.0115955382788,-42.8604229311504 -63.9809657904334,-42.8492558355818 -63.8274979913329,-42.8243691654574 -63.790806105893,-42.8132020698887 -63.7180604547602,-42.803630273687 -63.6328714685651,-42.7640668493867 -63.6408479653999,-42.6989786352152 -63.624575911857,-42.6772825638247 -63.6006464213527,-42.6239995649686 -63.5830981283163,-42.6058131521854 -63.6041560799601,-42.5467870756083 -63.6092610379343,-42.4099103899241 -63.5983332372707,-42.3339741400573 -63.6088622130925,-42.3020681527183 -63.637896661571,-42.2631428481648 -63.6765029062511,-42.2197507053838 -63.7163853904249,-42.1508337727316 -63.7390386414355,-42.0972317140021 -63.7581822338389,-42.0768118821052 -63.7974265982659,-42.0726641037511 -63.8186736858896,-42.0762052850217</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA GALLEGOS</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3566</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">44</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-66.9550099255915,-52.7231374358561 -68.3540060671193,-52.3298253533625 -68.352827231201,-52.3230470468323 -68.4217441638119,-52.2547682339678 -68.5844646991432,-52.1080006922965 -68.7098552293103,-51.9816529825098 -68.7631382281344,-51.9127360498989 -68.8496034537712,-51.7774546636627 -68.9210728653677,-51.6919466176455 -68.9555313316732,-51.630049002245 -69.0136002285953,-51.6070766913747 -69.1118706695405,-51.6440876366657 -69.0899751857422,-51.5910838152305 -69.0600633226299,-51.5671942072248 -69.0129621088489,-51.5581408833227 -68.9838478954195,-51.5748117616974 -68.9463583603187,-51.5508025062392 -68.961354174359,-51.5115581418357 -68.9945364011717,-51.4563607837724 -69.0790872675693,-51.2240851960838 -69.1186506918459,-51.1411296290521 -69.1543853976441,-50.9994670453519 -69.1741671097825,-50.9771328542281 -69.2054349773559,-50.9860665306776 -69.2947717418515,-51.0230774759686 -69.3745367101512,-51.0715745766948 -69.3828322668544,-51.036477990643 -69.3222108909466,-50.9879808899168 -69.2603132755461,-50.9618179803145 -69.229683527719,-50.9567130223433 -69.1645953135865,-50.9091731012367 -69.1320512065203,-50.899920364914 -69.1317321466471,-50.7994165048564 -69.1347524479508,-50.7838619531422 -67.4253056446392,-51.2434098908525 -66.9550099255915,-52.7231374358561</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA CARMEN PATAGONES</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3523</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">45</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-62.1207175877869,-39.8336849666144 -60.0080922984867,-40.5219919157089 -60.0044327774351,-40.5334238708525 -61.1978107212096,-41.0376584894452 -62.7109883142618,-41.0378560323746 -62.6441091272853,-40.9984141250182 -62.5333953512191,-40.9502360841364 -62.3939063628215,-40.912965902676 -62.3104722059301,-40.8696036717581 -62.2972910449107,-40.8270789730079 -62.261556339091,-40.748590244154 -62.238584028207,-40.7115792988408 -62.2337981301061,-40.6902022873237 -62.1776435923895,-40.6410670668217 -62.1744529936556,-40.5836362896115 -62.2408174473207,-40.5455086347415 -62.3087971415948,-40.5273222219583 -62.3190668812695,-40.5063240940408 -62.3713129355371,-40.4922256358854 -62.4188528566722,-40.4635102472803 -62.4230006350263,-40.4293708408276 -62.4404292806102,-40.4165685634078 -62.4622449994532,-40.3607729680488 -62.487450729451,-40.3304622800768 -62.4884079090712,-40.3006301819148 -62.4668713676174,-40.2841985984353 -62.4459729459103,-40.2500591919826 -62.4249149942666,-40.2360205575534 -62.3894993483204,-40.2283631205921 -62.3448309660458,-40.1971750179682 -62.3279207927562,-40.1572127688261 -62.3416403673119,-40.1230733623734 -62.3435547265522,-40.063728225923 -62.3304732717433,-39.9970447123845 -62.326963613136,-39.9239800013783 -62.3075009608592,-39.8684635834084 -62.2885168983925,-39.8457305674294 -62.2973109861528,-39.8301165748754 -62.256251968696,-39.8164368828038 -62.2268186953758,-39.8351018853971 -62.1983426016757,-39.8405259032448 -62.1445810130096,-39.8302362223279 -62.1197741078535,-39.8453915663139 -62.1207175877869,-39.8336849666144</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA RAWSON</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3547</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">46</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-62.6027162977764,-43.1047890389068 -63.8875809537407,-44.9954120739381 -65.5849794801742,-44.9989217325454 -65.6071541413748,-44.9765077764398 -65.5756469788775,-44.9615119623904 -65.5271498781223,-44.9246605470139 -65.5730944998904,-44.8946689189153 -65.7051852874738,-44.8787159252458 -65.7281575983578,-44.8500005366407 -65.7294338378514,-44.8097989925936 -65.7026328084867,-44.8015034358854 -65.6981659702592,-44.7345008624736 -65.6828510963365,-44.7064235936153 -65.6458401510233,-44.6694126483021 -65.5983002298882,-44.6430902087474 -65.5724563801436,-44.6445259781777 -65.521566330338,-44.6092698621681 -65.4652522626847,-44.5934763984353 -65.4619021340141,-44.5752899856521 -65.4151598625625,-44.5728970366017 -65.3699331255094,-44.5419482288829 -65.3751976134204,-44.5158252017491 -65.3410582069677,-44.5055355208323 -65.3109070489323,-44.5190955654513 -65.2906467469721,-44.5037806915286 -65.311066578869,-44.4726723538731 -65.3346770094999,-44.4603885487476 -65.2828297800741,-44.4225799537509 -65.2641647774808,-44.3901953766018 -65.2361872148329,-44.3857285383744 -65.2215503431412,-44.3641521144364 -65.2274529507989,-44.3343200162744 -65.2548123349421,-44.3323258920657 -65.274992871934,-44.2837490263421 -65.3121633471839,-44.2162678631202 -65.3070583892096,-44.1808522171739 -65.2757905216175,-44.1457556311011 -65.2330364985832,-44.1451175113543 -65.2422892349115,-44.0880057940175 -65.2183597444073,-44.0439755314897 -65.2537753903535,-44.0273844180735 -65.2518610311132,-43.9830350956723 -65.2850432579457,-43.9619771440286 -65.3019534312354,-43.928794917196 -65.3290735204734,-43.8467965297349 -65.323011382879,-43.7823464353101 -65.350769591864,-43.7746889983488 -65.3558745498382,-43.7529929269583 -65.3431121549026,-43.6773757369649 -65.3163111255379,-43.6339835941839 -65.2518610311132,-43.5663429010253 -65.1969827328901,-43.5401799914073 -65.1746485417528,-43.5044452855877 -65.1389138359332,-43.4658390409075 -65.0534057898648,-43.4023461261029 -65.0441530535364,-43.3816072343326 -65.0565963885986,-43.3445962890194 -65.0428768140429,-43.3149237207941 -64.9777885998714,-43.2543023448501 -64.8894090149424,-43.2061243039683 -64.7956054121658,-43.1652846401744 -64.6743626602777,-43.1218924973934 -64.4586781858662,-43.0631854806896 -64.4227839501099,-43.0390964602487 -64.3336067154974,-43.0038403442391 -64.3080819256263,-42.9784750843046 -64.3304161167635,-42.9374758905741 -62.6027162977764,-43.1047890389068</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>GOLFO SAN JORGE SUR</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3549</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">47</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-67.5945889506609,-45.992711323672 -64.1817557575782,-45.992711323672 -64.7594220284002,-47.9511677850897 -65.7848804614748,-47.9467009468621 -65.791580718816,-47.9029897442077 -65.8451827775455,-47.8946941874996 -65.8614548310883,-47.8653406791478 -65.8665597890626,-47.8245010153539 -65.8869796209595,-47.7708989566244 -65.8959132974144,-47.7555840827017 -65.853797394127,-47.7479266457403 -65.7950903774233,-47.6419987677749 -65.7398930193268,-47.5110246897484 -65.7453170371744,-47.4969860553193 -65.718835067683,-47.3282033822961 -65.7561650728696,-47.2154157170528 -65.7453170371743,-47.2020152023705 -65.8502877355195,-47.1324601499715 -65.8707075674165,-47.0922586059244 -65.8892130400731,-47.0973635638986 -65.9517487752575,-47.0775818517485 -65.9932265587981,-47.073115013521 -66.0666103296778,-47.0737531332678 -66.0953257182829,-47.084601168963 -66.1610520522011,-47.0814105702291 -66.1974248777676,-47.0871536479502 -66.2950571990248,-47.0712006542807 -66.3748221673723,-47.0648194568129 -66.4998936377411,-47.0373803077013 -66.5420095410285,-47.0456758644095 -66.6058215157065,-47.0373803077013 -66.6307081858309,-47.0450377446627 -66.6568710954488,-47.0309991102336 -66.7091969146848,-47.0341897089675 -66.7557796561996,-47.0169604758044 -66.8061911161952,-46.9844163687186 -66.900951898592,-46.9113516577124 -66.9504061789674,-46.8507302817683 -66.9848646452935,-46.8283960906311 -67.0279377282011,-46.8162718154423 -67.081858846804,-46.7684128344338 -67.0966951309166,-46.7347520177912 -67.1249319297116,-46.7235849222225 -67.1630595845817,-46.6868930367827 -67.2383577147017,-46.6671113246325 -67.2504819898905,-46.6492439717227 -67.327056359504,-46.6294622595725 -67.3946970526627,-46.5943656734997 -67.4431941534179,-46.5445923332509 -67.5669893842931,-46.3512420499767 -67.5976191321385,-46.2874300752987 -67.6212295627694,-46.2095794661916 -67.6278500551422,-46.1583703565126 -67.6242606315665,-46.0492518798133 -67.5933118238477,-46.0224508504486 -67.5961833627082,-45.9997975994379 -67.5945889506609,-45.992711323672</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA DEL TUYU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3554</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">48</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-55.2071350055312,-37.5529366559379 -56.7835065838426,-37.022808732565 -56.6677924071836,-36.8832359627805 -56.675449844145,-36.8309101435446 -56.6741736046514,-36.7396590197551 -56.675449844145,-36.7064767929226 -56.6837454008531,-36.6286261838155 -56.6894884785741,-36.5124883899016 -56.6914028378145,-36.4869636000304 -56.6996983945226,-36.4148560686444 -56.7175657474324,-36.3548728124471 -56.7455869315473,-36.3082614053967 -56.745598148496,-36.308260159069 -55.2408021087585,-36.2935435224089 -55.2071350055312,-37.5529366559379</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA GESELL</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3555</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">49</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-55.1868548553885,-38.3115609327038 -57.1793021361454,-37.5424334340031 -57.1285148643584,-37.4971071591824 -57.0889514400581,-37.4473338189336 -57.0417305787964,-37.3733119283072 -56.9913191188009,-37.2897182414791 -56.8943249172904,-37.1697517290845 -56.7915876380589,-37.0325559835269 -56.7835065838426,-37.022808732565 -55.2071350055312,-37.5529366559379 -55.1868548553885,-38.3115609327038</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA BAHIA BLANCA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3556</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.4514740630303,-40.3010798822125 -60.0031286509854,-40.5285054224138 -62.1207175877869,-39.8336849666144 -62.1258362454479,-39.7701732011623 -62.1213694072205,-39.7038087474972 -62.0961636772227,-39.6875366939544 -62.1190462525173,-39.6628594068719 -62.0931026965624,-39.5716182537034 -62.0899120978285,-39.5403503861112 -62.0470184860996,-39.4594088844807 -62.169706978039,-39.3753764903267 -62.1805151312501,-39.3876602954522 -62.2389429705646,-39.345145567323 -62.2549358467183,-39.3478176937627 -62.2659434123502,-39.2996396528808 -62.2316444759608,-39.296927643957 -62.196547889888,-39.3066589700954 -62.0898223622391,-39.388537710104 -62.0303974608203,-39.3921071924376 -62.0095788040817,-39.3669812274081 -62.0453135099013,-39.3440089165241 -62.0603093239506,-39.3215151954501 -62.2172070166901,-39.2746133940618 -62.2796629869061,-39.2656797176069 -62.2473781159674,-39.244123234911 -62.3066036049654,-39.212915191045 -62.3425776056902,-39.1630620858279 -62.3349201687288,-39.1298798589954 -62.3518303420185,-39.1053122487444 -62.3351694342549,-39.0763276533711 -62.3066135755865,-39.0524779278352 -62.3050182762195,-39.0147490978069 -62.3222475093826,-38.971835544836 -62.3453793502034,-38.9524526575275 -62.322566569256,-38.8939849357289 -62.3476127693171,-38.8700554452246 -62.3477747919091,-38.8699308124616 -62.3386619558573,-38.843240394674 -62.3614747368047,-38.8293612901816 -62.4037507931926,-38.8201752323815 -62.3792822659883,-38.8012167196312 -62.3407308597238,-38.8140289676721 -62.3112178214353,-38.8005088055372 -62.360971220442,-38.7686626419245 -62.4359901731728,-38.7825018639328 -62.5104906536093,-38.7636773314028 -62.497568728737,-38.7376739517215 -62.4702891095622,-38.7426991447274 -62.4286517960848,-38.7347226478927 -62.3730954956308,-38.7417020826231 -62.352914958639,-38.7177327096347 -62.3119157649084,-38.7377537166899 -62.3004794625716,-38.7849247248463 -62.2590016790309,-38.7891024150635 -62.2242241528314,-38.8080864775302 -62.2070746846367,-38.8005088055372 -62.1659359022115,-38.8120348434635 -62.1261930067324,-38.8418370297623 -62.1056136448988,-38.8691166489371 -62.1059327047721,-38.896874857922 -62.0764196664836,-38.9045322948833 -62.0729100078763,-38.9206448184895 -61.984689952884,-38.9474458478543 -61.8905672902341,-38.9688228593714 -61.86759497935,-38.9691419192448 -61.8095659648772,-38.9929916447807 -61.7932739700923,-38.9929916447806 -61.731695414528,-38.9682246221088 -61.6948439991515,-38.9672674424886 -61.6701168589638,-38.9896016336259 -61.613005141627,-39.0033212081816 -61.5433703242597,-39.0031616782449 -61.3838403875648,-38.9872086845754 -61.2973751618762,-38.9888039839424 -61.175175230368,-38.9993329597642 -61.1206159920182,-38.9980567202707 -61.0191549522803,-38.981146546981 -60.8618584346991,-38.9805084272342 -60.6830253756642,-38.9482833800219 -60.5174395564948,-38.9308451716657 -59.4514740630303,-40.3010798822125</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>GOLFO SAN MATIAS</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3558</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">51</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-63.8011844784861,-42.0620975457223 -65.069618391196,-41.9980365811691 -65.0747030364134,-41.9650611614504 -65.061541816636,-41.9341921186999 -65.0637752357498,-41.9013289517408 -65.047293799165,-41.8372178584316 -65.0163649326882,-41.8325516077832 -65.0127356266284,-41.7797172868741 -64.9989462577254,-41.7711126409136 -65.0223173934512,-41.7206214159497 -65.0230352781663,-41.6181234316232 -65.0003022621873,-41.5712216302349 -64.9881779869985,-41.518895810999 -65.0003022621873,-41.4868302937233 -65.0438938173891,-41.4627412732824 -65.0521096091289,-41.4345044744874 -65.0766772193799,-41.4005245979714 -65.0785915786202,-41.3786689966442 -65.1015638895043,-41.3375102729769 -65.1219837214013,-41.2545547058956 -65.137298595324,-41.2280727364042 -65.147189451399,-41.1768636267252 -65.1521348794366,-41.1068299845161 -65.1682137521967,-41.0682935341833 -65.1572934294989,-41.0518769066353 -65.1659479285646,-40.9999598828621 -65.163734450693,-40.9538158486732 -65.1471433372767,-40.9041023321506 -65.1252279122232,-40.8813094924453 -65.1289968069776,-40.8569213533731 -65.113243225729,-40.8319549182803 -65.0515051402281,-40.784574527082 -65.0180636772484,-40.7643939900901 -64.9244993693769,-40.7477430529475 -64.9169216973839,-40.7273232210506 -64.9545308799597,-40.7096153980774 -64.8472469975324,-40.7158370656085 -64.7752591135988,-40.7398064385969 -64.8004249611125,-40.7491389398936 -64.7790080671112,-40.7688010045912 -64.7512498581263,-40.7698778316638 -64.7419771805559,-40.8107374366998 -64.7915710496259,-40.8028606460755 -64.8419825096215,-40.7845346445977 -64.9032818877965,-40.8043761804741 -64.8678263593661,-40.8303795601554 -64.7567935234265,-40.816979045473 -64.6757523155855,-40.8386751168635 -64.6036447841993,-40.8498422124322 -64.5583326567647,-40.8605612103199 -64.5434140501944,-40.8643299989025 -64.4580205440828,-40.9022253606724 -64.3999665255293,-40.9167598762086 -64.3951832051757,-40.9269055673901 -64.3114763904603,-40.9557722683103 -64.2064013128323,-41.0098803290906 -64.140649539009,-41.0219857274357 -63.9943678789243,-41.0601054501484 -63.9224551081855,-41.0876826139687 -63.8972373690672,-41.1210016534297 -63.8695653422237,-41.1368504535559 -63.8182769436561,-41.1512056708032 -63.8011844784861,-42.0620975457223</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA NECOCHEA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3559</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">52</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-58.234809886767,-38.4441422212234 -57.2971358207301,-39.3934403459301 -59.4531538056282,-40.2991636782323 -60.5174395564948,-38.9308451716657 -60.5118497535906,-38.9302564971754 -60.4231511087882,-38.9190894016067 -60.3248806677842,-38.8999458092033 -60.1162155105873,-38.8651682830039 -59.9720004478151,-38.8498534090811 -59.7882219607426,-38.8268810981971 -59.6861228012579,-38.7949751108581 -59.3938639572329,-38.7528592075707 -59.3713702361589,-38.7426492916222 -59.2336959007913,-38.7161673221308 -59.1079863106757,-38.6989380889678 -58.9490944937276,-38.6593746646675 -58.9222934643629,-38.6453360302383 -58.8316804603202,-38.6236399588478 -58.8055175507022,-38.6102394441654 -58.6909750561553,-38.5732284988522 -58.4989010123747,-38.5381319127794 -58.4380403415256,-38.5142024222751 -58.3888253560552,-38.4993661381625 -58.3880932389752,-38.4995712736477 -58.281597246789,-38.4660919946671 -58.238205104008,-38.4453531028967 -58.234809886767,-38.4441422212234</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA MAR DEL PLATA</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3560</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">53</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-57.2971358207301,-39.3934403459301 -58.234809886767,-38.4441422212234 -58.0557028564291,-38.3802648887252 -57.9520083975774,-38.3292153089829 -57.8604382139145,-38.2995427407576 -57.8211938494876,-38.2669986336719 -57.7746111079727,-38.243388203041 -57.7050560555737,-38.2156299940561 -57.6642163917798,-38.1920195634253 -57.6118905725439,-38.1470321212773 -57.5895563814066,-38.1160833135585 -57.5474404781192,-38.1007684396358 -57.5359543226771,-38.0806676676123 -57.5410592806514,-38.0462092012862 -57.5241491073617,-38.0162175731875 -57.5401021010312,-38.0024979986318 -57.5413783405248,-37.9686776520524 -57.51457731116,-37.8723215702887 -57.5037292754648,-37.8464777205442 -57.4584227734434,-37.7884088235872 -57.4140734510422,-37.7364020642247 -57.2995309564953,-37.6467462398022 -57.1878600008089,-37.5500710981651 -57.1793021361454,-37.5424334340031 -55.1868548553885,-38.3115609327038 -55.182354882836,-38.4943715063558 -56.9568759409975,-39.2433177019817 -56.9492330764175,-39.2472896017791 -57.2971358207301,-39.3934403459301</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>GOLFO SAN JOSE</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3561</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">54</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-63.8125059825578,-42.0610316431965 -63.8186736858896,-42.0762052850217 -63.8893158418021,-42.0879789776738 -63.9626996126817,-42.1143014172285 -64.0048155159692,-42.1423786860868 -64.0750086881149,-42.1784324517798 -64.1431279710836,-42.196618864563 -64.369341421317,-42.2352251092432 -64.3135059434738,-42.2521352825328 -64.2422758267396,-42.2345869894964 -64.1862808189597,-42.2481470341155 -64.1286107468444,-42.2406092446066 -64.0888080276391,-42.2537305818998 -64.058936046993,-42.2751873583852 -64.0444587052379,-42.3128364234452 -64.0607307587807,-42.330225186545 -64.0427038759342,-42.3466567700246 -64.0557853307432,-42.3833486554644 -64.0991774735242,-42.4037684873613 -64.1247022633954,-42.4318457562196 -64.1789424418717,-42.4171690020437 -64.2165915069317,-42.4222739600179 -64.2899752778113,-42.4146165230566 -64.3001851937598,-42.4044066071081 -64.3601684499571,-42.4267407982454 -64.4769443636177,-42.4382269536874 -64.5370871497516,-42.4249859689418 -64.6101518607579,-42.4267407982454 -64.6179688276559,-42.3948348109064 -64.5962727562654,-42.3849439548313 -64.5780863434822,-42.3578238655932 -64.5586236912054,-42.3074124055976 -64.5075741114631,-42.2764635978788 -64.4743918846305,-42.2372192334519 -64.6131829295551,-42.2308380359841 -64.6986909756235,-42.2158422219348 -64.7511763247961,-42.2123325633275 -64.7999924854248,-42.1965390995947 -64.8318984727638,-42.1973367492782 -64.8848624117465,-42.1794693963684 -64.9582461826261,-42.1405440918148 -65.0131244808491,-42.0952375897935 -65.0418398694542,-42.0620553629609 -65.0692790185658,-42.0002375124917 -65.069618391196,-41.9980365811691 -63.8125059825578,-42.0610316431965</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA DESEADO SUR</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3563</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">55</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-65.5928590219222,-48.9728134947278 -66.8679005255978,-48.5789933361002 -66.8314949173744,-48.5222612632853 -66.7724688408327,-48.499288952415 -66.7542824280603,-48.4740832224324 -66.6821748967175,-48.4501537319425 -66.6617550648328,-48.4335626185362 -66.6119817246138,-48.4246289420866 -66.4944081613401,-48.4170512700981 -66.4674476020548,-48.3817153891414 -66.4701994934611,-48.3609166736572 -66.4359005570923,-48.3505073452941 -66.3408207148791,-48.3556123032653 -66.3603631321125,-48.314533344591 -66.3389063556399,-48.2775223992999 -66.2629701058187,-48.2376399151501 -66.2578651478475,-48.2207297418706 -66.2259591605276,-48.1999908501127 -66.1717189820839,-48.1945668322683 -66.1177978635133,-48.1215021213058 -66.0769581997439,-48.1093778461243 -66.0158582340263,-48.1087397263779 -65.9813997677209,-48.1001251098015 -65.9432721128737,-48.1135256244759 -65.9171092032714,-48.1098564359341 -65.905303987963,-48.0809815174096 -65.9404005740149,-48.0755574995652 -65.9687969027296,-48.0490755300897 -65.9531629689428,-48.0146170637843 -65.9276381790869,-47.9913256930408 -65.9512486097036,-47.9785632981129 -65.9365718555365,-47.948252610159 -65.9107280058074,-47.9326186763723 -65.8402157738305,-47.941871412695 -65.8306439776346,-47.9651627834385 -65.784978533283,-47.9463183096777 -65.7848738417623,-47.9467021785882 -64.7589368194922,-47.9484171254066 -65.5928590219222,-48.9728134947278</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA SAN JULIAN</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3564</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">56</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-66.3742120521991,-49.9326334935736 -67.6817899802423,-49.4656413764152 -67.6758619452419,-49.4420560393013 -67.6666092089192,-49.4048855640736 -67.6313530929307,-49.3546336340448 -67.603609839894,-49.2956698738845 -67.6127628700064,-49.2503060408194 -67.6680699049011,-49.2551816745067 -67.6727361555467,-49.2985339347775 -67.6990386538435,-49.3088634981724 -67.682946071489,-49.3416867826277 -67.7138948791893,-49.3859164575498 -67.7817349847281,-49.3801733798322 -67.8050263554716,-49.3422451374057 -67.7607567980653,-49.3136892787545 -67.7333176489703,-49.3118546844836 -67.7424108553564,-49.2768378634 -67.6900850361518,-49.2621611092329 -67.6677508450279,-49.2401459779822 -67.6655174259156,-49.2024969129448 -67.6144678462038,-49.1865439192848 -67.6368020373277,-49.1495329739938 -67.6214871634141,-49.1137982681956 -67.6017054512758,-49.1067789509852 -67.5749044219271,-49.0378620183743 -67.5500177518177,-49.0110609890256 -67.4696146637716,-48.9459727748931 -67.4230319222846,-48.915343027066 -67.3330570380426,-48.8745033632966 -67.243720273547,-48.8508929326799 -67.1926706938352,-48.8145201071353 -67.1952231728208,-48.785166598801 -67.1531072695586,-48.7500700127492 -67.1301349586883,-48.6824293196311 -67.0152734043368,-48.6230841832161 -66.961033225893,-48.6064930698098 -66.9201935621236,-48.605216830317 -66.8697821021582,-48.5819254595735 -66.8679005255978,-48.5789933361002 -65.5928590219222,-48.9728134947278 -66.3742120521991,-49.9326334935736</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA ISLA DE LOS ESTADOS</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3567</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">57</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-66.3181210688608,-54.5084266975281 -65.728194812132,-54.3228186367938 -65.7267563380626,-54.323384197558 -64.9099630626742,-54.3693288192986 -63.8021871829287,-54.6654163816269 -63.4834529976708,-55.1155399363554 -66.4025672527497,-55.1145709637221 -66.4538937890822,-55.0576207307563 -66.3623236054741,-55.0341698300762 -66.3698215124943,-55.0092831599667 -66.2967568015318,-54.9907776873211 -66.1956148217278,-54.9979565344681 -66.1818952471803,-54.9902990975113 -66.1053208776126,-54.9941278159897 -66.0399136036069,-54.9839179000474 -65.9719538506156,-54.9612646490502 -65.9581358161853,-54.9410130713955 -65.9934592338658,-54.9206131807529 -65.9853830308255,-54.9032044764215 -65.9151499762376,-54.9119187992082 -65.8916891049365,-54.9003728200468 -65.8052238792997,-54.914251924531 -65.7887125308617,-54.9030050640007 -65.7347914122911,-54.9105029710209 -65.7079903829424,-54.9503854551707 -65.7156478198992,-54.968571867943 -65.6368400312192,-54.9696885774992 -65.6070079330751,-54.9452804971995 -65.5262857851558,-54.9379421201159 -65.4972513366948,-54.9280512640468 -65.5001228755536,-54.9018883544445 -65.4388633798994,-54.8891259595165 -65.407595512326,-54.9408136589747 -65.3230446459283,-54.915607928992 -65.3125156701128,-54.872215786237 -65.2273266839688,-54.8179756077932 -65.2640185693866,-54.8042560332457 -65.2043543730985,-54.7803265427558 -65.2183930075192,-54.7449108968308 -65.1922300979169,-54.7197051668481 -65.1769152240034,-54.6807798623179 -65.1210797461937,-54.6614767399893 -65.1287371831504,-54.6514263539836 -65.2488632254097,-54.6477571654418 -65.2416843782627,-54.6199989564735 -65.367393968303,-54.6431307972804 -65.4497114155882,-54.6450451565196 -65.5262857851559,-54.661636269926 -65.5620204909541,-54.6533407132228 -65.6845394822624,-54.6661031081507 -65.7623900913229,-54.648873874998 -65.8083347130634,-54.6501501144908 -65.8587461730288,-54.6418545577876 -66.0444390192304,-54.5799569423871 -66.1503668971323,-54.5595371105024 -66.2390655418815,-54.5346504403929 -66.3016012770285,-54.5104018900298 -66.3181210688608,-54.5084266975281</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>COSTA RIO GRANDE</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">3568</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Costas</SimpleData>
+		<SimpleData name="CLASS">sea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">t</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">58</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-65.728194812132,-54.3228186367938 -66.3181210688608,-54.5084266975281 -66.360308293697,-54.5033825728195 -66.3845568440601,-54.4880676989059 -66.4573024951494,-54.4810483816956 -66.5026089971436,-54.4485042746293 -66.5523823373626,-54.422341365027 -66.5517442176162,-54.4057502516207 -66.6615008139965,-54.3438526362202 -66.7071263758639,-54.2892933979032 -66.7457326205209,-54.2561111710905 -66.861551354492,-54.2248433035171 -66.9027100781346,-54.2162286869407 -66.9486546998752,-54.1855989391136 -67.0131047942613,-54.1568835505258 -67.1276472887396,-54.1297634613039 -67.2501662800479,-54.0819044803241 -67.3187641527856,-54.0484031936382 -67.3420954060132,-54.0149417894365 -67.3747565304686,-54.0035262507919 -67.375865899467,-54.0035353989695 -67.4466971913171,-53.9792868486064 -67.4918441633747,-53.9425949631885 -67.5358744258761,-53.9275991491482 -67.5738425507867,-53.8880357248716 -67.5866049457147,-53.830924007569 -67.6650936745215,-53.7964655412636 -67.738158385484,-53.7476493806641 -67.8266975002966,-53.7047358277189 -67.8418528442735,-53.6886233041224 -67.9391661055991,-53.6353403052982 -68.0026590203656,-53.5728045701513 -68.0310553490803,-53.5335602057479 -68.0677472344981,-53.4547524170678 -68.0798715096797,-53.3979597596385 -68.106034419282,-53.3577582156154 -68.1373022868554,-53.332871545506 -68.2068573392127,-53.3060705161573 -68.3070421393971,-53.3226616295636 -68.4284444211491,-53.2987321390737 -68.4536501511318,-53.2980940193273 -68.5484109334718,-53.2489587988547 -68.5563874303018,-53.2129050331833 -68.539158197149,-53.1452643400651 -68.4673697256794,-53.0996387781978 -68.4123318975526,-53.0487487284226 -68.3627180872702,-53.0185975704053 -68.3282596209648,-53.0173213309125 -68.2638095265787,-53.0007302175062 -68.2877390170686,-52.9531902963996 -68.5366057181634,-52.7327199240193 -68.6071179501403,-52.6590170933105 -68.3553797101866,-52.3377238009995 -68.3540060671193,-52.3298253533625 -66.9550099255915,-52.7231374358561 -66.5491817680095,-54.0000257403643 -66.5491730437161,-54.0000369573133 -65.728194812132,-54.3228186367938</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>ZonaMalvinas</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">758</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI</SimpleData>
+		<SimpleData name="LAT">-52</SimpleData>
+		<SimpleData name="LONG">-58</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">59</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-62,-50 -56,-50 -56,-54 -62,-54 -62,-50</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Bahia Margarita</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">5000</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-68</SimpleData>
+		<SimpleData name="LONG">-67.13</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">60</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-67.2644202870158,-65.9999976125951 -67.2507580620167,-70.0132322288769 -70.0005593647818,-70.0007231816677 -70.0002466386016,-66.0001735210714 -67.2644202870158,-65.9999976125951</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Zona Larsen</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">5001</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-66</SimpleData>
+		<SimpleData name="LONG">-52</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">61</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-54.0000023069642,-66.000000235279 -54.0016779039156,-67.9984194754684 -65.6308223631712,-68.0060055285125 -65.5082141551347,-67.5730947681425 -63.7220394859768,-66.5041869114221 -62.122239847543,-66.1937084506122 -62.3744816083914,-65.9999782467194 -62.2730813660385,-66.0000222238385 -54.0000023069642,-66.000000235279</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Drake Sur (W58W)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">5002</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-61</SimpleData>
+		<SimpleData name="LONG">-62.5</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">62</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-58.001472847478,-59.9999945413994 -58.0000335943898,-62.0026659898188 -67.2652527330582,-62.0009870310116 -67.2666599997902,-60.0000000001799 -58.001472847478,-59.9999945413994</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>Mar de la Flota Oeste</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#metarea_modificado_2">
+		<SimpleData name="gid">5003</SimpleData>
+		<SimpleData name="type">MA</SimpleData>
+		<SimpleData name="DOMAIN">Metarea VI_Marambio</SimpleData>
+		<SimpleData name="LAT">-63</SimpleData>
+		<SimpleData name="LONG">-65</SimpleData>
+		<SimpleData name="CLASS">deepsea</SimpleData>
+		<SimpleData name="DOMAIN_ALT">Argentina</SimpleData>
+		<SimpleData name="warnings_m">f</SimpleData>
+		<SimpleData name="weather_mo">t</SimpleData>
+		<SimpleData name="has_data">t</SimpleData>
+		<SimpleData name="FID">63</SimpleData>
+	</SchemaData></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-58.0000335943898,-62.0026659898188 -62.5000000611253,-63.5008175628468 -67.266659960325,-63.4999448924293 -67.2666599992451,-62.0009870313356 -58.0000335943898,-62.0026659898188</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

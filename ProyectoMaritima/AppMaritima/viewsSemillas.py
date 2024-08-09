@@ -34,6 +34,22 @@ def cargarAreas(request):
 
 
 
+@staff_member_required
+def cargarCredencialesIniciales(request):
+
+    credential = Credential(
+        username="smn_user",
+        password="Dico1234!",
+        client="referer",
+        referer="https://gis.prefecturanaval.gob.ar/portal/",
+        expiration=60,
+        f="json"
+    )
+    credential.save()
+
+    return HttpResponse("Credenciales cargadas")
+
+
 #Ejectucarlo solo una vez, y con permisos de admin 
 @staff_member_required
 def cargarUsuarios(request):

@@ -1,7 +1,4 @@
 {% extends "AppMaritima/padre.html" %}
-
-
-
 {% load static %}
 
 {% block contenido %}
@@ -13,6 +10,7 @@
    
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
     <script src="{% static 'js/leaflet-windbarb.js' %}"></script>
     <style>
         #map {
@@ -29,11 +27,7 @@
 <body>
     <a target="_blank" href=""><h4 class="card-title">Reporte de Barcos</h4></a>
 
-
     <div id="map"></div>
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="{% static 'AppVerificacion/leaflet-windbarb.js' %}"></script>
 
     <script>
         const windDirectionMap = {
@@ -99,7 +93,20 @@
         map.addLayer(ignLayer);
         map.addLayer(osmLayer);
 
-        barcos.forEach(barco => {
+        // Cargar y agregar el archivo KML usando Leaflet Omnivore
+        const kmlUrl = '{% static "kml/mapa_metarea.kml" %}';
+        console.log('Cargando KML desde:', kmlUrl);
+
+        omnivore.kml(kmlUrl)
+            .on('ready', function() {
+                console.log('KML cargado correctamente');
+            })
+            .on('error', function(error) {
+                console.error('Error cargando KML:', error);
+            })
+            .addTo(map);
+
+            barcos.forEach(barco => {
             barco.nombre_buque = barco.nombre_buque.trim();
             barco.matricula = barco.matricula.trim();
             barco.imo = barco.imo ? barco.imo.trim() : 'No disponible';
@@ -153,6 +160,27 @@
             }
         });
     </script>
+
+
+<h1>Mapa de VesselFinder con Campos Meteorológicos</h1>
+<div id="vesselfinder"></div>
+<script type="text/javascript">
+    // Configuración del mapa
+    var width="100%";         // ancho en píxeles o porcentaje
+    var height="1000";        // alto en píxeles
+    var latitude="-34.00";    // latitud del centro (grados decimales)
+    var longitude="-58.14";   // longitud del centro (grados decimales)
+    var zoom="5";             // zoom inicial (entre 3 y 18)
+    var maptype="6";          // tipo de mapa (0: mapa, 1: satélite, 2: híbrido, 3: relieve, 6: náutico)
+    var weather="1";          // activar campos meteorológicos (1: sí, 0: no)
+    var traffic="0";          // mostrar tráfico (1: sí, 0: no)
+    var minimap="1";          // mostrar minimapa (1: sí, 0: no)
+    var shownames="1";        // mostrar nombres (1: sí, 0: no)
+    var defaultzoom="5";      // zoom predeterminado (entre 3 y 18)
+
+    // Generar el script de VesselFinder con los parámetros
+    document.write('<script type="text/javascript" src="https://www.vesselfinder.com/aismap.js?width=' + width + '&height=' + height + '&latitude=' + latitude + '&longitude=' + longitude + '&zoom=' + zoom + '&maptype=' + maptype + '&weather=' + weather + '&traffic=' + traffic + '&minimap=' + minimap + '&shownames=' + shownames + '&defaultzoom=' + defaultzoom + '"></scr' + 'ipt>');
+</script>
 </body>
 </html>
 {% endblock %}
