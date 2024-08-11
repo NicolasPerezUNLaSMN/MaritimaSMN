@@ -191,9 +191,15 @@ class BoletinCreacion(LoginRequiredMixin, FormView):
                 cargarPronosticos(boletin.id)
 
         except Exception as e:
+             # Capturar el mensaje de la excepción
+            error_message = str(e)
+     
+            # Redirigir a la plantilla de error con información adicional
+
+
             # Si ocurre una excepción, redirigir a una plantilla de error
-            messages.error(self.request, "El archivo XML tiene faltante de información. Por favor vuelva a PIMET, recuerde cargar METAREA-VI NORTE y SUR, COSTAS y RIO DE LA PLATA.")
-            return render(self.request, "AppMaritima/boletin/error_xml.html")
+            messages.error(self.request, f"ERROR: {error_message}")
+            return render(self.request, "AppMaritima/boletin/error_xml.html", {"error":f"\n\nERROR: error_message"})
 
         #return redirect(self.success_url)
         return redirect("boletin/ultimo")   

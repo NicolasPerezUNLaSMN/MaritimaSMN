@@ -1,4 +1,11 @@
+{% extends "AppMaritima/padre.html" %}
+
+
 {% load static %}
+
+        {% block contenido %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +30,11 @@
 </head>
 <body>
     <h1>Reporte de Barcos</h1>
+
+
+    <a href="{% url 'NewBoletin' %}" class="btn btn-primary">-Volver</a>
+
+
 
     <div id="map"></div>
 
@@ -162,3 +174,4 @@
     </script>
 </body>
 </html>
+{% endblock %}

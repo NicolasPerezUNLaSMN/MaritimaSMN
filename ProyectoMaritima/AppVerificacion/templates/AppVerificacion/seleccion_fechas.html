@@ -1,5 +1,12 @@
 <!-- templates/AppVerificacion/seleccion_fechas.html -->
 
+{% extends "../AppMaritima/padre.html" %}
+
+
+{% load static %}
+
+        {% block contenido %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +15,51 @@
     <title>Seleccionar Fechas</title>
 </head>
 <body>
-    <h1>Seleccionar Fechas</h1>
-    <form method="post" action="{% url 'selector_fechas' %}">
-        {% csrf_token %}
-        <label for="fecha_inicio">Fecha de Inicio:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
-        <br>
-        <label for="fecha_fin">Fecha de Fin:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" required>
-        <br>
-        <button type="submit">Consultar</button>
-    </form>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                     <div class="card">
+                        <!-- <a href="{% url 'ListBoletin' %}" class="btn btn-primary">-Últimos</a> -->
+                        <div class="card-body">
+                            <h4 class="card-title">Reportes de qué día?</h4>
+                           
+                           
+
+                    <form method="post" action="{% url 'selector_fechas' %}">
+                        {% csrf_token %}
+
+                        <div class="row form-material">
+
+                            <div class="col-md-6">
+                                <label class="m-t-20">Fecha inicio:</label>
+                                <input required type="date" class="form-control" placeholder="AAAA-MM-DD" name="fecha_inicio" id="fecha_inicio">
+                                
+                                
+                            </div>
+                        
+                
+                            <div class="col-md-6">
+                                <label class="m-t-20">Fecha fin:</label>
+                                <input required type="date" class="form-control" placeholder="AAAA-MM-DD" name="fecha_fin" id="fecha_fin">
+                                
+                                
+                            </div>
+                        
+                        </div>
+
+                         <input class="btn btn-success" type="submit" value="Consultar" />
+                     </form>
+</div>
+</div>
+
+</div>
+</div>
+</div>
 </body>
 </html>
+
+{% endblock %}
+
+
+         

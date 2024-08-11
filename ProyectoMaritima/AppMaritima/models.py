@@ -154,41 +154,46 @@ class Aviso(models.Model):
     
     def paraTXTEnIngles(self):
         
+
+        
         #Hay dos casos, aviso activo y aviso cesado
         
         #traigo la situación, a futuro se podria tener varias, por ahora solo UNA
         listaDeSituacionesAsignadas= []
+        contador = 0
         for s in self.situacion.all():
             listaDeSituacionesAsignadas.append(s)
+            contador = contador * 1
         
-        
+      
+ 
         texto = f"WARNING {self.numero}: {listaDeSituacionesAsignadas[0].paraTXTEnInglesResumen()} {self.provoca} "
-        
+            
         #Si está activo
         if (self.activo):
-            
-            texto = texto + f"{self.tipo} " + f" FROM {self.direccion} WITH GUST IN"
-            
-            #En qué areas?
-            
-            for a in self.area.all():
-                texto = texto + f" {(a.description.upper())}"
-            
-            
-            #si tiene hora de inicio
-            if (not self.horaDesde == -1):
                 
-                texto = texto + f" FROM {self.desde} / {self.horaDesde}"
+                texto = texto + f"{self.tipo} " + f" FROM {self.direccion} WITH GUST IN"
                 
-            #si tiene hora de fin
-            if (not self.horaHasta == -1):
+                #En qué areas?
                 
-                texto = texto + f" UNTIL {self.hasta} / {self.horaHasta}"
-            
-        #Si fue cesado   
+                for a in self.area.all():
+                    texto = texto + f" {(a.description.upper())}"
+                
+                
+                #si tiene hora de inicio
+                if (not self.horaDesde == -1):
+                    
+                    texto = texto + f" FROM {self.desde} / {self.horaDesde}"
+                    
+                #si tiene hora de fin
+                if (not self.horaHasta == -1):
+                    
+                    texto = texto + f" UNTIL {self.hasta} / {self.horaHasta}"
+                
+            #Si fue cesado   
         else:
-            texto = texto + "CEASED"  
-        
+                texto = texto + "CEASED"  
+            
         texto = texto +"\n"
         
         return texto

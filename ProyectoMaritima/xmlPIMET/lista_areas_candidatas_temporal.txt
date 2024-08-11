@@ -1,15 +1,9 @@
 Areas candidatas para temporales: 
---> COSTA ISLA DE LOS ESTADOS
---> COSTA RIO GRANDE
---> OFFSHORE FIN DEL MUNDO
---> OFFSHORE PATAGONIA SUR
---> Area Centro Este (N 45 E 30W)
---> Area Centro Este (N 45 W 30)
+--> OFFSHORE MAR DEL PLATA
+--> OFFSHORE RIO DE LA PLATA
 --> Area Centro Este (S 45 E 30)
 --> Area Centro Este (S 45 W 30)
+--> Area Centro Oeste (N 45 E 50)
+--> Area Centro Oeste (N 45 W 50)
 --> Area Centro Oeste (S 45 E 50)
---> Area Norte (N 40S E30W)
---> Area Sudeste (N 55 W 30)
---> Area Sudoeste (N 55 E 50)
---> Area Sudoeste (N 55 W 50)
---> Area Sudoeste (S 55 W 50)
+--> Area Norte (N 40S W 40W)

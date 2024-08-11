@@ -26,7 +26,7 @@ def timestamp_to_date(timestamp):
 def fecha_hoy(request, numero=None):
         
         if numero is None:
-            numero = 24
+            numero = 12
     
         # Obtener la fecha actual y la fecha de hace 24 horas
         fecha_fin = datetime.datetime.now()
@@ -105,10 +105,14 @@ def fecha_hoy(request, numero=None):
 
 
 def selector_fechas(request):
+
+
     if request.method == 'POST':
         # Obtener las fechas del formulario
         fecha_inicio = request.POST.get('fecha_inicio')
         fecha_fin = request.POST.get('fecha_fin')
+
+        print(f"ME LLEGO: {fecha_inicio} ---------- {fecha_fin}")
         try:
             datetime.datetime.strptime(fecha_inicio, '%Y-%m-%d').date()
             datetime.datetime.strptime(fecha_fin, '%Y-%m-%d').date()

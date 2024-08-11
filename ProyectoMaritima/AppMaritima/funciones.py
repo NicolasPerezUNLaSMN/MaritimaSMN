@@ -281,6 +281,8 @@ def tomarHorasIndicadasSegunTurno(elemento):
         hora1 = 0
         hora2 = 0
         hora3 = 0
+
+        print(f"HORA QUE TOMA: {horaActual}")
        
         #Hora actual en hora local :) 
         if (horaActual < 18): #Si se crea el boletin en el turno diurno
@@ -330,22 +332,36 @@ def escribirTextoOlas(direccion, altura):
         ########
 
 
-       
+        print(f"HORAS OLAS: {hora1} {hora2} {hora3}")
+
+        print(f"{altura.list_timeranges[hora1]}")
+        print(f"{altura.list_timeranges[hora2]}")
+        print(f"{altura.list_timeranges[hora3]}")
 
         #Value[0] altura en metros
         alturaInicial = altura.list_timeranges[hora1].list_values[0].text
         alturaMedia = altura.list_timeranges[hora2].list_values[0].text
         alturaFinal = altura.list_timeranges[hora3].list_values[0].text
+
+        hora1d,hora2d,hora3d = tomarHorasIndicadasSegunTurno(direccion)
         
-        #print(f"\nPRUEBA DE HORARIOS DE OLAS: {altura.list_timeranges[hora1]}//{altura.list_timeranges[hora2]}//{altura.list_timeranges[hora3]}")
+        print(f"{direccion.list_timeranges[hora1d]}")
+        print(f"{direccion.list_timeranges[hora2d]}")
+        print(f"{direccion.list_timeranges[hora3d]}")
+        
+        print(f"\nPRUEBA DE HORARIOS DE OLAS: {altura.list_timeranges[hora1]}//{altura.list_timeranges[hora2]}//{altura.list_timeranges[hora3]}")
         
 
         #Value[1] direccion en 16 cuadrantes
-        dirInicial = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora1].list_values[1].text)
-        dirMedia = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora2].list_values[1].text)
-        dirFinal = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora3].list_values[1].text)
+        dirInicial = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora1d].list_values[1].text)
+        print(f" {direccion.list_timeranges[hora1d].list_values[1].text}  ")
+        dirMedia = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora2d].list_values[1].text)
+        print(f"  {direccion.list_timeranges[hora2d].list_values[1].text }   ")
+        dirFinal = transformarOlasA8Cuadrantes(direccion.list_timeranges[hora3d].list_values[1].text)
+        print(f"   {direccion.list_timeranges[hora3d].list_values[1].text}")
 
-      
+
+        print(f" {dirInicial} {dirMedia }    {dirFinal}")
 
         #Acá se guarda el texto final
         retorno = "\nWAVES: "
@@ -407,17 +423,22 @@ def escribirTextoOlas(direccion, altura):
 
         retorno = retorno +". "
         
+        print(f"\n\nPRUEBA OLAS: {retorno}")
 
         return retorno 
 
 #Direccion y velocidad tienen una lista de horas y en cada hora esta el valor
 def escribirTextoViento(direccion, velocidad):
+        
+
 
         #Transformo direcciones a sectores 
 
         for t in direccion.list_timeranges:
 
           t.list_values[1].text = transformarASectores(t.list_values[1].text)
+
+          print(f"VIENTO EN DIRECCIONES: {t.list_values[1].text}" )
 
         #"""OBS: list_ parametros : #1-WD viento direccion  6- WS vel viento
         #        list_timeranges:   #0 - 6z  #1- 12Z    2-18  3-24/00   4-30/06   5-36/12
@@ -427,6 +448,8 @@ def escribirTextoViento(direccion, velocidad):
         #####Checkear y validar esto entre diuno y nocturno y distintos modelos
         hora1,hora2,hora3 = tomarHorasIndicadasSegunTurno(velocidad)
         ########
+
+        print(f"HORAS SEGUN TURNO: {hora1} {hora2} {hora3}")
          
         #print(f"\nPRUEBA DE HORARIOS DE VEINTO: {velocidad.list_timeranges[hora1]}{velocidad.list_timeranges[hora2]}{velocidad.list_timeranges[hora3]}")
         
@@ -439,6 +462,8 @@ def escribirTextoViento(direccion, velocidad):
         hora2Maxima = hora2
         hora3Maxima = hora3
 
+       
+
         #Si la hora siguiente es mayor, me quedo con la siguiente
 
         if((int(ktABeaufort(velocidad.list_timeranges[hora1].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora1+1].list_values[0].text) )):
@@ -447,10 +472,14 @@ def escribirTextoViento(direccion, velocidad):
         if((int(ktABeaufort(velocidad.list_timeranges[hora2].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora2+1].list_values[0].text) )):
           hora2Maxima = hora2 +1
 
+        print("---------------------------")
+
         if((int(ktABeaufort(velocidad.list_timeranges[hora3].list_values[0].text) )) < int(ktABeaufort(velocidad.list_timeranges[hora3+1].list_values[0].text) )):
           hora3Maxima = hora3 +1
 
-        #print(f"HORAS DEL PRONOS 2023: {hora1Maxima} {hora2Maxima} {hora3Maxima}")
+        print("xxxxxxxxxxxxxxxxxxx")
+
+        print(f"HORAS DEL PRONOS 2023: {hora1Maxima} {hora2Maxima} {hora3Maxima}")
 
         #Ahora ya se cual es mi dato más importante, uso ese
 
@@ -536,7 +565,7 @@ def escribirTextoViento(direccion, velocidad):
 
         retorno = retorno + ". "
         
-
+        print(f"\n\nPRUEBA VIENTOS: {retorno}")
         return retorno 
 
 
@@ -596,6 +625,7 @@ def escribirVisibilidad(visibilidad):
 
         retorno = retorno +". "
         
+        print(f"\n\nPRUEBA VISI: {retorno}")
         return retorno
       
     
@@ -793,6 +823,7 @@ def escribirPronostico(pronostico):
            
         retorno = retorno +". "
 
+        print(f"\n\nPRUEBA FENO: {retorno}")
         return retorno
    
 #Esta funcion retorna el area de pronostico recibida solo si tiene pronostico de temporal
@@ -835,7 +866,7 @@ def areaAtexto(area,bole):
   #print(f"Texto a area: {area}")
   texto = f"\n{traducirAreas(area.description)}: ".upper()
 
-  
+
  
   parametroWd = next((p for p in area.list_parameters if p.id == "wd"), None)
   parametroWs = next((p for p in area.list_parameters if p.id == "ws"), None)
@@ -849,11 +880,10 @@ def areaAtexto(area,bole):
 
   
 
-  #print(f"--- Parametros viento: {parametroWd} - {parametroWs}")
-  #print(f"--- Parametros fenomeno: {parametroWw}")
-  #print(f"--- Parametros visibility: {parametroVi}")
-
-  #print(f"--- Parametros olas: {parametroWad} - {parametroWah}")
+  print(f"--- Parametros viento: {parametroWd} - {parametroWs}")
+  print(f"--- Parametros fenomeno: {parametroWw}")
+  print(f"--- Parametros visibility: {parametroVi}")
+  print(f"--- Parametros olas: {parametroWad} - {parametroWah}")
 
   #if all(param is not None for param in [parametroWd, parametroWs, parametroWw, parametroVi]):
     #genero el viento del area, solo con los parametros 1 y 6
@@ -871,6 +901,7 @@ def areaAtexto(area,bole):
 
   #Si el pronostico de SHN no está, uso PIMET
   if(bole.pronosticosOlasSHN == ""):
+
     if all(param is not None for param in [parametroWad, parametroWah]):
 
       ola = escribirTextoOlas(parametroWad,parametroWah)
@@ -968,6 +999,9 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
       
           ###################ESTRUCTURA PRINCIPAL; CARGA AREAS CON PRONOSTICOS######
           if (area.tag == 'area'):
+              
+              print(f"INTENTANDO HACER EL PRONOS DE: {area.attrib['description']}")
+
               #instancio un area
               a = AreaXML(area.attrib['id'],area.attrib['latitude'],area.attrib['longitude'],area.attrib['description'], area.attrib['domain'])
             
@@ -980,7 +1014,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
                   #instancio el parametro
                   p = Parameter(parameter.attrib['id'])
 
-                  #print(f"ESTOY EN PARAMETER: {p}")
+                  print(f"ESTOY EN PARAMETER: {p}")
 
                   ###################TIME RANGE#########################
                   #accedo a las horas de mi parametro
@@ -988,7 +1022,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
                     #instancio el timerange
                     t = Timerange(timerange.attrib['h'],timerange.attrib['datetime'])
 
-                    #print(f"ESTOY EN HORA: {t}")
+                    print(f"ESTOY EN HORA: {t}")
 
                     ###################VALUE#########################
                     #accedo al value de ese horario
@@ -997,7 +1031,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
                       #instancio al valor
                       v = Value(value.text,value.attrib['unit'])
 
-                      #print(f"ESTOY EN VALOR: {v}")
+                      print(f"ESTOY EN VALOR: {v}")
 
                       #Agrego el valor a la lista de timerange
                       t.list_values.append(v)
@@ -1022,8 +1056,8 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
 
               pronos = Pronostico(texto = areaAtexto(a,b), area =  queAreaEs, tipo = tipo)
 
-              #print(f"-----> estoy por guardar el pronos de: {queAreaEs}")
-              #print(f"{pronos}")
+              print(f"-----> estoy por guardar el pronos de: {queAreaEs}")
+              print(f"{pronos}")
               
               #LISTA DE AREAS DE POSIBLE TEMPORAL !!!¡¡????? PENSAR
               
@@ -1046,7 +1080,7 @@ def cargarPronosticosDesdeElXML(nombreArchivo, idBoletin):
               
               pronos.save()
 
-              #print(f"-----> EDITE y GUARDE el pronos de: {queAreaEs}")
+              print(f"-----> EDITE y GUARDE el pronos de: {queAreaEs}")
               
     #Una vez que guarde todos los pronos en el boletín seteo 
     #Y guardo el horario del xml para saber cuando se actualizo pimet
@@ -1286,6 +1320,9 @@ def traducirAreas(areaCastellano):
 
   if("RIO DE LA PLATA INTERMEDIO" in areaCastellano):
      areaIngles = areaCastellano.replace("RIO DE LA PLATA INTERMEDIO" ,"INTERMEDIATE RIO DE LA PLATA")
+
+  if("RIO DE LA PLATA INTERMEDIO" in areaCastellano):
+     areaIngles = areaCastellano.replace("OFFSHORE RIO DE LA PLATA" ,"URUGUAY SOUTH EAST COASTS")
 
 
   # Remover el subString "OFFSHORE"
