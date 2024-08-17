@@ -8,7 +8,10 @@ class AreaAdmin(admin.ModelAdmin):
     list_display = ('id','idPimet', 'latitude', 'longitude','description','descriptionIngles','domain', 'orden')
 
 class AvisoAdmin(admin.ModelAdmin):
-    list_display = ('id','numero', 'actualizacion', 'tipo','direccion','activo','desde','hasta')
+    list_display = ('id','numero', 'actualizacion', 'tipo', 'sur60','navtex','direccion','activo','desde','hasta')
+
+class SituacionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'sistema','movimiento','navtex', 'activo','sur60', 'esPresente', )
 
 class BoletinAdmin(admin.ModelAdmin):
     list_display = ('id','emitido', 'modificado', 'pronosticosGuardados', 'valido','hora')
@@ -22,5 +25,5 @@ admin.site.register(Boletin, BoletinAdmin)
 admin.site.register(Aviso, AvisoAdmin)
 admin.site.register(Hielo)
 admin.site.register(Credential)
-admin.site.register(Situacion)
+admin.site.register(Situacion, SituacionAdmin)
 admin.site.register(Pronostico,PronosticoAdmin)

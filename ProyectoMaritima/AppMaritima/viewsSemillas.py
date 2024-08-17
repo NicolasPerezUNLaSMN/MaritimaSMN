@@ -80,7 +80,8 @@ def cargarUsuarios(request):
                         "mcorvalan",
                         "sgalgano",
                         "rvidal",
-                        "ngiletto"
+                        "ngiletto",
+                        "invitado"
                         ]
         
        for n in lista_usuarios:

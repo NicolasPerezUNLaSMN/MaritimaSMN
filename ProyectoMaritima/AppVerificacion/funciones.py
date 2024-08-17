@@ -12,7 +12,7 @@ def beaufort_to_knots(beaufort):
 
 
     print(f"----> {beaufort}")
-    if beaufort is "null":
+    if beaufort == "null":
         beaufort = 0
     else:
         try:

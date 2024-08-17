@@ -1,9 +1,1 @@
-Areas candidatas para temporales: 
---> OFFSHORE MAR DEL PLATA
---> OFFSHORE RIO DE LA PLATA
---> Area Centro Este (S 45 E 30)
---> Area Centro Este (S 45 W 30)
---> Area Centro Oeste (N 45 E 50)
---> Area Centro Oeste (N 45 W 50)
---> Area Centro Oeste (S 45 E 50)
---> Area Norte (N 40S W 40W)
+No hay areas candidatas para temporales.

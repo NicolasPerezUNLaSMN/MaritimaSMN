@@ -61,7 +61,8 @@ class Situacion(models.Model):
     momentoFinal = models.DateField(null=True, blank=True)
     horaFinal = models.IntegerField(null=True, blank=True)
     
-    navtex = BooleanField(null=True, blank=True)
+    navtex = BooleanField(default = False, null=True, blank=True)
+    sur60= BooleanField(default = False, null=True, blank=True)
 
     esPresente = BooleanField(null=True, blank=True)
     
@@ -88,13 +89,13 @@ class Situacion(models.Model):
             if ( self.movimiento != "NOT MOV"):
                 texto = f"{self.sistema} {valorInicial} MOVING {self.movimiento} {self.evolucion}"
             else:
-                texto = f"NOT MOV {self.evolucion}"
+                texto = f"{self.sistema} {valorInicial}  NOT MOV {self.evolucion}"
             
             
             #Si tiene posición inicial
             if (not self.horaInicial == -1):
                 
-                texto = texto +f"AT {self.posicionInicial} BY {self.momentoInicial}/{self.horaInicial}"
+                texto = texto +f" AT {self.posicionInicial} BY {self.momentoInicial}/{self.horaInicial}"
                 
             #Si tiene posición final
             if (not self.horaFinal == -1):
@@ -144,7 +145,8 @@ class Aviso(models.Model):
     provoca = models.CharField(default="PROVOKE", max_length=30)
     
     navtex = BooleanField(default = False, null=True, blank=True)
-    
+    sur60= BooleanField(default = False, null=True, blank=True)
+
     def __str__2(self):
         return f"NUMERO: ---->  {self.numero} TIPO: ---> {self.tipo} ---> DIRECCIÓN ---> {self.direccion}"
     
@@ -177,7 +179,7 @@ class Aviso(models.Model):
                 #En qué areas?
                 
                 for a in self.area.all():
-                    texto = texto + f" {(a.description.upper())}"
+                    texto = texto + f" {(a.descriptionIngles.upper())}"
                 
                 
                 #si tiene hora de inicio

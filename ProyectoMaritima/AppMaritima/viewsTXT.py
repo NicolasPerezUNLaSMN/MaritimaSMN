@@ -35,19 +35,23 @@ def crearTXT(request, pk):
     
     #Envio toda la info
     #nortes
-    textoAltamar = crearTXTnaveganteAltamar(boletin,avisos, situaciones,hielos,pronosticosMetarea)
-    textoOff = crearTXTnaveganteOffShore(boletin,avisosNavtex , situacionesNavtex,hielos,pronosticosOffshore)
+    textoAltamar = crearTXTnaveganteAltamar(boletin,avisos, situaciones,hielos,pronosticosMetarea) #:)
+    textoOff = crearTXTnaveganteOffShore(boletin,avisosNavtex , situacionesNavtex,hielos,pronosticosOffshore)#:)
+
     textoCostas = crearTXTnaveganteCostas(boletin,avisosNavtex , situacionesNavtex,hielos,pronosticosCostas)
 
 
-        #nortes
-    textoAltamarS = crearTXTnaveganteAltamarS(boletin,avisos, situaciones,hielos,pronosticosMetareaS)
-    textoOffS = crearTXTnaveganteOffShoreS(boletin,avisosNavtex , situacionesNavtex,hielos,pronosticosOffshoreS)
+    #sures
+    textoAltamarS = crearTXTnaveganteAltamarS(boletin,avisos, situaciones,hielos,pronosticosMetareaS)#:)
+    textoOffS = crearTXTnaveganteOffShoreS(boletin,avisosNavtex , situacionesNavtex,hielos,pronosticosOffshoreS)#:)
+
+
+    textoSupremo = crearTXTnaveganteSupremo(boletin,avisos, situaciones,hielos,pronosticosMetarea, pronosticosMetareaS, pronosticosOffshore, pronosticosOffshoreS) #:)
 
 
     array_navtex = crearTXTnavtex(boletin,avisosNavtex, situaciones,pronosticosOffshore)
     
-    diccionario = {"textoAltamar":textoAltamar, "textoOff":textoOff, "textoCostas":textoCostas, "array_navtex": array_navtex}
+    diccionario = {"textoAltamar":textoAltamar, "textoOff":textoOff, "textoAltamarS":textoAltamarS, "textoOffS":textoOffS, "textoCostas":textoCostas, "array_navtex": array_navtex, "textoSupremo":textoSupremo }
     
     return render(request, 'AppMaritima/editor.html', diccionario)
 
@@ -67,12 +71,20 @@ and maximum waves may be up to twice the significant height, sea ice and iceberg
                     
 PART 1 GALE WARNING\n"""
     
-    if (len(avisos)!=0):            
+
+
+    # Contar los avisos activos que no son del sur de 60
+    no_sur60_count = Aviso.objects.filter(activo=True, sur60=False).count()
+
+  
+    
+    if (no_sur60_count  != 0):            
         #Escritura de los avisos
         for a in avisos: 
             
-            #Defino en un metodo del modelo la escritura de txt
-            textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+            if ( a.activo and not a.sur60):
+                #Defino en un metodo del modelo la escritura de txt
+                textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
     else:
         textoEnIngles = textoEnIngles +"NO WARNINGS"
         
@@ -85,7 +97,7 @@ PART 1 GALE WARNING\n"""
     #escribo la situación   
     for s in situaciones: 
         
-        if (s.esPresente):
+        if (s.activo  and s.esPresente and not s.sur60 ):
             textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
 
 
@@ -100,7 +112,7 @@ PART 1 GALE WARNING\n"""
     
     
     #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
-    textoEnIngles = textoEnIngles +"PART 3 FORECAST\n"
+    textoEnIngles = textoEnIngles +"\nPART 3 FORECAST\n"
     
     #textoEnIngles = textoEnIngles +"COASTAL AREAS:\n"
    
@@ -152,12 +164,16 @@ and maximum waves may be up to twice the significant height, sea ice and iceberg
                     
 PART 1 GALE WARNING\n"""
     
-    if (len(avisos)!=0):            
+    # Contar los avisos activos que no son del sur de 60
+    sur60_count = Aviso.objects.filter(activo=True, sur60=True).count()
+    
+    if (sur60_count!=0):            
         #Escritura de los avisos
         for a in avisos: 
             
-            #Defino en un metodo del modelo la escritura de txt
-            textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+            if( a.sur60 and a.activo):
+                #Defino en un metodo del modelo la escritura de txt
+                textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
     else:
         textoEnIngles = textoEnIngles +"NO WARNINGS"
         
@@ -170,7 +186,7 @@ PART 1 GALE WARNING\n"""
     #escribo la situación   
     for s in situaciones: 
         
-        if (s.esPresente):
+        if (s.esPresente and s.sur60 and s.activo):
             textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
 
 
@@ -237,31 +253,40 @@ and maximum waves may be up to twice the significant height, sea ice and iceberg
                     
 PART 1 GALE WARNING\n"""
     
-    if (len(avisos)!=0):            
+     # Contar los avisos activos que no son del sur de 60
+    no_sur60_count = Aviso.objects.filter(activo=True, sur60=False, navtex=True).count()
+
+    if (no_sur60_count !=0):            
         #Escritura de los avisos
         for a in avisos: 
             
-            #Defino en un metodo del modelo la escritura de txt
-            textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+            if (a.navtex and a.activo and not a.sur60):
+                #Defino en un metodo del modelo la escritura de txt
+                textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
     else:
         textoEnIngles = textoEnIngles +"NO WARNINGS"
         
     #Escritura de las situaciones
     textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
+
+     #escribo la situación   
+    for s in situaciones: 
+        
+        if (s.esPresente and s.activo and not s.sur60):
+            textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
+
+
+    textoEnIngles = textoEnIngles +"\n"
     
     
     #Escribo los hielos, aún es uno solo
     
-    for h in hielos:
+    #for h in hielos:
         
-        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
-    textoEnIngles = textoEnIngles +"\n"
+        #textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
+    #textoEnIngles = textoEnIngles +"\n"
     
        
-    for s in situaciones: 
-        
-        if (s.esPresente):
-            textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
 
 
     textoEnIngles = textoEnIngles +"\n"
@@ -317,31 +342,34 @@ and maximum waves may be up to twice the significant height, sea ice and iceberg
                     
 PART 1 GALE WARNING\n"""
     
-    if (len(avisos)!=0):            
+    sur60_count = Aviso.objects.filter(activo=True, sur60=True, navtex=True).count()
+
+    if (sur60_count !=0):            
         #Escritura de los avisos
         for a in avisos: 
-            
-            #Defino en un metodo del modelo la escritura de txt
-            textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+            if( a.sur60 and a.navtex and a.activo):
+                #Defino en un metodo del modelo la escritura de txt
+                textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
     else:
         textoEnIngles = textoEnIngles +"NO WARNINGS"
         
     #Escritura de las situaciones
     textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
     
-    
-    #Escribo los hielos, aún es uno solo
-    
-    for h in hielos:
-        
-        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
-    textoEnIngles = textoEnIngles +"\n"
-    
-       
+    #escribo la situación   
     for s in situaciones: 
         
-        if (s.esPresente):
+        if (s.esPresente and   s.sur60 and s.activo ):
             textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
+
+    #Escribo los hielos, aún es uno solo
+    
+    #for h in hielos:
+        
+        #textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
+    #textoEnIngles = textoEnIngles +"\n"
+    
+
 
 
     textoEnIngles = textoEnIngles +"\n"
@@ -547,3 +575,118 @@ def descargar_archivo(request):
         
 
           
+
+
+# ---- supremo
+#escfitura del boletin  Altamar
+
+def crearTXTnaveganteSupremo(boletin,avisos, situaciones,hielos,pronosticosMetarea,pronosticosMetareaS, pronosticoOffShore, pronosticoOffShoreS):
+    
+    
+    #Encabezado "casi" fijo  #01 en español
+    textoEnIngles = f"""FQST02 SABM {boletin.valido} {boletin.hora}00 
+1:31:06:01:00 
+SECURITE 
+WEATHER BULLETIN ON METAREA VI
+SMN ARGENTINA, {boletin.valido} AT {boletin.hora}UTC WIND SPEED IN BEAUFORT SCALE WAVES IN METERS
+Please be aware wind gust can be a further 40 percent stronger than the averages 
+and maximum waves may be up to twice the significant height, sea ice and icebergs issued by SHN
+                    
+PART 1 GALE WARNING\n"""
+    
+
+
+    # Contar los avisos activos que no son del sur de 60
+    count = Aviso.objects.filter(activo=True).count()
+
+  
+    
+    if (count != 0):            
+        #Escritura de los avisos
+        for a in avisos: 
+            
+            if ( a.activo ):
+                #Defino en un metodo del modelo la escritura de txt
+                textoEnIngles = textoEnIngles +a.paraTXTEnIngles()
+    else:
+        textoEnIngles = textoEnIngles +"NO WARNINGS"
+        
+    #Escritura de las situaciones
+    textoEnIngles = textoEnIngles +"\nPART 2 GENERAL SYNOPSIS\n"
+    
+    
+    
+    
+    #escribo la situación   
+    for s in situaciones: 
+        
+        if (s.activo  ):
+            textoEnIngles = textoEnIngles +s.paraTXTEnIngles()
+
+
+    textoEnIngles = textoEnIngles +"\n"
+
+    #Escribo los hielos, aún es uno solo
+    
+    for h in hielos:
+        
+        textoEnIngles = textoEnIngles +h.paraTXTEnIngles()
+    textoEnIngles = textoEnIngles +"\n"
+    
+    
+    #Escribo los pronosticos--- OJO en que orden los quieren poner!!!!!!
+    textoEnIngles = textoEnIngles +"\nPART 3 FORECAST\n"
+    
+    #textoEnIngles = textoEnIngles +"COASTAL AREAS:\n"
+   
+    
+    #for p in pronosticosOffshore:
+        
+    #   textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+    textoEnIngles = textoEnIngles +"\nCOASTS - NORTH 60S\n"
+
+    for p in pronosticoOffShore:
+        
+        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+
+        
+    textoEnIngles = textoEnIngles +"\nOCEANIC AREAS - NORTH 60S\n"
+    for p in pronosticosMetarea:
+        
+        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+
+
+
+    textoEnIngles = textoEnIngles +"\nCOASTS - SOUTH 60S\n"
+
+    for p in pronosticoOffShoreS:
+        
+        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+
+    textoEnIngles = textoEnIngles +"\nOCEANIC AREAS - SOUTH 60S\n"
+
+    for p in pronosticosMetareaS:
+        
+        textoEnIngles = textoEnIngles +p.paraTXTEnIngles()
+
+
+
+    #Cierre pedido por comunicaciones
+    textoEnIngles = textoEnIngles + "-----------------------------------------------------------------\nNNNN="
+    
+    #Por si algo quedó mal lo paso todo a mayusculas
+    textoEnIngles = textoEnIngles.upper()
+    
+    #Abro el archivo, escribo y lo cierro... boletin maritimo en ingles -- carpeta archivo
+    nombreArchivo = f"{boletin.valido}_{boletin.hora}_nav_ing_sup.txt"
+    f = open (f"txtGuardados/{nombreArchivo}",'w')
+    f.write(textoEnIngles)
+    f.close()
+
+    #Abro el archivo, escribo y lo cierro... boletin maritimo en ingles - Carpeta para difusión
+    nombreArchivoUltimo = "nav_ing_sup.txt"
+    f = open (f"txtUltimos/{nombreArchivoUltimo}",'w')
+    f.write(textoEnIngles)
+    f.close()
+    
+    return textoEnIngles

@@ -6,6 +6,7 @@ from datetime import datetime
 from AppMaritima.models import Pronostico, Boletin, Area
 
 from AppMaritima.clasesLecturaDelXML import *
+import random
 
 #Envio de mails
 import smtplib, ssl
@@ -734,7 +735,70 @@ def escribirPronostico(pronostico):
         fenomeno3 = codigoAFenomeno(pronostico.list_timeranges[hora3].list_values[0].text)
         fenomeno33 = codigoAFenomeno(pronostico.list_timeranges[hora3+1].list_values[0].text)
 
+    
+        
+        # Definir los fenómenos
+        fenomenos = [(fenomeno1, fenomeno11), (fenomeno2, fenomeno22), (fenomeno3, fenomeno33)]
+
+        # Inicializar el retorno
+        retorno = "\nFORECAST: "
+
+        # Función para combinar fenómenos
+        def combinar_fenomenos(fen1, fen2):
+            if fen1 == fen2 or fen1 in fen2 or fen2 in fen1:
+                return fen1
+            else:
+                return fen1 + "/" + fen2
+
+        # Lista para almacenar los fenómenos combinados que no son redundantes
+        fenomenos_combinados = []
+
+        # Iterar sobre los pares de fenómenos
+        for fen1, fen2 in fenomenos:
+            fenomeno_final = combinar_fenomenos(fen1, fen2)
+            # Añadir solo si no está contenido en el último fenómeno significativo añadido
+            if not fenomenos_combinados or fenomeno_final not in fenomenos_combinados[-1] :
+                fenomenos_combinados.append(fenomeno_final)
+
+        # Construir la cadena final
+        if fenomenos_combinados:
+            retorno += " LATER ".join(fenomenos_combinados)
+        else:
+            retorno += "NO SIGNIFICANT WEATHER EVENTS."
+
+        retorno += "."
+
+        # Reemplazar barras por "then" o "followed by" aleatoriamente
+        def reemplazar_barras(string):
+            opciones = [", then", ", followed by"]
+            partes = string.split("/")
+            resultado = partes[0]
+
+            for parte in partes[1:]:
+                resultado += random.choice(opciones) + " " + parte
+
+            return resultado
+        
+         # Reemplazar "LATER" por un sinónimo aleatoriamente sin repeticiones consecutivas
+        def reemplazar_later(string):
+            sinonimos = ["afterwards", "subsequently", "later"]
+            partes = string.split(" LATER ")
+            resultado = partes[0]
+            ultimo_usado = None
+
+            for parte in partes[1:]:
+                opciones = [sinonimo for sinonimo in sinonimos if sinonimo != ultimo_usado]
+                sinonimo_elegido = random.choice(opciones)
+                resultado += " " + sinonimo_elegido + " " + parte
+                ultimo_usado = sinonimo_elegido
+
+            return resultado
+        
+        retorno = reemplazar_barras(retorno)
+        retorno = reemplazar_later(retorno)
+
         #Si los fenomenos y  su consecutivo son distintos los uno. Sino dejo el de la hora clave. 
+        """
         if fenomeno1 != fenomeno11:
            fenomeno1 = fenomeno1 +"/" +fenomeno11
 
@@ -751,6 +815,7 @@ def escribirPronostico(pronostico):
 
 
         #Si hay algun fenomeno significativo
+       
         if (not(fenomeno1 == "WORSENING" and fenomeno2 == "WORSENING" and fenomeno3 == "WORSENING") ):
 
           
@@ -765,9 +830,9 @@ def escribirPronostico(pronostico):
 
 
           #Los tres dintintos
-          if ( not (fenomeno1 == fenomeno2)  and  not (fenomeno2 == fenomeno3) and  not (fenomeno1 == fenomeno3)):
+          if ( not (fenomeno1 == fenomeno2 or )  and  not (fenomeno2 == fenomeno3) and  not (fenomeno1 == fenomeno3)):
 
-            if (fenomeno3 == "WORSENING"):
+            if (fenomeno3 == "WORSENING"): #el tres es solo nube
 
               fenomeno3 = "IMPROVING"
 
@@ -822,6 +887,8 @@ def escribirPronostico(pronostico):
            retorno = retorno +"NO SIGNIFICANT WEATHER EVENTS."
            
         retorno = retorno +". "
+        """
+
 
         print(f"\n\nPRUEBA FENO: {retorno}")
         return retorno
@@ -1288,8 +1355,8 @@ def traducirAreas(areaCastellano):
   if("PATAGONIA SUR" in areaCastellano):
      areaIngles = areaCastellano.replace("PATAGONIA SUR","SOUTH PATAGONIA COASTS (48ºS - 54ºS)")
 
-  if("OFSHORE SAN JORGE" in areaCastellano):
-     areaIngles = areaCastellano.replace("OFSHORE SAN JORGE" ,"GOLFO DE SAN JORGE  COASTS (45ºS - 48ºS)")
+  if("OFFSHORE SAN JORGE" in areaCastellano):
+     areaIngles = areaCastellano.replace("OFFSHORE SAN JORGE" ,"GOLFO DE SAN JORGE  COASTS (45ºS - 48ºS)")
 
   #if("SAN JORGE SUR" in areaCastellano):
      #areaIngles = areaCastellano.replace("SAN JORGE SUR" ,"GOLFO DE SAN JORGE SUR COASTS (47ºS - 48ºS)")
@@ -1321,7 +1388,7 @@ def traducirAreas(areaCastellano):
   if("RIO DE LA PLATA INTERMEDIO" in areaCastellano):
      areaIngles = areaCastellano.replace("RIO DE LA PLATA INTERMEDIO" ,"INTERMEDIATE RIO DE LA PLATA")
 
-  if("RIO DE LA PLATA INTERMEDIO" in areaCastellano):
+  if("OFFSHORE RIO DE LA PLATA" in areaCastellano):
      areaIngles = areaCastellano.replace("OFFSHORE RIO DE LA PLATA" ,"URUGUAY SOUTH EAST COASTS")
 
 

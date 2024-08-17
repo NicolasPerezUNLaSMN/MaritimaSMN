@@ -60,6 +60,9 @@ class AvisoForm(forms.Form):
     CHOICESHORAS = ((' ',' '),('0','0'),
                    ('3','3'),('6','6'),('9','9'), ('12','12'),('15','15'),('18','18'),('21','21'))
    
+
+    CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
+
     situacion = forms.ModelMultipleChoiceField(
         queryset=Situacion.objects.filter(activo=True), #solo situaciones activas
         widget=forms.CheckboxSelectMultiple
@@ -78,8 +81,8 @@ class AvisoForm(forms.Form):
     
     horaHasta = forms.ChoiceField(label="Hora (hasta)", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
     
-    
-    
+    sur60 = forms.ChoiceField(label="Es del boletín al S 60:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESSUR60)
+
     #area = forms.ModelMultipleChoiceField(
      #   queryset=Area.objects.filter(latitude__range=[-35, -58]).exclude(description__contains='COSTA' ).exclude(description__contains='GOLFO').exclude(domain__contains='Rio de la Plata' ).exclude(description__contains='DESEMBOCADURA').order_by("-domain", "description"), #Traigo todo menos al sur de 60, y no traigo las costas
      #   widget=forms.CheckboxSelectMultiple
@@ -94,6 +97,8 @@ class AvisoForm(forms.Form):
     
     
 class AvisoFormUpdate(forms.Form):
+            
+            CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
     
             CHOICESPROVOCA = (('PROVOKES','PROVOCA'),
                         ('WILL PROVOKE','PROVOCARÁ'),)
@@ -133,6 +138,8 @@ class AvisoFormUpdate(forms.Form):
             horaHasta = forms.ChoiceField(label="Hora (hasta)", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
             
             #activo = forms.ChoiceField(label="¿Está activo?",widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESACTIVO)
+
+            sur60 = forms.ChoiceField(label="Es del boletín al S 60:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESSUR60)
             
             area = forms.ModelMultipleChoiceField(
                 queryset=Area.objects.filter(latitude__range=[-35, -58]).exclude(description__contains='COSTA' ).exclude(description__contains='GOLFO').exclude(domain__contains='Rio de la Plata' ).exclude(description__contains='DESEMBOCADURA').order_by("-domain", "description"), #Traigo todo menos al sur de 60, y no traigo las costas
@@ -150,6 +157,7 @@ class SituacionForm(forms.Form):
     CHOICESFUTURO =(('Es presente','Es presente'),("Es a futuro","Es a futuro"))
 
     CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
+    CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
       
     CHOICESTIPO = (('HIGH PRESSURE','ANTICICLON'),('LOW PRESSURE','DEPRESION'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
                    ('COLD FRONT','FRENTE FRIO'),('STATIONARY FRONT','FRENTE ESTACIONARIO'),('WARM FRONT','FRENTE CALIENTE'),('OCCLUSION','FRENTE OCLUIDO'),
@@ -183,13 +191,15 @@ class SituacionForm(forms.Form):
     horaFinal = forms.ChoiceField(label="Hora final", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
     
     navtex = forms.ChoiceField(label="Incluir en navtex", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESNAVTEX)
+    sur60 = forms.ChoiceField(label="Es del boletín al S 60:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESSUR60)
+
     esPresente = forms.ChoiceField(label="¿Es presente?:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESFUTURO)
 
 
 class SituacionFormUpdate(forms.Form):
 
     CHOICESFUTURO =(('Es presente','Es presente'),("Es a futuro","Es a futuro"))
-
+    CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
     CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
       
     CHOICESTIPO = (('HIGH PRESSURE','ANTICICLON'),('LOW PRESSURE','DEPRESION'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
@@ -224,6 +234,8 @@ class SituacionFormUpdate(forms.Form):
     horaFinal = forms.ChoiceField(label="Hora final", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESHORAS)
     
     navtex = forms.ChoiceField(label="Incluir en navtex", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESNAVTEX)
+    sur60 = forms.ChoiceField(label="Es del boletín al S 60:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESSUR60)
+
     esPresente = forms.ChoiceField(label="¿Es presente?:", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESFUTURO)
 
 class HieloForm(forms.Form):

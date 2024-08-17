@@ -365,6 +365,7 @@ class AvisoCreacion(FormView):
                     horaHasta = horaH,
                     activo = True,
                     provoca = form.cleaned_data.get("provoca"),
+                    sur60 = form.cleaned_data.get("sur60")=="Es Sur 60",
                     navtex = False)
                     #boletin = Boletin.objects.all().order_by("-id")[0] 
                     
@@ -452,6 +453,7 @@ class AvisoUpdate(FormView):
                     horaHasta = horaH,
                     activo = True, 
                     provoca = form.cleaned_data.get("provoca"),
+                    sur60 = form.cleaned_data.get("sur60")=="Es Sur 60",
                     navtex = False)
                     #boletin = Boletin.objects.all().order_by("-id")[0] 
                     
@@ -601,7 +603,7 @@ class SituacionCreacion(FormView):
                 form_class = SituacionForm
                 success_url = "boletin/ultimo"
                 
-               
+             
                 
                 
                 def form_valid(self, form):
@@ -644,6 +646,7 @@ class SituacionCreacion(FormView):
                        horaFinal =  horaH,
                        navtex =  form.cleaned_data.get("navtex")=="Incluir",
                        esPresente=  form.cleaned_data.get("esPresente")=="Es presente",
+                       sur60 = form.cleaned_data.get("sur60")=="Es Sur 60",
                        activo = True
                         
                         
@@ -715,6 +718,7 @@ class SituacionUpdate(FormView):
                        horaFinal =  horaH,
                        navtex =  form.cleaned_data.get("navtex")=="Incluir",
                        esPresente=  form.cleaned_data.get("esPresente")=="Es presente",
+                       sur60 = form.cleaned_data.get("sur60")=="Es Sur 60",
                        activo = True
                         
                         
