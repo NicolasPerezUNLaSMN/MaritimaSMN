@@ -1,0 +1,171 @@
+{% extends "AppMaritima/padre.html" %}
+
+{% block extra_css %}
+    <style>
+        /* Ajustes para el contenedor de imágenes */
+        .image-container {
+            display: flex; /* Usar flexbox para alinear las imágenes en fila */
+            flex-wrap: wrap; /* Permitir el ajuste a la línea siguiente si es necesario */
+            gap: 10px; /* Espacio entre las imágenes */
+            justify-content: flex-start; /* Alinea los elementos al inicio */
+        }
+
+        /* Ajustes para las imágenes dentro del contenedor */
+        .image-container img {
+            max-width: 750px; /* Limita el ancho máximo de las imágenes */
+            width: 100%; /* Asegura que las imágenes ocupen el 100% del espacio disponible */
+            height: auto; /* Mantener la relación de aspecto */
+            display: block; /* Asegúrate de que las imágenes se muestren */
+            border: 1px solid #ccc; /* Opcional: agrega un borde para mejor visualización */
+            border-radius: 5px; /* Opcional: bordes redondeados */
+        }
+
+        /* Opcional: Estilo para las pestañas activas */
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block contenido %}
+    <h1>Verificación de Pronósticos</h1>
+    
+    <!-- Selector de Años -->
+    <label for="year">Selecciona el año:</label>
+    <select id="year" onchange="updateImages()">
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+    </select>
+
+    <!-- Pestañas -->
+    <div>
+        <button onclick="showTab('mensual')">Verificación Mensual</button>
+        <button onclick="showTab('trimestral')">Verificación Trimestral</button>
+    </div>
+
+    <!-- Contenido de las Pestañas -->
+    <div id="mensual" class="tab-content">
+        <h2>Verificación Mensual</h2>
+        <div>
+            <button onclick="showImage(1)">Enero</button>
+            <button onclick="showImage(2)">Febrero</button>
+            <button onclick="showImage(3)">Marzo</button>
+            <button onclick="showImage(4)">Abril</button>
+            <button onclick="showImage(5)">Mayo</button>
+            <button onclick="showImage(6)">Junio</button>
+            <button onclick="showImage(7)">Julio</button>
+            <button onclick="showImage(8)">Agosto</button>
+            <button onclick="showImage(9)">Septiembre</button>
+            <button onclick="showImage(10)">Octubre</button>
+            <button onclick="showImage(11)">Noviembre</button>
+            <button onclick="showImage(12)">Diciembre</button>
+        </div>
+        <!-- Contenedor para mostrar las imágenes -->
+        <div id="image-container" class="image-container">
+            <!-- Las imágenes serán añadidas dinámicamente aquí -->
+        </div>
+    </div>
+
+    <div id="trimestral" class="tab-content">
+        <h2>Verificación Trimestral</h2>
+        <div>
+            <button onclick="showQuarter('DEF')">DEF</button>
+            <button onclick="showQuarter('MAM')">MAM</button>
+            <button onclick="showQuarter('JJA')">JJA</button>
+            <button onclick="showQuarter('SON')">SON</button>
+        </div>
+        <!-- Contenedor para mostrar las imágenes trimestrales -->
+        <div id="quarter-image-container" class="image-container">
+            <!-- Las imágenes trimestrales serán añadidas dinámicamente aquí -->
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Define the base URL for the static files
+        var staticUrlBaseMonthly = '/static/AppMetricas/images/mensual/';
+        var staticUrlBaseQuarterly = '/static/AppMetricas/images/trimestral/';
+
+        function showTab(tabName) {
+            console.log('Showing tab:', tabName); // Para depuración
+            var tabs = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function showImage(month) {
+            console.log('Showing images for month:', month); // Para depuración
+            var year = document.getElementById('year').value;
+            var imageContainer = document.getElementById('image-container');
+            imageContainer.innerHTML = ''; // Limpiar el contenedor
+
+            // Cargar gráfico de aciertos
+            var imgAciertos = document.createElement('img');
+            var imageUrlAciertos = `${staticUrlBaseMonthly}${year}/${month}/grafico_aciertos_${month}_${year}.png`;
+            console.log('Image URL Aciertos:', imageUrlAciertos); // Imprimir URL en la consola
+            imgAciertos.src = imageUrlAciertos;
+            imgAciertos.alt = `Aciertos Mes ${month} ${year}`;
+            imgAciertos.onerror = function() {
+                console.error('Error al cargar la imagen de aciertos:', imageUrlAciertos);
+            };
+            imageContainer.appendChild(imgAciertos);
+
+            // Cargar gráfico de cantidad de datos
+            var imgDatos = document.createElement('img');
+            var imageUrlDatos = `${staticUrlBaseMonthly}${year}/${month}/cantidad_de_datos_${month}_${year}.png`;
+            console.log('Image URL Datos:', imageUrlDatos); // Imprimir URL en la consola
+            imgDatos.src = imageUrlDatos;
+            imgDatos.alt = `Cantidad de Datos Mes ${month} ${year}`;
+            imgDatos.onerror = function() {
+                console.error('Error al cargar la imagen de cantidad de datos:', imageUrlDatos);
+            };
+            imageContainer.appendChild(imgDatos);
+        }
+
+        function showQuarter(quarter) {
+            console.log('Showing images for quarter:', quarter); // Para depuración
+            var year = document.getElementById('year').value;
+            var quarterImageContainer = document.getElementById('quarter-image-container');
+            quarterImageContainer.innerHTML = ''; // Limpiar el contenedor
+
+            // Cargar gráfico de aciertos
+            var imgAciertos = document.createElement('img');
+            var imageUrlAciertos = `${staticUrlBaseQuarterly}${year}/${quarter}/grafico_aciertos_${quarter}_${year}.png`;
+            console.log('Image URL Aciertos Trimestrales:', imageUrlAciertos); // Imprimir URL en la consola
+            imgAciertos.src = imageUrlAciertos;
+            imgAciertos.alt = `Aciertos Trimestre ${quarter} ${year}`;
+            imgAciertos.onerror = function() {
+                console.error('Error al cargar la imagen de aciertos trimestrales:', imageUrlAciertos);
+            };
+            quarterImageContainer.appendChild(imgAciertos);
+
+            // Cargar gráfico de cantidad de datos
+            var imgDatos = document.createElement('img');
+            var imageUrlDatos = `${staticUrlBaseQuarterly}${year}/${quarter}/cantidad_de_datos_${quarter}_${year}.png`;
+            console.log('Image URL Datos Trimestrales:', imageUrlDatos); // Imprimir URL en la consola
+            imgDatos.src = imageUrlDatos;
+            imgDatos.alt = `Cantidad de Datos Trimestre ${quarter} ${year}`;
+            imgDatos.onerror = function() {
+                console.error('Error al cargar la imagen de cantidad de datos trimestrales:', imageUrlDatos);
+            };
+            quarterImageContainer.appendChild(imgDatos);
+        }
+
+        function updateImages() {
+            var year = document.getElementById('year').value;
+            var imageContainer = document.getElementById('image-container');
+            var quarterImageContainer = document.getElementById('quarter-image-container');
+            
+            // Limpiar ambos contenedores
+            imageContainer.innerHTML = '';
+            quarterImageContainer.innerHTML = '';
+
+            console.log('Updating images for year:', year);
+        }
+
+        // Mostrar la pestaña mensual por defecto
+        showTab('mensual');
+    </script>
+{% endblock %}
