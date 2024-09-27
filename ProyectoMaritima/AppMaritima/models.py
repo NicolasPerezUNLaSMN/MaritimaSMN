@@ -168,9 +168,13 @@ class Aviso(models.Model):
             contador = contador * 1
         
       
- 
-        texto = f"WARNING {self.numero}: {listaDeSituacionesAsignadas[0].paraTXTEnInglesResumen()} {self.provoca} "
-            
+    # Verifica si hay situaciones asignadas
+    
+        if listaDeSituacionesAsignadas:
+          texto = f"WARNING {self.numero}: {listaDeSituacionesAsignadas[0].paraTXTEnInglesResumen()} {self.provoca} "
+        else:
+          texto = f"WARNING {self.numero}: Información no disponible"
+
         #Si está activo
         if (self.activo):
                 
