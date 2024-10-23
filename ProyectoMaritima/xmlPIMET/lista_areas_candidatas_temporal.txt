@@ -1,9 +1,7 @@
 Areas candidatas para temporales: 
---> COSTA RIO GRANDE
---> OFFSHORE FIN DEL MUNDO
+--> Area Centro Este (S 45 E 30)
 --> Area Centro Este (S 45 W 30)
---> Area Drake
+--> Area Centro Oeste (N 45 E 50)
+--> Area Centro Oeste (S 45 E 50)
 --> Area Sudeste (N 55 E 30)
 --> Area Sudoeste (N 55 E 50)
---> Area Sudoeste (N 55 W 50)
---> Area Sudoeste (S 55 W 50)
