@@ -1,24 +1,27 @@
 from cgi import print_form
 from django.db import models
 from django.db.models.fields import BooleanField
-
+from django.contrib.gis.db import models
 
 # Create your models here.
 
 class Area(models.Model): #son fijas, son las areas pimet
     
     #Mantengo los nombres del xml por comodidad
+    name = models.CharField(max_length=100)
     idPimet = models.IntegerField()
     latitude = models.CharField(max_length=20)
     longitude = models.CharField(max_length=20)
     description = models.CharField(max_length=80) #castellano
     descriptionIngles= models.CharField(max_length=80,default='INGLES')  #En ingles
     domain = models.CharField(max_length=30)
-    
+    geom = models.PolygonField()  # O MultiPolygonField para áreas complejas
+
     orden = models.IntegerField(default=999)
     
     def __str__(self):
-        return f"IDPIME: {self.idPimet}--- {self.description} ({self.domain} {self.latitude}  {self.longitude})"
+        return self.name
+        #return f"IDPIME: {self.idPimet}--- {self.description} ({self.domain} {self.latitude}  {self.longitude})"
     
 
 class Boletin(models.Model):
@@ -266,3 +269,6 @@ class Credential(models.Model):
 
     def __str__(self):
         return self.username
+
+from django.contrib.gis.db import models
+

@@ -28,7 +28,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
 
+from django.core.serializers import serialize
+from django.http import JsonResponse
+from .models import Area
 
+def areas_geojson(request):
+    areas = Area.objects.all()
+    geojson = serialize('geojson', areas, geometry_field='geom', fields=('id', 'name'))
+    return JsonResponse(geojson, safe=False)
 
 
 

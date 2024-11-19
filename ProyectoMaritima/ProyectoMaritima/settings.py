@@ -91,9 +91,10 @@ WSGI_APPLICATION = 'ProyectoMaritima.wsgi.application'
 #}
 
 #CONFIGURACIón para postgres... OJO CAMBIAR de USER PARA ABAJO
+#'ENGINE': 'django.contrib.gis.db.backends.postgis',
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'maritima',
         'USER': 'postgres',
         'PASSWORD':'root',

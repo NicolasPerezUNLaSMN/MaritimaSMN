@@ -61,7 +61,7 @@ class AvisoForm(forms.Form):
                    ('3','3'),('6','6'),('9','9'), ('12','12'),('15','15'),('18','18'),('21','21'))
    
 
-    CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
+    CHOICESSUR60= (("No Es Sur 60","No Es Sur 60"), ('Es Sur 60','Es Sur 60'))
 
     situacion = forms.ModelMultipleChoiceField(
         queryset=Situacion.objects.filter(activo=True), #solo situaciones activas
@@ -169,7 +169,7 @@ class SituacionForm(forms.Form):
     CHOICESMOV = (('', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
                    ('E','E'),('SE','SE'),('S','S'), ('SW','SW'),('W','W'),('NW','NW'))
    
-    CHOICESEVO = (('','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('IDEEPENING','PROFUNDIZANDOSE'))
+    CHOICESEVO = (('','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('DEEPENING','PROFUNDIZANDOSE'))
    
 
     CHOICESHORAS = ((' ',' '),('0','0'),
