@@ -46,10 +46,10 @@ class Situacion(models.Model):
     actualizacion = models.IntegerField(null=True, blank=True)
     
     sistema = models.CharField(max_length=60)
-    
+    extension = models.CharField(max_length=50, null=True, default='')
+
     valorInicial = models.IntegerField(null=True, blank=True)
 
-    
     movimiento = models.CharField(max_length=8,null=True, blank=True)
     evolucion = models.CharField(max_length=30,null=True, blank=True)
     
@@ -82,23 +82,27 @@ class Situacion(models.Model):
             
             #mejorar esto, porque en la base de datos en vez de vacio se guarda con -1
             valorInicial = ""
-            if ( self.valorInicial != -1):
+            if self.valorInicial != -1:
                 valorInicial = self.valorInicial
-            
+                    # Agregar "extiende {extension}" si hay un valor en el campo extension
 
-            if ( self.movimiento != "NOT MOV"):
-                texto = f"{self.sistema} {valorInicial} MOVING {self.movimiento} {self.evolucion}"
+            extension_text = ""
+            if self.extension and self.extension != '':  # Verifica si tiene un valor
+             extension_text = f" ASSOCIATED WITH A {self.extension}"
+
+            if self.movimiento != "":
+                texto = f"{self.sistema} {valorInicial} {extension_text} MOVING {self.movimiento} {self.evolucion}"
             else:
-                texto = f"{self.sistema} {valorInicial}  NOT MOV {self.evolucion}"
+                texto = f"{self.sistema} {valorInicial} {extension_text} {self.evolucion}"
             
             
             #Si tiene posición inicial
-            if (not self.horaInicial == -1):
+            if not self.horaInicial == -1:
                 
                 texto = texto +f" AT {self.posicionInicial} BY {self.momentoInicial}/{self.horaInicial}"
                 
             #Si tiene posición final
-            if (not self.horaFinal == -1):
+            if not self.horaFinal == -1:
                 
                 texto = texto +f" EXPECTED {self.posicionFinal} BY {self.momentoFinal}/{self.horaFinal}"
             texto = texto +"\n"

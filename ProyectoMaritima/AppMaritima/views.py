@@ -514,7 +514,7 @@ def  cesarAviso(request,pk):
                    
                     
                     
-                    return redirect("boletin/ultimo")    
+                    return redirect("UltimoBoletin")    
     
     
     
@@ -635,6 +635,7 @@ class SituacionCreacion(FormView):
                        numero = ultimoSituacion() + 1,
                        actualizacion = 0,
                        sistema =  form.cleaned_data.get("sistema"),
+                       extension=form.cleaned_data.get("extension"),  # Aquí se añade la extensión
                        valorInicial =  valorI,
                        movimiento =  form.cleaned_data.get("movimiento"),
                        evolucion =  form.cleaned_data.get("evolucion"),

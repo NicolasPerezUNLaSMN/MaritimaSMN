@@ -157,17 +157,19 @@ class SituacionForm(forms.Form):
     CHOICESFUTURO =(('Es presente','Es presente'),("Es a futuro","Es a futuro"))
 
     CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
-    CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
+    CHOICESSUR60= (("No Es Sur 60","No Es Sur 60"), ('Es Sur 60','Es Sur 60'))
       
-    CHOICESTIPO = (('HIGH PRESSURE','ANTICICLON'),('LOW PRESSURE','DEPRESION'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
+    CHOICESTIPO = (('HIGH','ALTA'),('LOW','BAJA'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
                    ('COLD FRONT','FRENTE FRIO'),('STATIONARY FRONT','FRENTE ESTACIONARIO'),('WARM FRONT','FRENTE CALIENTE'),('OCCLUSION','FRENTE OCLUIDO'),
-                   ('STRONG GRADIENT','FUERTE GRADIENTE BARICO'),('RIDGE','EJE DE CUÑA'),
-                   ('TROUGH','EJE DE VAGUADA'),('FRONTAL WAVE','ONDA FRONTAL'),('STRONG FLOW','FUERTE FLUJO'))
+                   ('RIDGE','CUÑA'),
+                   ('TROUGH','VAGUADA'),('STRONG FLOW','FUERTE FLUJO'),('VIGOROUS FLOW','FLUJO VIGOROSO'), ('ZONAL FLOW','FLUJO ZONAL'),('DENSE FOG','NIEBLA DENSA'))
     
-    CHOICESMOV = (('NOT MOV', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
+    CHOICEEXT =  (('', ' '), ('COLD FRONT', 'FRENTE FRIO'))
+    
+    CHOICESMOV = (('', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
                    ('E','E'),('SE','SE'),('S','S'), ('SW','SW'),('W','W'),('NW','NW'))
    
-    CHOICESEVO = (('WITHOUT CHANGES','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('IDEEPENING','PROFUNDIZANDOSE'))
+    CHOICESEVO = (('','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('IDEEPENING','PROFUNDIZANDOSE'))
    
 
     CHOICESHORAS = ((' ',' '),('0','0'),
@@ -176,7 +178,14 @@ class SituacionForm(forms.Form):
     
     
     sistema = forms.ChoiceField(label="Sistema",required=True, widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESTIPO)
-    valorInicial = forms.IntegerField(label="Valor",required=False, widget=forms.NumberInput(attrs={"class":"form-control"}))
+
+    extension = forms.ChoiceField(
+    label="Extensión", 
+    required=False, 
+    widget=forms.Select(attrs={"class":"form-control"}), 
+    choices=[('', ' '), ('COLD FRONT', 'FRENTE FRIO')]
+)
+    valorInicial = forms.IntegerField(label="Valor",required=False, widget=forms.NumberInput(attrs={"class":"form-control",'placeholder': 'Solo valor en hpa'}))
   
    
     movimiento  = forms.ChoiceField(label="Movimiento", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESMOV)
@@ -199,19 +208,20 @@ class SituacionForm(forms.Form):
 class SituacionFormUpdate(forms.Form):
 
     CHOICESFUTURO =(('Es presente','Es presente'),("Es a futuro","Es a futuro"))
-    CHOICESSUR60= (('Es Sur 60','Es Sur 60'),("No Es Sur 60","No Es Sur 60"))
+    CHOICESSUR60= (("No Es Sur 60","No Es Sur 60"),('Es Sur 60','Es Sur 60'))
     CHOICESNAVTEX= (('Incluir','Incluir'),("No incluir","No incluir"))
       
     CHOICESTIPO = (('HIGH PRESSURE','ANTICICLON'),('LOW PRESSURE','DEPRESION'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
                    ('COLD FRONT','FRENTE FRIO'),('STATIONARY FRONT','FRENTE ESTACIONARIO'),('WARM FRONT','FRENTE CALIENTE'),('OCCLUSION','FRENTE OCLUIDO'),
                    ('STRONG GRADIENT','FUERTE GRADIENTE BARICO'),('RIDGE','EJE DE CUÑA'),
-                   ('TROUGH','EJE DE VAGUADA'),('FRONTAL WAVE','ONDA FRONTAL'),('STRONG FLOW','FUERTE FLUJO'))
+                   ('TROUGH','EJE DE VAGUADA'),('FRONTAL WAVE','ONDA FRONTAL'),('PRUEBA AAAAAAA','FUERTE FLUJO'))
     
-    CHOICESMOV = (('NOT MOV', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
+    CHOICESMOV = (('', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
                    ('E','E'),('SE','SE'),('S','S'), ('SW','SW'),('W','W'),('NW','NW'))
    
-    CHOICESEVO = (('WITHOUT CHANGES','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('IDEEPENING','PROFUNDIZANDOSE'))
-   
+    CHOICESEVO = (('','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('IDEEPENING','PROFUNDIZANDOSE'))
+   #    CHOICESEVO = (('WITHOUT CHANGES','SIN CAMBIOS'),('WEAKENING','DEBILITANDOSE'),('INTENSIFYING','INTENSIFICANDOSE'),('IDEEPENING','PROFUNDIZANDOSE'))
+
 
     CHOICESHORAS = ((' ',' '),('0','0'),
                    ('3','3'),('6','6'),('9','9'), ('12','12'),('15','15'),('18','18'),('21','21'))
@@ -219,7 +229,7 @@ class SituacionFormUpdate(forms.Form):
     
     
     sistema = forms.ChoiceField(label="Sistema",required=True, widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESTIPO)
-    valorInicial = forms.IntegerField(label="Valor",required=False, widget=forms.NumberInput(attrs={"class":"form-control"}))
+    valorInicial = forms.IntegerField(label="Valor",required=False, widget=forms.NumberInput(attrs={"class":"form-control",'placeholder': 'Solo valor en hpa'}))
   
    
     movimiento  = forms.ChoiceField(label="Movimiento", required=False,widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESMOV)
