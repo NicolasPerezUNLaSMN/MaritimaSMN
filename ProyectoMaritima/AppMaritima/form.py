@@ -50,8 +50,10 @@ class AvisoForm(forms.Form):
     CHOICESPROVOCA = (('PROVOKES','PROVOCA'),
                         ('WILL PROVOKE','PROVOCARÁ'),)
     
-    CHOICESTIPO = (('NEAR GALE FORCE','RAFAGAS DE TEMPORAL (7)'),('GALE FORCE','TEMPORAL (8y9)'),
-                   ('STORM FORCE','TEMPORAL FUERTE (10y11)' ),('HURRICANE FORCE','TEMPORAL MUY FUERTE (+11)'),)
+    CHOICESTIPO = (('NEAR GALE FORCE','RAFAGAS DE TEMPORAL (7 Bf, 28 a 33 Kt, 50 a 61 km/h)'),
+                          ('GALE FORCE','TEMPORAL (8y9 Bf, 34 a 47 Kt, 62 a 88 km/h )'),
+                          ('STORM FORCE','TEMPORAL FUERTE (10y11 Bf, 48 a 63 Kt, 89 a 117 km/h )' ),
+                          ('HURRICANE FORCE','TEMPORAL MUY FUERTE (+11 Bf, +64 Kt, +118 km/h)'))
     
     CHOICESDIR = (('SECTOR N','SECTOR N'),
                    ('SECTOR S','SECTOR S'),('SECTOR W','SECTOR W'),('SECTOR E','SECTOR E'), ('NW','NW'), ('SW','SO'), ('SE','SE'), ('NE','NE'),('N','N'),('S','S'),('W','W'),('E','E'),)
@@ -103,8 +105,10 @@ class AvisoFormUpdate(forms.Form):
             CHOICESPROVOCA = (('PROVOKES','PROVOCA'),
                         ('WILL PROVOKE','PROVOCARÁ'),)
     
-            CHOICESTIPO = (('NEAR GALE FORCE','RAFAGAS DE TEMPORAL (7)'),('GALE FORCE','TEMPORAL (8y9)'),
-                   ('STORM FORCE','TEMPORAL FUERTE (10y11)' ),('HURRICANE FORCE','TEMPORAL MUY FUERTE (+11)'),)
+            CHOICESTIPO = (('NEAR GALE FORCE','RAFAGAS DE TEMPORAL (7 Bf, 28 a 33 Kt, 50 a 61 km/h)'),
+                          ('GALE FORCE','TEMPORAL (8y9 Bf, 34 a 47 Kt, 62 a 88 km/h )'),
+                          ('STORM FORCE','TEMPORAL FUERTE (10y11 Bf, 48 a 63 Kt, 89 a 117 km/h )' ),
+                          ('HURRICANE FORCE','TEMPORAL MUY FUERTE (+11 Bf, +64 Kt, +118 km/h)'))
     
             CHOICESDIR = (('SECTOR N','SECTOR N'),
                    ('SECTOR S','SECTOR S'),('SECTOR W','SECTOR W'),('SECTOR E','SECTOR E'), ('NW','NW'), ('SW','SW'), ('SE','SE'), ('NE','NE'),('N','N'),('S','S'),('W','W'),('E','E'),)
@@ -164,7 +168,7 @@ class SituacionForm(forms.Form):
                    ('RIDGE','CUÑA'),
                    ('TROUGH','VAGUADA'),('FRONTAL WAVE','ONDA FRONTAL'),('STRONG FLOW','FUERTE FLUJO'),('VIGOROUS FLOW','FLUJO VIGOROSO'),('DENSE FOG','NIEBLA DENSA'))
     
-    CHOICEEXT =  (('', ' '), ('COLD FRONT', 'FRENTE FRIO'), ('WARM FRONT','FRENTE CALIENTE'),)
+    CHOICEEXT =  (('', ' '), ('COLD FRONT', 'FRENTE FRIO'), ('WARM FRONT','FRENTE CALIENTE'),('RIDGE','CUÑA'),('TROUGH','VAGUADA'))
     
     CHOICESMOV = (('', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
                    ('E','E'),('SE','SE'),('S','S'), ('SW','SW'),('W','W'),('NW','NW'))
