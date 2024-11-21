@@ -190,14 +190,17 @@ class Aviso(models.Model):
                 
                 
                 #si tiene hora de inicio
-                if (not self.horaDesde == -1):
+                if self.horaDesde != -1:
                     
-                    texto = texto + f" FROM {self.desde} / {self.horaDesde}"
+                    horaDesde_str = f"{self.horaDesde:04d}" 
+                    texto += f" FROM {self.desde} / {horaDesde_str}"
                     
                 #si tiene hora de fin
-                if (not self.horaHasta == -1):
-                    
-                    texto = texto + f" UNTIL {self.hasta} / {self.horaHasta}"
+                if self.horaHasta != -1:
+                    if self.hasta:
+                       # Formateamos el día y la hora (2 dígitos para el día y 4 para la hora)
+                        hora_formateada = self.hasta.strftime("%d/%H%M")
+                        texto += f" UNTIL {hora_formateada}"
                 
             #Si fue cesado   
         else:

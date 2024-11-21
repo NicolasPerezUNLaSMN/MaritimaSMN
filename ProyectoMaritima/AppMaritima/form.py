@@ -162,9 +162,9 @@ class SituacionForm(forms.Form):
     CHOICESTIPO = (('HIGH','ALTA'),('LOW','BAJA'),('SECUNDARY LOW PRESSURE','DEPRESION SECUNDARIA'),('CYCLOGENESIS','CICLOGENESIS'),
                    ('COLD FRONT','FRENTE FRIO'),('STATIONARY FRONT','FRENTE ESTACIONARIO'),('WARM FRONT','FRENTE CALIENTE'),('OCCLUSION','FRENTE OCLUIDO'),
                    ('RIDGE','CUÑA'),
-                   ('TROUGH','VAGUADA'),('STRONG FLOW','FUERTE FLUJO'),('VIGOROUS FLOW','FLUJO VIGOROSO'), ('ZONAL FLOW','FLUJO ZONAL'),('DENSE FOG','NIEBLA DENSA'))
+                   ('TROUGH','VAGUADA'),('FRONTAL WAVE','ONDA FRONTAL'),('STRONG FLOW','FUERTE FLUJO'),('VIGOROUS FLOW','FLUJO VIGOROSO'),('DENSE FOG','NIEBLA DENSA'))
     
-    CHOICEEXT =  (('', ' '), ('COLD FRONT', 'FRENTE FRIO'))
+    CHOICEEXT =  (('', ' '), ('COLD FRONT', 'FRENTE FRIO'), ('WARM FRONT','FRENTE CALIENTE'),)
     
     CHOICESMOV = (('', 'SIN MOVIMIENTO'),('N','N'),('NE','NE'),
                    ('E','E'),('SE','SE'),('S','S'), ('SW','SW'),('W','W'),('NW','NW'))
@@ -179,12 +179,7 @@ class SituacionForm(forms.Form):
     
     sistema = forms.ChoiceField(label="Sistema",required=True, widget=forms.Select(attrs={"class":"form-control"}), choices=CHOICESTIPO)
 
-    extension = forms.ChoiceField(
-    label="Extensión", 
-    required=False, 
-    widget=forms.Select(attrs={"class":"form-control"}), 
-    choices=[('', ' '), ('COLD FRONT', 'FRENTE FRIO')]
-)
+    extension = forms.ChoiceField(    label="Extensión",required=False,widget=forms.Select(attrs={"class":"form-control"}),choices=CHOICEEXT)
     valorInicial = forms.IntegerField(label="Valor",required=False, widget=forms.NumberInput(attrs={"class":"form-control",'placeholder': 'Solo valor en hpa'}))
   
    
